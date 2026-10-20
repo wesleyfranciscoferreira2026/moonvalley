@@ -43,6 +43,8 @@ window.MV_I18N = {
     "world.title": "The World",
     "world.lead": "Four great regions hold the balance of Moon Valley. Ice, root, flame and moonlight — each one guards a piece of the first night.",
     "world.explore": "Discover the region",
+    "world.map.caption": "The known lands of the Vale — choose a marked region to begin your chronicle.",
+    "world.map.zoom": "View full map",
 
     "features.eyebrow": "Shaping the Hero",
     "features.title": "Features",
@@ -121,6 +123,8 @@ window.MV_I18N = {
     "world.title": "O Mundo",
     "world.lead": "Quatro grandes regiões mantêm o equilíbrio de Moon Valley. Gelo, raiz, chama e luz da lua — cada uma guarda um fragmento da primeira noite.",
     "world.explore": "Descobrir a região",
+    "world.map.caption": "As terras conhecidas do Vale — escolha uma região marcada para começar sua crônica.",
+    "world.map.zoom": "Ver mapa em tela cheia",
 
     "features.eyebrow": "Forjando o Herói",
     "features.title": "Recursos",

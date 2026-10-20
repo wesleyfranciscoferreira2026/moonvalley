@@ -237,6 +237,41 @@
     registerReveals();
   }
 
+  /* ---------------- WORLD MAP PINS ---------------- */
+  var mapMarkers = $("#worldMapMarkers");
+  var worldMapZoom = $("#worldMapZoom");
+
+  function renderMapPins() {
+    if (!mapMarkers) return;
+    mapMarkers.innerHTML = "";
+    CONTENT.regions.forEach(function (item) {
+      if (!item.map) return;
+      var c = loc(item);
+      var pin = document.createElement("button");
+      pin.type = "button";
+      pin.className = "map-pin map-pin--" + item.tone;
+      pin.style.left = item.map.x + "%";
+      pin.style.top = item.map.y + "%";
+      pin.setAttribute("aria-label", c.name);
+      pin.innerHTML = '<span class="map-pin__label">' + c.name + "</span>";
+      pin.addEventListener("click", function () { openRegion(item); });
+      mapMarkers.appendChild(pin);
+    });
+  }
+
+  if (worldMapZoom) {
+    worldMapZoom.addEventListener("click", function () {
+      var mapImg = $("#worldMapImg");
+      openModal(
+        '<h3 class="modal-title" id="modalTitle">' + t("world.title") + "</h3>" +
+        '<img src="' + (mapImg ? mapImg.getAttribute("src") : "assets/world-map.jpg") + '" alt="' +
+        (mapImg ? mapImg.alt.replace(/"/g, "&quot;") : "") +
+        '" style="width:100%;max-height:68vh;object-fit:contain;background:#04101a;border:1px solid rgba(216,216,207,.2)">' +
+        '<p class="modal-prose" style="margin-top:1.1rem">' + t("world.map.caption") + "</p>"
+      );
+    });
+  }
+
   /* ---------------- FEATURES ---------------- */
   var featureGrid = $("#featureGrid");
 
@@ -576,6 +611,7 @@
 
     renderNews();
     renderRegions();
+    renderMapPins();
     renderFeatures();
     renderMediaFilters();
     renderMedia();

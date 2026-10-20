@@ -190,6 +190,7 @@ window.MV_CONTENT = {
       id: "frostvale",
       scene: "assets/region-frost.svg",
       tone: "ice",
+      map: { x: 47, y: 12 },
       en: {
         biome: "Frozen Kingdom",
         name: "Frostvale",
@@ -215,6 +216,7 @@ window.MV_CONTENT = {
       id: "eldergrove",
       scene: "assets/region-grove.svg",
       tone: "forest",
+      map: { x: 82, y: 30 },
       en: {
         biome: "Ancient Forest",
         name: "The Eldergrove",
@@ -240,6 +242,7 @@ window.MV_CONTENT = {
       id: "ashenmaw",
       scene: "assets/region-ash.svg",
       tone: "fire",
+      map: { x: 25, y: 33 },
       en: {
         biome: "Volcanic Lands",
         name: "Ashenmaw",
@@ -265,6 +268,7 @@ window.MV_CONTENT = {
       id: "moongate",
       scene: "assets/region-moon.svg",
       tone: "moon",
+      map: { x: 56, y: 49 },
       en: {
         biome: "Lunar Ruins",
         name: "The Moongate Ruins",

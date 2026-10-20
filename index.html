@@ -191,6 +191,21 @@
           <p class="section-head__lead" data-i18n="world.lead">Four great regions hold the balance of Moon Valley. Ice, root, flame and moonlight — each one guards a piece of the first night.</p>
         </header>
 
+        <figure class="world-map reveal">
+          <div class="world-map__frame">
+            <span class="gem gem--tl"></span><span class="gem gem--tr"></span>
+            <span class="gem gem--bl"></span><span class="gem gem--br"></span>
+            <img class="world-map__img" id="worldMapImg" src="assets/world-map.jpg" alt="Hand-drawn map of Moon Valley showing frozen kingdoms, ancient forests, volcanic highlands and the ring of the Moongate at the center of the vale" loading="lazy" decoding="async">
+            <div class="world-map__markers" id="worldMapMarkers"><!-- rendered by js --></div>
+          </div>
+          <figcaption class="world-map__caption">
+            <span data-i18n="world.map.caption">The known lands of the Vale — choose a marked region to begin your chronicle.</span>
+            <button class="link-rune world-map__zoom" type="button" id="worldMapZoom">
+              <span data-i18n="world.map.zoom">View full map</span>
+            </button>
+          </figcaption>
+        </figure>
+
         <div class="region-grid" id="regionGrid"><!-- rendered by js --></div>
       </div>
     </section>
