@@ -41,7 +41,7 @@ Crie um projeto novo apontando para o repositório GitHub com as configurações
 ### Importante para qualquer hospedagem
 - Todos os caminhos são relativos → funciona em subpastas (ex.: `usuario.github.io/moonvalley/`).
 - Publique sempre via **HTTPS** (requisito de segurança do PRD).
-- Gere um `og-image.png` (1200×630) a partir de `assets/og-image.svg` para miniaturas de compartilhamento — nem toda rede social aceita SVG.
+- `og:image` usa `assets/hero-valley.jpg` (JPEG real, aceito por todas as redes).
 
 ## Estrutura
 
@@ -57,31 +57,33 @@ moonvalley/
 │   ├── i18n.js           # Dicionário EN/PT-BR da interface
 │   ├── content.js        # Conteúdo estruturado + CONFIG de links reais
 │   └── main.js           # Renderização, modais, lightbox, parallax, a11y
-└── assets/               # Arte autoral em SVG (cenários, emblema, ornamentos)
+└── assets/
+    ├── regions/          # Artwork das regiões (Frostvale, Ashenmaw, Moongate)
+    ├── classes/          # Arte das classes (Kaelith 1–4)
+    ├── videos/           # Vídeos (kaelith-1..3.mp4) + posters
+    └── *.svg             # Arte autoral: cenários, emblema, ornamentos
 ```
 
 ## Como configurar os links oficiais (importante)
 
-O site **não exibe links falsos**. Enquanto os URLs reais não forem informados, os botões de Discord/redes sociais mostram um estado honesto ("canais serão revelados em breve").
+O site **não exibe links falsos**. Enquanto os URLs reais não forem informados, os botões mostram um estado honesto ("canais serão revelados em breve").
 
-Edite `js/content.js`:
+Edite `js/content.js` (valores atuais já são os links oficiais):
 
 ```js
 window.MV_CONFIG = {
-  discordUrl: "https://discord.gg/SEU-SERVIDOR",   // habilita os botões de Discord
-  trailerUrl: "https://www.youtube.com/watch?v=VIDEO_ID", // habilita o player do trailer
-  socials: [
-    { key: "x",        label: "X",        url: "https://x.com/seuperfil" },
-    { key: "youtube",  label: "YouTube",  url: "https://youtube.com/@seucanal" },
-    { key: "instagram",label: "Instagram",url: "https://instagram.com/seuperfil" },
-    { key: "reddit",   label: "Reddit",   url: "https://reddit.com/r/seusub" }
-  ]
+  discordUrl: "https://discord.gg/...",      // botões de Discord
+  whatsappUrl: "https://chat.whatsapp.com/...", // botão de WhatsApp
+  trailerUrl: "assets/videos/kaelith-1.mp4", // trailer (arquivo local ou YouTube/Vimeo)
+  heroImage: "assets/hero-valley.jpg",       // imagem de fundo do topo (null = cena SVG)
+  socials: []            // ex.: { key: "x", label: "X", url: "https://x.com/..." }
 };
 ```
 
-- `trailerUrl` aceita links do YouTube ou Vimeo (conversão automática para embed).
-  Sem URL, o modal do trailer exibe "O trailer está sendo forjado".
-- Ícones sociais disponíveis: `discord`, `x`, `youtube`, `instagram`, `reddit`.
+- `trailerUrl` aceita links do YouTube/Vimeo **ou** arquivos de vídeo locais (`.mp4`, `.webm`, `.ogg` — player nativo com `controls`).
+  Sem URL, o modal exibe "O trailer está sendo forjado".
+- `heroImage: null` restaura a cena em camadas SVG do hero automaticamente (com fallback se o arquivo falhar).
+- Ícones sociais disponíveis: `discord`, `whatsapp`, `x`, `youtube`, `instagram`, `reddit`.
   Para outro serviço, adicione o SVG em `MV_SOCIAL_ICONS`.
 
 ## Como atualizar o conteúdo (RF-09)
@@ -89,17 +91,20 @@ window.MV_CONFIG = {
 Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:
 
 - **`news`** — notícias; o primeiro item recebe destaque automático. Itens além do 4º são revelados por "View All News".
-- **`regions`** — regiões do mundo (`tone`: `ice`, `forest`, `fire`, `moon` define a cor do bioma).
+- **`regions`** — regiões do mundo (`scene`: imagem da região; `map`: `{x,y}` em % posiciona o pino no mapa-múndi).
+- **`classes`** — abas de classes (`tone`: cor da aba; `sigil`: `blade`/`shield`/`arcane`/`bow`; `images`: galeria; `videos`: `[{src, poster}]`). Sem arte, o painel mostra um brasão honesto.
 - **`features`** — sistemas de gameplay (`icon`: `sword`, `shield`, `compass`, `beast`, `star`, `banner`).
-- **`media`** — `kind`: `trailer`, `video` (abrem modal), `screenshot`, `art` (lightbox com navegação).
+- **`media`** — `kind`: `trailer`, `video` (abrem modal), `screenshot`, `art` (lightbox com navegação). `url` local (`.mp4`) abre com player nativo.
 - Textos da interface (títulos, botões, rodapé) ficam em `js/i18n.js`.
 
 ## Substituindo a arte
 
-Toda a arte é SVG autoral em `assets/`, gerada para transmitir a direção artística (castelo sob céu dourado, dragão, reino gelado, floresta ancestral, terras vulcânicas, ruínas lunares). Para usar artes finais do jogo:
+O site já usa artwork real em JPEG além dos SVGs autorais. Para usar artes finais do jogo:
 
-- **Cenas de região / mídia**: substitua o arquivo SVG mantendo o mesmo nome, ou altere o caminho em `content.js`.
-- **Camadas do hero**: troque os arquivos `scene-*.svg` por WebP/AVIF panorâmicos (o layout aceita `img` com object-fit).
+- **Hero**: substitua `assets/hero-valley.jpg` mantendo o nome (ou altere `MV_CONFIG.heroImage`).
+- **Regiões**: substitua os arquivos em `assets/regions/` mantendo os nomes, ou altere `scene` em `content.js`.
+- **Classes**: adicione imagens em `assets/classes/` e liste em `images` da classe em `content.js`.
+- **Vídeos**: substitua `assets/videos/kaelith-*.mp4` e seus `*-poster.jpg`, ou altere `media`/`classes` em `content.js`.
 - **Logotipo**: substitua `assets/logo.svg` mantendo o viewBox quadrado.
 
 ## Idiomas
@@ -116,6 +121,5 @@ Seletor EN | PT no cabeçalho e no rodapé. A escolha é salva em `localStorage`
 
 ## Limitações conhecidas (para produção)
 
-- `og:image` usa SVG — para metadados de compartilhamento, gere um PNG 1200×630 a partir de `assets/og-image.svg`.
 - Termos de uso e política de privacidade exibem aviso de "em elaboração" até o texto jurídico ser fornecido.
-- Todo texto provisório (lore, notícias, recursos) deve ser revisado conforme a história real do jogo, conforme o PRD.
+- Todo texto provisório (lore, notícias, recursos, descrições das classes) deve ser revisado conforme a história real do jogo, conforme o PRD.

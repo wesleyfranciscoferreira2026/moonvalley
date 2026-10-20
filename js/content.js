@@ -10,8 +10,12 @@
    ============================================================ */
 window.MV_CONFIG = {
   /* Official community links — set to real URLs before launch. */
-  discordUrl: null,          // e.g. "https://discord.gg/your-server"
-  trailerUrl: null,          // e.g. "https://www.youtube.com/watch?v=VIDEO_ID" (YouTube/Vimeo embeds supported)
+  discordUrl: "https://discord.gg/ACGjkDBws",
+  whatsappUrl: "https://chat.whatsapp.com/LSHSJq7csQnLDRaF3xKPql",
+  trailerUrl: "assets/videos/kaelith-1.mp4",
+  /* Hero backdrop shown at the very top of the site. Replace the
+     file (keeping the name) or set to null to use the SVG scene. */
+  heroImage: "assets/hero-valley.jpg",
   socials: [
     /* { key: "x", label: "X", url: "https://x.com/yourprofile", icon: "..." }, */
   ]
@@ -19,6 +23,7 @@ window.MV_CONFIG = {
 
 /* ---------- social icons (inline SVG paths) ---------- */
 window.MV_SOCIAL_ICONS = {
+  whatsapp: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.25-4.36c0-4.53 3.69-8.22 8.23-8.22 2.2 0 4.26.86 5.81 2.42a8.16 8.16 0 0 1 2.41 5.81c0 4.53-3.69 8.21-8.23 8.21z"/></svg>',
   discord: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.3 5.3A16.7 16.7 0 0 0 15.1 4l-.2.4a15.6 15.6 0 0 1 3.9 1.6 13.5 13.5 0 0 0-11.6 0A15.6 15.6 0 0 1 11 4.4L10.8 4a16.7 16.7 0 0 0-4.2 1.3C3.9 9.4 3.1 13.4 3.5 17.3a16.8 16.8 0 0 0 5.1 2.6l1-1.7a10.9 10.9 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 10.3 0l.4.3a10.9 10.9 0 0 1-1.7.8l1 1.7a16.8 16.8 0 0 0 5.1-2.6c.5-4.5-.8-8.5-3.1-12zM9.5 14.9c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm5 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>',
   x: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.2l-4.9-6.4L5.1 21H2l7.3-8.3L2.5 3h6.4l4.4 5.8L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg>',
   youtube: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26.3 26.3 0 0 0 2 12a26.3 26.3 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26.3 26.3 0 0 0 22 12a26.3 26.3 0 0 0-.4-4.8zM10 15.1V8.9l5.2 3.1-5.2 3.1z"/></svg>',
@@ -188,7 +193,7 @@ window.MV_CONTENT = {
   regions: [
     {
       id: "frostvale",
-      scene: "assets/region-frost.svg",
+      scene: "assets/regions/frostvale.jpg",
       tone: "ice",
       map: { x: 47, y: 12 },
       en: {
@@ -240,7 +245,7 @@ window.MV_CONTENT = {
     },
     {
       id: "ashenmaw",
-      scene: "assets/region-ash.svg",
+      scene: "assets/regions/ashenmaw.jpg",
       tone: "fire",
       map: { x: 25, y: 33 },
       en: {
@@ -266,7 +271,7 @@ window.MV_CONTENT = {
     },
     {
       id: "moongate",
-      scene: "assets/region-moon.svg",
+      scene: "assets/regions/moongate.jpg",
       tone: "moon",
       map: { x: 56, y: 49 },
       en: {
@@ -365,33 +370,159 @@ window.MV_CONTENT = {
   ],
 
   /* ==========================================================
+     CLASSES — tabs (first tab = Kaelith)
+     images: drop files in assets/classes/ (e.g. kaelith-1.jpg)
+             and list them here to extend the gallery.
+     videos: { src, poster } entries open in the video modal.
+     ========================================================== */
+  classes: [
+    {
+      id: "kaelith",
+      tone: "blood",
+      sigil: "blade",
+      images: [
+        "assets/classes/kaelith-1.jpg",
+        "assets/classes/kaelith-2.jpg",
+        "assets/classes/kaelith-3.jpg",
+        "assets/classes/kaelith-4.jpg"
+      ],
+      videos: [
+        { src: "assets/videos/kaelith-1.mp4", poster: "assets/videos/kaelith-1-poster.jpg" },
+        { src: "assets/videos/kaelith-2.mp4", poster: "assets/videos/kaelith-2-poster.jpg" },
+        { src: "assets/videos/kaelith-3.mp4", poster: "assets/videos/kaelith-3-poster.jpg" }
+      ],
+      en: {
+        name: "Kaelith",
+        role: "Blood-Gem Duelist",
+        text: "Silver-haired and sharp-eyed, Kaelith fights with chains, blades and blood-gems. She turns every wound into leverage — a dueliste who ends the fight the moment her opponent hesitates.",
+        traits: [
+          { label: "Style", value: "Agile duelist & counters" },
+          { label: "Arsenal", value: "Blood-gem chains, twin blades" },
+          { label: "Oath", value: "No second chances" }
+        ]
+      },
+      pt: {
+        name: "Kaelith",
+        role: "Duelista Rubra",
+        text: "De cabelos prateados e olhos vermelhos, Kaelith luta com correntes, lâminas e gemas de sangue. Transforma cada ferida em vantagem — uma duelista que encerra a luta no instante em que o oponente hesita.",
+        traits: [
+          { label: "Estilo", value: "Duelista ágil e contragolpes" },
+          { label: "Arsenal", value: "Correntes de gema e lâminas gêmeas" },
+          { label: "Juramento", value: "Sem segundas chances" }
+        ]
+      }
+    },
+    {
+      id: "theryon",
+      tone: "iron",
+      sigil: "shield",
+      images: [],
+      videos: [],
+      en: {
+        name: "Theryon",
+        role: "Iron Vanguard",
+        text: "Theryon stands where others break. Clad in oath-forged iron, he answers every blow with a promise — and the vale's enemies learn that some walls strike back.",
+        traits: [
+          { label: "Style", value: "Frontline anchor" },
+          { label: "Arsenal", value: "Oath-forged iron & mace" },
+          { label: "Oath", value: "The line holds" }
+        ]
+      },
+      pt: {
+        name: "Theryon",
+        role: "Vanguarda de Ferro",
+        text: "Theryon permanece onde outros se partem. Armado em ferro forjado por juramento, responde a cada golpe com uma promessa — e os inimigos do Vale aprendem que algumas paredes revidam.",
+        traits: [
+          { label: "Estilo", value: "Âncora de frente" },
+          { label: "Arsenal", value: "Ferro jurado e maça" },
+          { label: "Juramento", value: "A linha se mantém" }
+        ]
+      }
+    },
+    {
+      id: "nyfheris",
+      tone: "arcane",
+      sigil: "arcane",
+      images: [],
+      videos: [],
+      en: {
+        name: "Nyfheris",
+        role: "Arcane Seer",
+        text: "Nyfheris reads the runes the moon left behind. Where they point, the air remembers older laws — and obeys.",
+        traits: [
+          { label: "Style", value: "Spellcraft & control" },
+          { label: "Arsenal", value: "Rune staff, starfire" },
+          { label: "Oath", value: "Knowledge before mercy" }
+        ]
+      },
+      pt: {
+        name: "Nyfheris",
+        role: "Vidente Arcano",
+        text: "Nyfheris lê as runas que a lua deixou para trás. Onde aponta, o ar lembra leis mais antigas — e obedece.",
+        traits: [
+          { label: "Estilo", value: "Feitiçaria e controle" },
+          { label: "Arsenal", value: "Cajado rúnico e fogo estelar" },
+          { label: "Juramento", value: "Conhecimento antes da misericórdia" }
+        ]
+      }
+    },
+    {
+      id: "vaelthor",
+      tone: "moon",
+      sigil: "bow",
+      images: [],
+      videos: [],
+      en: {
+        name: "Vaelthor",
+        role: "Moonlit Ranger",
+        text: "Vaelthor walks the roads no map keeps. Arrow first, question later — the night owes him nothing, and he collects anyway.",
+        traits: [
+          { label: "Style", value: "Precision at range" },
+          { label: "Arsenal", value: "Longbow & moonsteel" },
+          { label: "Oath", value: "One shot, one debt" }
+        ]
+      },
+      pt: {
+        name: "Vaelthor",
+        role: "Patrulheiro da Lua",
+        text: "Vaelthor percorre estradas que nenhum mapa guarda. Primeiro o flecha, depois a pergunta — a noite nada lhe deve, e ele cobra assim mesmo.",
+        traits: [
+          { label: "Estilo", value: "Precisão à distância" },
+          { label: "Arsenal", value: "Arco longo e aço lunar" },
+          { label: "Juramento", value: "Um tiro, uma dívida" }
+        ]
+      }
+    }
+  ],
+
+  /* ==========================================================
      MEDIA — trailer/video items need a real URL in `url`
      to play; without one they show an honest "coming soon" state.
      ========================================================== */
   media: [
     {
-      id: "trailer-announce",
+      id: "kaelith-showcase",
       kind: "trailer",
-      thumb: "assets/scene-castle.svg",
-      url: null,
-      en: { title: "Announce Trailer", sub: "Trailer" },
-      pt: { title: "Trailer de Anúncio", sub: "Trailer" }
+      thumb: "assets/videos/kaelith-1-poster.jpg",
+      url: "assets/videos/kaelith-1.mp4",
+      en: { title: "Kaelith — First Look", sub: "Trailer" },
+      pt: { title: "Kaelith — Primeira Olhada", sub: "Trailer" }
     },
     {
-      id: "world-tour",
+      id: "kaelith-motion",
       kind: "video",
-      thumb: "assets/region-frost.svg",
-      url: null,
-      en: { title: "World Tour — Frostvale", sub: "Video" },
-      pt: { title: "Tour pelo Mundo — Vale Glacial", sub: "Vídeo" }
+      thumb: "assets/videos/kaelith-2-poster.jpg",
+      url: "assets/videos/kaelith-2.mp4",
+      en: { title: "Kaelith in Motion", sub: "Gameplay" },
+      pt: { title: "Kaelith em Movimento", sub: "Gameplay" }
     },
     {
-      id: "combat-chronicle",
+      id: "kaelith-chronicle",
       kind: "video",
-      thumb: "assets/region-ash.svg",
-      url: null,
-      en: { title: "Combat Chronicle — Stances", sub: "Video" },
-      pt: { title: "Crônica de Combate — Posturas", sub: "Vídeo" }
+      thumb: "assets/videos/kaelith-3-poster.jpg",
+      url: "assets/videos/kaelith-3.mp4",
+      en: { title: "Combat Chronicle — Kaelith", sub: "Gameplay" },
+      pt: { title: "Crônica de Combate — Kaelith", sub: "Gameplay" }
     },
     {
       id: "shot-castle",

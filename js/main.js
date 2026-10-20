@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "features", "media", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "features", "media", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -139,6 +139,21 @@
       dot.style.width = dot.style.height = (3 * scale).toFixed(1) + "px";
       particleHost.appendChild(dot);
     }
+  }
+
+  /* ---------------- hero photo backdrop ---------------- */
+  var heroPhoto = $("#heroPhoto");
+  if (heroPhoto && CONFIG.heroImage) {
+    heroPhoto.src = CONFIG.heroImage;
+    var heroSection = $(".hero");
+    var revealPhoto = function () { heroSection.classList.add("hero--photo"); };
+    if (heroPhoto.complete && heroPhoto.naturalWidth) revealPhoto();
+    else heroPhoto.addEventListener("load", revealPhoto);
+    heroPhoto.addEventListener("error", function () {
+      /* graceful fallback: keep the layered SVG scene */
+      heroSection.classList.remove("hero--photo");
+      heroPhoto.removeAttribute("src");
+    });
   }
 
   /* ---------------- feature icons ---------------- */
@@ -361,6 +376,157 @@
     });
   }
 
+  /* ---------------- CLASSES ---------------- */
+  var classTabs = $("#classTabs");
+  var classPanel = $("#classPanel");
+  var activeClass = 0;
+
+  var CLASS_SIGILS = {
+    blade: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8 34 32"/><path d="M38 8 14 32"/><path d="m8 34 6 6M40 34l-6 6"/><path fill="currentColor" stroke="none" d="m24 17 4.5 7L24 31l-4.5-7z"/></svg>',
+    shield: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 5 8 11v12c0 9.5 6.6 16.4 16 19 9.4-2.6 16-9.5 16-19V11L24 5z"/><path fill="currentColor" stroke="none" d="m24 15 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L24 15z"/></svg>',
+    arcane: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="13"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8M13 13l5.5 5.5M29.5 29.5 35 35M35 13l-5.5 5.5M18.5 29.5 13 35"/><circle fill="currentColor" stroke="none" cx="24" cy="24" r="3.5"/></svg>',
+    bow: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7c13 6.5 13 27.5 0 34"/><path d="M15 7v34"/><path d="M8 24h28"/><path d="m31 18 6 6-6 6"/></svg>'
+  };
+
+  function classGallery(item, c) {
+    var entries = [];
+    (item.images || []).forEach(function (src) {
+      entries.push({ type: "image", src: src, title: c.name + " — " + t("classes.gallery") });
+    });
+    (item.videos || []).forEach(function (v) {
+      entries.push({ type: "video", src: v.src, poster: v.poster, title: c.name });
+    });
+    return entries;
+  }
+
+  function openClassLightbox(entries, index, name) {
+    var images = entries.filter(function (e) { return e.type === "image"; });
+    if (!images.length) return;
+    var clicked = entries[index];
+    galleryItems = images.map(function (e) {
+      return { thumb: e.src, en: { title: e.title, sub: name }, pt: { title: e.title, sub: name } };
+    });
+    lightboxIndex = clicked && clicked.type === "image" ? Math.max(0, images.indexOf(clicked)) : 0;
+    openModal(lightboxHTML(galleryItems[lightboxIndex]));
+    bindLightbox();
+  }
+
+  function renderClassPanel() {
+    var item = CONTENT.classes[activeClass];
+    if (!item || !classPanel) return;
+    var c = loc(item);
+    var entries = classGallery(item, c);
+    var html = '<div class="class-panel class-panel--' + item.tone + '">';
+
+    /* ---- art side ---- */
+    html += '<div class="class-art">';
+    if (entries.length) {
+      var main = entries[0];
+      if (main.type === "video") {
+        html += '<button class="class-art__main class-art__main--video" type="button" data-class-media="0" aria-label="' + t("media.play") + ": " + c.name + '">' +
+          '<img src="' + main.poster + '" alt="">' +
+          '<span class="class-art__play"><span class="class-art__play-ring">' + PLAY_ICON + "</span></span>" +
+          "</button>";
+      } else {
+        html += '<button class="class-art__main class-art__main--portrait" type="button" data-class-media="0" aria-label="' + t("media.view") + ": " + c.name + '">' +
+          '<img src="' + main.src + '" alt="' + c.name + '">' +
+          "</button>";
+      }
+      if (entries.length > 1) {
+        html += '<div class="class-thumbs">';
+        entries.forEach(function (entry, i) {
+          html += '<button class="class-thumb' + (i === 0 ? " is-active" : "") + '" type="button" data-class-media="' + i +
+            '" aria-label="' + (entry.type === "video" ? t("media.play") : t("media.view")) + ": " + c.name + " " + (i + 1) + '">' +
+            '<img src="' + (entry.type === "video" ? entry.poster : entry.src) + '" alt="" loading="lazy">' +
+            (entry.type === "video" ? '<span class="class-thumb__badge" aria-hidden="true">' + PLAY_ICON + "</span>" : "") +
+            "</button>";
+        });
+        html += "</div>";
+      }
+    } else {
+      /* honest crest fallback until class art exists */
+      html += '<div class="class-crest">' +
+        '<span class="class-crest__sigil" aria-hidden="true">' + (CLASS_SIGILS[item.sigil] || CLASS_SIGILS.arcane) + "</span>" +
+        '<p class="class-crest__name">' + c.name + "</p>" +
+        "</div>";
+    }
+    html += "</div>";
+
+    /* ---- info side ---- */
+    html += '<div class="class-info">' +
+      '<p class="class-info__role">' + c.role + "</p>" +
+      '<h3 class="class-info__name">' + c.name + "</h3>" +
+      '<p class="class-info__text">' + c.text + "</p>" +
+      '<ul class="class-info__traits">';
+    (c.traits || []).forEach(function (tr) {
+      html += '<li class="class-trait"><span class="class-trait__label">' + tr.label + '</span><span class="class-trait__value">' + tr.value + "</span></li>";
+    });
+    html += "</ul>";
+    if (item.videos && item.videos.length) {
+      html += '<div class="class-info__actions">' +
+        '<button class="btn btn--ghost" type="button" data-class-watch>' +
+        '<svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>' +
+        "<span>" + t("classes.watch") + "</span></button>" +
+        "</div>";
+    }
+    html += "</div></div>";
+    classPanel.innerHTML = html;
+
+    /* media interactions */
+    $all("[data-class-media]", classPanel).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var i = parseInt(btn.dataset.classMedia, 10);
+        var entry = entries[i];
+        if (!entry) return;
+        if (entry.type === "video") {
+          openTrailer({ url: entry.src, en: { title: entry.title, sub: "" }, pt: { title: entry.title, sub: "" } });
+        } else {
+          openClassLightbox(entries, i, c.name);
+        }
+      });
+    });
+    var watchBtn = $("[data-class-watch]", classPanel);
+    if (watchBtn) {
+      watchBtn.addEventListener("click", function () {
+        var v = item.videos[0];
+        openTrailer({ url: v.src, en: { title: c.name, sub: "" }, pt: { title: c.name, sub: "" } });
+      });
+    }
+  }
+
+  function renderClasses() {
+    if (!classTabs || !classPanel) return;
+    classTabs.innerHTML = "";
+    CONTENT.classes.forEach(function (item, i) {
+      var c = loc(item);
+      var tab = document.createElement("button");
+      tab.type = "button";
+      tab.className = "class-tab class-tab--" + item.tone + (i === activeClass ? " is-active" : "");
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-selected", i === activeClass ? "true" : "false");
+      tab.innerHTML = '<span class="class-tab__sigil" aria-hidden="true">' + (CLASS_SIGILS[item.sigil] || CLASS_SIGILS.arcane) +
+        '</span><span class="class-tab__name">' + c.name + "</span>";
+      tab.addEventListener("click", function () {
+        activeClass = i;
+        renderClasses();
+      });
+      classTabs.appendChild(tab);
+    });
+    renderClassPanel();
+  }
+
+  /* arrow-key navigation across class tabs (bound once) */
+  if (classTabs) {
+    classTabs.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      var total = CONTENT.classes.length;
+      activeClass = (activeClass + (e.key === "ArrowRight" ? 1 : total - 1)) % total;
+      renderClasses();
+      var tabs = $all(".class-tab", classTabs);
+      if (tabs[activeClass]) tabs[activeClass].focus();
+    });
+  }
+
   /* ---------------- SOCIAL / DISCORD ---------------- */
   function socialButton(key, label, url) {
     var el;
@@ -386,12 +552,11 @@
     var rows = [$("#socialRow"), $("#footerSocialRow")].filter(Boolean);
     rows.forEach(function (row) { row.innerHTML = ""; });
 
-    var items = [{ key: "discord", label: "Discord", url: CONFIG.discordUrl }]
-      .concat(CONFIG.socials || []);
+    var items = [
+      { key: "discord", label: "Discord", url: CONFIG.discordUrl },
+      { key: "whatsapp", label: "WhatsApp", url: CONFIG.whatsappUrl }
+    ].concat(CONFIG.socials || []);
 
-    if (!CONFIG.socials || !CONFIG.socials.length) {
-      /* honest default: only Discord, disabled until a real URL exists */
-    }
     rows.forEach(function (row) {
       items.forEach(function (s) { row.appendChild(socialButton(s.key, s.label, s.url)); });
     });
@@ -412,8 +577,24 @@
         btn.addEventListener("click", function () { openPending(); });
       }
     });
+
+    /* WhatsApp button */
+    var whatsappReady = !!CONFIG.whatsappUrl;
+    var waBtn = $("#communityWhatsapp");
+    if (waBtn) {
+      if (whatsappReady) {
+        waBtn.href = CONFIG.whatsappUrl;
+        waBtn.target = "_blank";
+        waBtn.rel = "noopener noreferrer";
+      } else {
+        waBtn.removeAttribute("href");
+        waBtn.setAttribute("role", "button");
+        waBtn.setAttribute("aria-disabled", "true");
+        waBtn.addEventListener("click", function () { openPending(); });
+      }
+    }
     var note = $("#communityNote");
-    if (note) note.hidden = discordReady;
+    if (note) note.hidden = discordReady || whatsappReady;
   }
 
   /* ---------------- MODALS ---------------- */
@@ -465,6 +646,9 @@
     var embed = embedUrl(url);
     if (embed) {
       return '<div class="video-frame"><iframe src="' + embed + '" title="Moon Valley video" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>';
+    }
+    if (/\.(mp4|webm|ogv|ogg)(\?.*)?$/i.test(url || "")) {
+      return '<div class="video-frame"><video class="video-frame__player" controls autoplay playsinline preload="metadata" src="' + url + '"></video></div>';
     }
     return '<div class="video-frame"><div class="video-frame__pending">' +
       '<div class="rune-ring"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>' +
@@ -612,6 +796,7 @@
     renderNews();
     renderRegions();
     renderMapPins();
+    renderClasses();
     renderFeatures();
     renderMediaFilters();
     renderMedia();
