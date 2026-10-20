@@ -2,21 +2,54 @@
 
 Site institucional cinematográfico do universo de RPG **Moon Valley** — fantasia épica sombria, em conformidade com o PRD v1.0.
 
-## Como executão site é estático (HTML + CSS + JS puro), sem etapa de build:
+## Como executar localmente
+
+O site é estático (HTML + CSS + JS puro), sem etapa de build:
 
 1. Abra `index.html` diretamente no navegador (duplo clique), **ou**
-2. Sirva a pasta com qualquer servidor estático:
-   - VS Code extensão *Live Server*
-   - `npx serve .` (se tiver Node)
-   - Qualquer hospedagem estática (Netlify, Vercel, GitHub Pages, Cloudflare Pages)
+2. Sirva a pasta com qualquer servidor estático (VS Code extensão *Live Server*, `npx serve .`).
 
-> Recomenda-se servidor/HTTPS em produção (requisito de segurança do PRD).
+## Como hospedar (escolha uma opção)
+
+### Opção A — GitHub Pages (gratuita, deploy automático)
+O repositório já inclui o workflow `.github/workflows/deploy-pages.yml`, que publica o site automaticamente a cada push.
+
+1. Envie o projeto ao GitHub (uma única vez):
+   ```
+   cd C:\Users\wokup\Documents\moonvalley
+   git add .
+   git commit -m "Deploy setup"
+   git push -u origin main
+   ```
+2. No GitHub, abra o repositório → **Settings** → **Pages**.
+3. Em **Source**, escolha **GitHub Actions** e salve.
+4. Pronto: o site fica online em
+   `https://wesleyfranciscoferreira2026.github.io/moonvalley/`
+   (o deploy roda sozinho a cada push; acompanhe em **Actions**).
+
+### Opção B — Netlify Drop (mais rápido, sem git)
+1. Acesse [app.netlify.com/drop](https://app.netlify.com/drop).
+2. Arraste a pasta `moonvalley` inteira para a área indicada.
+3. Você recebe um endereço público na hora — e pode apontar um domínio próprio depois.
+
+### Opção C — Vercel ou Cloudflare Pages
+Crie um projeto novo apontando para o repositório GitHub com as configurações padrão:
+- **Framework preset:** Other
+- **Build command:** *(vazio)*
+- **Output directory:** `.` (raiz)
+
+### Importante para qualquer hospedagem
+- Todos os caminhos são relativos → funciona em subpastas (ex.: `usuario.github.io/moonvalley/`).
+- Publique sempre via **HTTPS** (requisito de segurança do PRD).
+- Gere um `og-image.png` (1200×630) a partir de `assets/og-image.svg` para miniaturas de compartilhamento — nem toda rede social aceita SVG.
 
 ## Estrutura
 
 ```
 moonvalley/
 ├── index.html            # Página única com todas as seções
+├── netlify.toml          # Configuração de publicação (Netlify)
+├── .github/workflows/    # Deploy automático no GitHub Pages
 ├── css/
 │   ├── core.css          # Design system: tokens, botões, molduras, header, footer, modais
 │   └── layout.css        # Hero em camadas, seções, grids, responsivo
@@ -53,7 +86,7 @@ window.MV_CONFIG = {
 
 ## Como atualizar o conteúdo (RF-09)
 
-Toda a conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:
+Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:
 
 - **`news`** — notícias; o primeiro item recebe destaque automático. Itens além do 4º são revelados por "View All News".
 - **`regions`** — regiões do mundo (`tone`: `ice`, `forest`, `fire`, `moon` define a cor do bioma).
@@ -78,7 +111,7 @@ Seletor EN | PT no cabeçalho e no rodapé. A escolha é salva em `localStorage`
 - Navegação por teclado (modais com Escape, lightbox com setas, cards focáveis).
 - Indicadores de foco visíveis, skip-link, contraste verificado sobre fundos escuros.
 - `prefers-reduced-motion` desativa parallax, partículas e animações.
-- Imensos abaixo da dobra com `loading="lazy"`; dimensões reservadas (sem layout shift).
+- Imagens abaixo da dobra com `loading="lazy"`; dimensões reservadas (sem layout shift).
 - Otimizado para desktop, tablet e mobile (menu adaptado a toque).
 
 ## Limitações conhecidas (para produção)

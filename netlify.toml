@@ -1,0 +1,11 @@
+# Configuração do Netlify — publique arrastando a pasta em https://app.netlify.com/drop
+# ou conectando o repositório Git.
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
