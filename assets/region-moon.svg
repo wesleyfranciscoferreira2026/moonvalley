@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="mn-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A0A20"/>
+      <stop offset=".55" stop-color="#221A4A"/>
+      <stop offset="1" stop-color="#4A3A72"/>
+    </linearGradient>
+    <linearGradient id="mn-stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#C9CBE0"/>
+      <stop offset="1" stop-color="#5C5E86"/>
+    </linearGradient>
+    <linearGradient id="mn-stone-dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6E7099"/>
+      <stop offset="1" stop-color="#2A2A4C"/>
+    </linearGradient>
+    <radialGradient id="mn-moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F6F4FF" stop-opacity=".95"/>
+      <stop offset=".55" stop-color="#CDBBFF" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#CDBBFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#mn-sky)"/>
+
+  <!-- stars -->
+  <g fill="#E8E6F6">
+    <circle cx="120" cy="90" r="1.4" opacity=".8"/><circle cx="300" cy="160" r="1" opacity=".55"/>
+    <circle cx="520" cy="70" r="1.5" opacity=".8"/><circle cx="740" cy="180" r="1" opacity=".5"/>
+    <circle cx="960" cy="90" r="1.4" opacity=".75"/><circle cx="1120" cy="220" r="1.1" opacity=".6"/>
+    <circle cx="220" cy="300" r="1" opacity=".45"/><circle cx="640" cy="320" r="1.2" opacity=".5"/>
+    <circle cx="1040" cy="340" r="1" opacity=".4"/><circle cx="420" cy="240" r="1.1" opacity=".5"/>
+  </g>
+
+  <!-- big pale moon behind the ring -->
+  <circle cx="600" cy="300" r="260" fill="url(#mn-moon)"/>
+  <circle cx="600" cy="300" r="92" fill="#EFEAFF" opacity=".8"/>
+
+  <!-- the shattered ring -->
+  <g fill="none" stroke-linecap="butt">
+    <path d="M600 90A210 210 0 0 1 810 300" stroke="url(#mn-stone)" stroke-width="34"/>
+    <path d="M600 510A210 210 0 0 1 390 300" stroke="url(#mn-stone)" stroke-width="34"/>
+    <path d="M810 300A210 210 0 0 1 690 470" stroke="url(#mn-stone-dark)" stroke-width="30"/>
+  </g>
+  <!-- ring details -->
+  <g fill="#2A2A4C" opacity=".8">
+    <rect x="590" y="94" width="20" height="34" transform="rotate(0 600 110)"/>
+    <rect x="770" y="264" width="34" height="20"/>
+    <rect x="382" y="284" width="30" height="20"/>
+    <rect x="656" y="430" width="24" height="30" transform="rotate(-38 668 444)"/>
+  </g>
+
+  <!-- broken shards floating -->
+  <g fill="url(#mn-stone)">
+    <path d="M250 220 300 200 320 250 280 270Z"/>
+    <path d="M900 420 950 400 970 450 920 470Z" opacity=".9"/>
+    <path d="M180 430 220 415 232 456 200 466Z" opacity=".8"/>
+    <path d="M1000 180 1040 166 1052 206 1016 216Z" opacity=".85"/>
+    <path d="M480 150 508 140 518 172 492 180Z" opacity=".75"/>
+    <path d="M760 560 796 546 806 580 774 590Z" opacity=".8"/>
+  </g>
+
+  <!-- colonnade ruins on the ground -->
+  <g fill="#2A2A4C">
+    <rect x="240" y="560" width="34" height="140"/>
+    <path d="M228 548h58v18h-58Z"/>
+    <rect x="330" y="600" width="28" height="100"/>
+    <path d="M320 590h48v14h-48Z"/>
+    <rect x="900" y="580" width="32" height="120"/>
+    <path d="M888 568h56v16h-56Z"/>
+    <rect x="820" y="620" width="26" height="80"/>
+  </g>
+  <!-- silver rim on the columns -->
+  <g fill="#C9CBE0" opacity=".7">
+    <rect x="240" y="560" width="8" height="140"/>
+    <rect x="900" y="580" width="8" height="120"/>
+  </g>
+
+  <!-- silver desert floor -->
+  <path d="M0 760V700C200 682 400 706 600 692 820 676 1000 704 1200 688V760Z" fill="#1C1C38"/>
+  <g stroke="#8F86C9" stroke-width="1.4" opacity=".45">
+    <path d="M120 726h200"/><path d="M420 740h180"/><path d="M720 722h220"/><path d="M980 742h160"/>
+  </g>
+  <!-- moonlight reflection -->
+  <path d="M540 760 600 700 660 760Z" fill="#CDBBFF" opacity=".22"/>
+
+  <!-- floating motes -->
+  <g fill="#CDBBFF">
+    <circle cx="320" cy="360" r="2.4" opacity=".8"/><circle cx="480" cy="440" r="2" opacity=".6"/>
+    <circle cx="720" cy="380" r="2.6" opacity=".85"/><circle cx="880" cy="300" r="2" opacity=".6"/>
+    <circle cx="1060" cy="480" r="2.2" opacity=".7"/><circle cx="180" cy="520" r="2" opacity=".55"/>
+  </g>
+</svg>

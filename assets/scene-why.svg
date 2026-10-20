@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="wy-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#062030"/>
+      <stop offset=".5" stop-color="#0A4C61"/>
+      <stop offset="1" stop-color="#0E6B80"/>
+    </linearGradient>
+    <linearGradient id="wy-ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DFF3F7"/>
+      <stop offset=".45" stop-color="#8FC6D6"/>
+      <stop offset="1" stop-color="#2E6C82"/>
+    </linearGradient>
+    <linearGradient id="wy-ice-dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FB4C6"/>
+      <stop offset="1" stop-color="#164B60"/>
+    </linearGradient>
+    <linearGradient id="wy-aurora" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FD6E6" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#7FD6E6" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#B49BE8" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="wy-orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#EAFBFF"/>
+      <stop offset=".4" stop-color="#7FD6E6" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#7FD6E6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wy-moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F2FAFB" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#F2FAFB" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- sky -->
+  <rect width="1600" height="900" fill="url(#wy-sky)"/>
+
+  <!-- moon -->
+  <circle cx="1150" cy="170" r="200" fill="url(#wy-moon)"/>
+  <circle cx="1150" cy="170" r="62" fill="#EFF8F9" opacity=".85"/>
+
+  <!-- aurora bands -->
+  <g opacity=".8">
+    <path d="M300 0C360 160 300 300 380 420 460 300 420 150 520 0Z" fill="url(#wy-aurora)"/>
+    <path d="M560 0C640 180 580 340 680 470 780 340 720 160 820 0Z" fill="url(#wy-aurora)" opacity=".7"/>
+    <path d="M880 0C960 150 920 290 1000 400 1080 280 1050 140 1140 0Z" fill="url(#wy-aurora)" opacity=".55"/>
+  </g>
+
+  <!-- far ice range -->
+  <path d="M0 620 140 470 260 590 400 440 520 580 660 460 780 590 920 450 1060 580 1200 440 1340 570 1480 460 1600 580V920H0Z" fill="#0B3A4E" opacity=".95"/>
+  <g fill="url(#wy-ice)" opacity=".85">
+    <path d="M400 440 428 476 410 484 396 472 380 486 364 476Z"/>
+    <path d="M920 450 948 486 930 494 916 482 900 496 884 486Z"/>
+    <path d="M1200 440 1230 478 1212 486 1197 474 1180 488 1164 478Z"/>
+  </g>
+
+  <!-- ice spires, mid -->
+  <g>
+    <path d="M180 900 250 520 320 900Z" fill="url(#wy-ice-dark)"/>
+    <path d="M250 520 268 900 320 900Z" fill="url(#wy-ice)" opacity=".55"/>
+    <path d="M480 900 560 470 640 900Z" fill="url(#wy-ice-dark)"/>
+    <path d="M560 470 582 900 640 900Z" fill="url(#wy-ice)" opacity=".6"/>
+    <path d="M820 900 890 560 960 900Z" fill="url(#wy-ice-dark)"/>
+    <path d="M890 560 908 900 960 900Z" fill="url(#wy-ice)" opacity=".5"/>
+  </g>
+
+  <!-- frozen ground with reflections -->
+  <path d="M0 900V812C220 788 420 812 640 796 880 778 1100 810 1340 794 1460 786 1540 796 1600 788V900Z" fill="#0A2C3C"/>
+  <g stroke="#7FD6E6" stroke-width="1.4" opacity=".35">
+    <path d="M120 856h280"/><path d="M520 878h240"/><path d="M900 850h300"/><path d="M1240 880h260"/>
+  </g>
+
+  <!-- the Aurora Warden (character), right side, backlit -->
+  <g transform="translate(1230 380)">
+    <!-- cloak silhouette -->
+    <path d="M60 480C26 420 14 340 24 258 30 200 44 150 66 118 84 92 106 76 132 70 122 96 118 128 122 164 128 216 142 268 166 312 186 348 196 396 190 444 152 400 116 328 118 258 120 190 132 128 154 74Z" fill="#03121C"/>
+    <!-- hood + head -->
+    <path d="M74 122C66 92 78 62 104 48 128 36 158 44 172 68 182 84 182 104 174 120 156 108 132 104 110 110 96 114 84 118 74 122Z" fill="#03121C"/>
+    <!-- staff -->
+    <path d="M236 60 246 62 216 480 206 478Z" fill="#03121C"/>
+    <!-- orb of light -->
+    <circle cx="242" cy="42" r="46" fill="url(#wy-orb)"/>
+    <circle cx="242" cy="42" r="10" fill="#EAFBFF"/>
+    <!-- rim light: warm from behind, cool from the orb -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M170 66C182 84 182 104 174 120" stroke="#F5C489" stroke-width="2.4" opacity=".8"/>
+      <path d="M166 312C186 348 196 396 190 444" stroke="#F5C489" stroke-width="2.4" opacity=".7"/>
+      <path d="M122 164C128 216 142 268 166 312" stroke="#F5C489" stroke-width="1.6" opacity=".45"/>
+      <path d="M76 126C68 96 80 66 104 52" stroke="#7FD6E6" stroke-width="2" opacity=".75"/>
+      <path d="M110 110C132 104 156 108 174 120" stroke="#7FD6E6" stroke-width="1.6" opacity=".6"/>
+      <path d="M120 258C118 320 122 384 138 440" stroke="#7FD6E6" stroke-width="1.4" opacity=".35"/>
+    </g>
+  </g>
+
+  <!-- snow particles -->
+  <g fill="#EAFBFF">
+    <circle cx="300" cy="200" r="2" opacity=".7"/><circle cx="540" cy="320" r="1.6" opacity=".6"/>
+    <circle cx="760" cy="180" r="1.8" opacity=".65"/><circle cx="980" cy="360" r="1.5" opacity=".5"/>
+    <circle cx="1380" cy="240" r="2" opacity=".6"/><circle cx="1520" cy="420" r="1.6" opacity=".5"/>
+    <circle cx="160" cy="420" r="1.6" opacity=".5"/><circle cx="660" cy="500" r="1.4" opacity=".45"/>
+    <circle cx="1080" cy="120" r="1.7" opacity=".6"/><circle cx="420" cy="120" r="1.5" opacity=".55"/>
+  </g>
+
+  <!-- mist over the ground -->
+  <path d="M0 900V760C260 742 520 772 780 756 1060 740 1320 770 1600 750V900Z" fill="#0E4C62" opacity=".55"/>
+</svg>

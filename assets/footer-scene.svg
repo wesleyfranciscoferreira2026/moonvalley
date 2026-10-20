@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="ft-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#050F1C"/>
+      <stop offset=".6" stop-color="#0A3145"/>
+      <stop offset="1" stop-color="#0E4C62"/>
+    </linearGradient>
+    <radialGradient id="ft-moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#EAF6F8" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#EAF6F8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="560" fill="url(#ft-sky)"/>
+
+  <!-- moon -->
+  <circle cx="330" cy="140" r="170" fill="url(#ft-moon)"/>
+  <circle cx="330" cy="140" r="44" fill="#E8F3F5" opacity=".6"/>
+
+  <!-- stars -->
+  <g fill="#D8E6EA" opacity=".6">
+    <circle cx="140" cy="80" r="1.3"/><circle cx="520" cy="60" r="1.1"/><circle cx="760" cy="120" r="1.4"/>
+    <circle cx="980" cy="70" r="1.1"/><circle cx="1240" cy="130" r="1.3"/><circle cx="1460" cy="80" r="1.1"/>
+    <circle cx="640" cy="200" r="1"/><circle cx="1100" cy="210" r="1"/>
+  </g>
+
+  <!-- distant keep on a ridge -->
+  <g fill="#03101A" opacity=".95">
+    <rect x="1080" y="240" width="30" height="60"/>
+    <path d="M1076 242 1114 242 1095 210Z"/>
+    <rect x="1046" y="270" width="66" height="34"/>
+    <rect x="1120" y="262" width="22" height="42"/>
+    <path d="M1116 264 1146 264 1131 236Z"/>
+  </g>
+
+  <!-- far range -->
+  <path d="M0 420 140 330 280 410 420 320 560 410 700 340 840 420 980 330 1120 410 1260 340 1400 415 1600 330V560H0Z" fill="#061824"/>
+  <!-- near range -->
+  <path d="M0 500 180 430 360 500 540 440 720 505 900 440 1080 505 1260 445 1440 500 1600 440V560H0Z" fill="#03101A"/>
+
+  <!-- archer silhouette, left edge -->
+  <g fill="#020A12" transform="translate(120 300)">
+    <path d="M40 260C30 210 34 160 52 122 60 104 74 92 90 88 82 104 80 124 84 144 92 180 106 214 126 240 104 258 74 264 40 260Z"/>
+    <circle cx="92" cy="66" r="16"/>
+    <path d="M78 52C82 40 104 40 108 52Z"/>
+    <path d="M84 88 76 130 90 132 96 92Z"/>
+    <path d="M96 92 106 132 120 128 108 88Z"/>
+    <!-- bow -->
+    <path d="M118 60C148 76 152 128 126 156" fill="none" stroke="#020A12" stroke-width="5"/>
+    <path d="M118 60 126 156" stroke="#020A12" stroke-width="1.6" fill="none"/>
+    <!-- quiver -->
+    <path d="M60 108 44 60 56 56 74 104Z"/>
+  </g>
+
+  <!-- knight silhouette, right edge -->
+  <g fill="#020A12" transform="translate(1380 290)">
+    <path d="M60 270C36 220 30 168 44 126 52 100 70 82 94 76 84 100 82 128 88 154 98 196 116 234 140 264 112 280 82 280 60 270Z"/>
+    <circle cx="96" cy="54" r="18"/>
+    <path d="M78 44C84 28 110 28 116 44Z"/>
+    <path d="M116 20 118 44 110 44Z"/>
+    <path d="M112 100 128 104 118 200 106 198Z"/>
+    <rect x="100" y="98" width="34" height="8" rx="4"/>
+    <!-- cape -->
+    <path d="M62 96C34 108 18 140 16 176 34 158 52 148 72 144 62 128 58 112 62 96Z"/>
+  </g>
+
+  <!-- low mist -->
+  <path d="M0 560V470C260 452 520 480 780 466 1060 450 1320 478 1600 458V560Z" fill="#0A3145" opacity=".6"/>
+</svg>

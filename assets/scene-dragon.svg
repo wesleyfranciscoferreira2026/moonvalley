@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <!-- Dragon silhouette gliding through the upper sky.
+       Built from clean parts so the shape reads clearly at any scale. -->
+  <g fill="#04121C" transform="translate(360 230) scale(1.35)">
+    <!-- far wing (behind body) -->
+    <path d="M52 24C84 -22 140 -52 208 -56 186 -38 176 -24 182 -8 148 -20 124 -12 116 6 92 -8 68 -2 58 18Z" opacity=".82"/>
+
+    <!-- tail with spade tip -->
+    <path d="M-46 46C4 56 62 66 116 92 148 108 176 130 196 156L182 168C160 142 132 120 100 104 50 80 0 70 -50 62Z"/>
+    <path d="M196 156 226 142 214 166 232 182 200 184 208 168Z"/>
+
+    <!-- body -->
+    <ellipse cx="24" cy="40" rx="52" ry="21" transform="rotate(-6 24 40)"/>
+
+    <!-- neck + head (facing left) -->
+    <path d="M-18 34C-46 20 -72 4 -92 -16L-104 -8C-84 16 -56 36 -24 52Z"/>
+    <path d="M-92 -16C-104 -26 -118 -30 -132 -26L-146 -18 -132 -10 -118 -6 -104 -8Z"/>
+    <path d="M-118 -30 -108 -46 -98 -32Z"/>
+    <path d="M-104 -26 -90 -40 -84 -24Z"/>
+
+    <!-- near wing (in front) -->
+    <path d="M44 54C74 12 132 -16 200 -20 178 -2 168 12 174 28 140 16 116 24 108 42 84 28 60 34 50 54Z"/>
+
+    <!-- legs tucked -->
+    <path d="M4 58 -6 84 6 82 20 62Z"/>
+    <path d="M40 58 30 86 44 82 54 60Z"/>
+  </g>
+</svg>

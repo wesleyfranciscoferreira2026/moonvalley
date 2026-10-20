@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="as-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#160806"/>
+      <stop offset=".5" stop-color="#4A1B10"/>
+      <stop offset="1" stop-color="#8C3A1C"/>
+    </linearGradient>
+    <linearGradient id="as-rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A120C"/>
+      <stop offset="1" stop-color="#0D0503"/>
+    </linearGradient>
+    <linearGradient id="as-lava" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/>
+      <stop offset=".4" stop-color="#F5A34A"/>
+      <stop offset="1" stop-color="#B82E12"/>
+    </linearGradient>
+    <radialGradient id="as-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FFB54A" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#FFB54A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#as-sky)"/>
+
+  <!-- smoke haze -->
+  <g fill="#2A120C" opacity=".55">
+    <ellipse cx="300" cy="180" rx="320" ry="110"/>
+    <ellipse cx="880" cy="120" rx="360" ry="120"/>
+  </g>
+
+  <!-- volcano -->
+  <path d="M340 760 520 240 620 240 800 760Z" fill="url(#as-rock)"/>
+  <!-- crater glow + plume -->
+  <path d="M520 240 560 200 620 240Z" fill="url(#as-lava)"/>
+  <ellipse cx="570" cy="230" rx="180" ry="90" fill="url(#as-glow)"/>
+  <g fill="#3A1A10" opacity=".8">
+    <ellipse cx="560" cy="120" rx="120" ry="60"/>
+    <ellipse cx="620" cy="60" rx="150" ry="64"/>
+  </g>
+  <!-- lava river down the slope -->
+  <path d="M566 250 556 340 572 420 548 520 566 600 540 700 580 700 604 590 586 500 610 410 592 330 604 250Z" fill="url(#as-lava)"/>
+  <path d="M566 250 556 340 572 420 548 520 566 600 540 700" fill="none" stroke="#FFE9A8" stroke-width="3" opacity=".7"/>
+
+  <!-- obsidian spines -->
+  <g fill="url(#as-rock)">
+    <path d="M120 760 180 340 240 760Z"/>
+    <path d="M180 340 196 760 240 760Z" fill="#3A1810" opacity=".8"/>
+    <path d="M900 760 960 300 1020 760Z"/>
+    <path d="M960 300 978 760 1020 760Z" fill="#3A1810" opacity=".8"/>
+    <path d="M1060 760 1110 420 1160 760Z"/>
+    <path d="M300 760 350 500 400 760Z"/>
+  </g>
+
+  <!-- lava pool at the base -->
+  <path d="M0 760V700C180 678 380 706 560 690 760 672 940 702 1200 684V760Z" fill="#1A0906"/>
+  <path d="M180 726C320 712 420 736 560 724 700 712 800 734 940 722 1040 714 1120 726 1200 718V760H180Z" fill="url(#as-lava)" opacity=".85"/>
+  <g fill="#FFE9A8" opacity=".8">
+    <path d="M260 730h120v5H260Z"/>
+    <path d="M520 738h160v5H520Z"/>
+    <path d="M840 728h120v5H840Z"/>
+  </g>
+
+  <!-- ember glow reflections on the rocks -->
+  <g fill="#B85C43" opacity=".35">
+    <path d="M240 760 300 520 306 760Z"/>
+    <path d="M1020 760 960 320 968 760Z"/>
+  </g>
+
+  <!-- ember particles -->
+  <g fill="#FFB54A">
+    <circle cx="260" cy="420" r="2.4" opacity=".9"/><circle cx="420" cy="360" r="2" opacity=".7"/>
+    <circle cx="700" cy="320" r="2.6" opacity=".9"/><circle cx="820" cy="440" r="2" opacity=".6"/>
+    <circle cx="1040" cy="380" r="2.4" opacity=".8"/><circle cx="140" cy="500" r="2" opacity=".6"/>
+    <circle cx="620" cy="480" r="2.2" opacity=".8"/><circle cx="960" cy="540" r="2" opacity=".55"/>
+    <circle cx="360" cy="240" r="1.8" opacity=".6"/><circle cx="760" cy="200" r="2" opacity=".65"/>
+  </g>
+</svg>

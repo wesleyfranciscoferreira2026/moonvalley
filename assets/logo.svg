@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Moon Valley emblem">
+  <defs>
+    <linearGradient id="mv-silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".55" stop-color="#D8D8CF"/>
+      <stop offset="1" stop-color="#8E9AA0"/>
+    </linearGradient>
+    <linearGradient id="mv-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD9A3"/>
+      <stop offset=".55" stop-color="#F5A34A"/>
+      <stop offset="1" stop-color="#B85C43"/>
+    </linearGradient>
+    <radialGradient id="mv-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#11A9C4" stop-opacity=".5"/>
+      <stop offset=".7" stop-color="#11A9C4" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#11A9C4" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="mv-crescent">
+      <circle cx="60" cy="60" r="42" fill="#fff"/>
+      <circle cx="83" cy="51" r="36" fill="#000"/>
+    </mask>
+    <clipPath id="mv-disc"><circle cx="60" cy="60" r="47"/></clipPath>
+  </defs>
+
+  <!-- ambient glow -->
+  <circle cx="60" cy="60" r="58" fill="url(#mv-glow)"/>
+
+  <!-- outer ring + gold seals -->
+  <circle cx="60" cy="60" r="51" fill="none" stroke="url(#mv-silver)" stroke-width="1.3" opacity=".7"/>
+  <circle cx="60" cy="60" r="54.5" fill="none" stroke="url(#mv-silver)" stroke-width=".5" opacity=".4"/>
+  <path d="M60 3.5 63 8.5 60 13.5 57 8.5Z" fill="url(#mv-gold)"/>
+  <path d="M60 106.5 63 111.5 60 116.5 57 111.5Z" fill="url(#mv-gold)"/>
+  <path d="M3.5 60 8.5 57 13.5 60 8.5 63Z" fill="url(#mv-gold)" opacity=".8"/>
+  <path d="M106.5 60 111.5 57 116.5 60 111.5 63Z" fill="url(#mv-gold)" opacity=".8"/>
+
+  <!-- crescent moon -->
+  <circle cx="60" cy="60" r="42" fill="url(#mv-silver)" mask="url(#mv-crescent)"/>
+
+  <!-- scene inside the disc: valley + castle -->
+  <g clip-path="url(#mv-disc)">
+    <!-- stars -->
+    <circle cx="76" cy="27" r="1.1" fill="#F5A34A"/>
+    <circle cx="87" cy="37" r=".8" fill="#D8D8CF"/>
+    <circle cx="68" cy="17" r=".7" fill="#D8D8CF" opacity=".8"/>
+    <circle cx="93" cy="24" r=".6" fill="#D8D8CF" opacity=".6"/>
+    <!-- valley floor -->
+    <rect x="0" y="90" width="120" height="40" fill="#05141E"/>
+    <!-- mountains -->
+    <path d="M-4 94 30 62 43 76 58 54 73 76 88 62 124 94Z" fill="#05141E"/>
+    <!-- castle on the central peak -->
+    <g fill="#05141E">
+      <rect x="54.2" y="43" width="8.6" height="13"/>
+      <path d="M52 43.6 65 43.6 58.5 34Z"/>
+      <rect x="46.6" y="49.4" width="4.4" height="8.6"/>
+      <path d="M45.4 49.8 52.2 49.8 48.8 43.8Z"/>
+      <rect x="66" y="49.4" width="4.4" height="8.6"/>
+      <path d="M64.8 49.8 71.6 49.8 68.2 43.8Z"/>
+      <rect x="50" y="53.2" width="17" height="3.2"/>
+    </g>
+    <!-- windows -->
+    <g fill="#F5A34A">
+      <rect x="56.6" y="46.4" width="1.2" height="1.9" rx=".4"/>
+      <rect x="59.4" y="46.4" width="1.2" height="1.9" rx=".4"/>
+      <rect x="48.2" y="52.4" width="1" height="1.6" rx=".3"/>
+      <rect x="67.6" y="52.4" width="1" height="1.6" rx=".3"/>
+    </g>
+    <!-- banner -->
+    <path d="M58.5 33.6 58.5 29.2 63.4 30.4 58.5 31.6Z" fill="#B85C43"/>
+  </g>
+
+  <!-- rim light on crescent edge -->
+  <circle cx="60" cy="60" r="42" fill="none" stroke="#FFFFFF" stroke-width=".6" opacity=".5" mask="url(#mv-crescent)"/>
+</svg>

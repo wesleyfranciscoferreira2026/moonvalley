@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="gr-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04140F"/>
+      <stop offset=".55" stop-color="#0B3B33"/>
+      <stop offset="1" stop-color="#17624B"/>
+    </linearGradient>
+    <linearGradient id="gr-trunk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0A2119"/>
+      <stop offset=".5" stop-color="#123A2C"/>
+      <stop offset="1" stop-color="#061711"/>
+    </linearGradient>
+    <linearGradient id="gr-moss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FD9A4"/>
+      <stop offset="1" stop-color="#2E6B4C"/>
+    </linearGradient>
+    <radialGradient id="gr-light" cx="50%" cy="0%" r="90%">
+      <stop offset="0" stop-color="#F5E7B8" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#F5E7B8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#gr-sky)"/>
+
+  <!-- god rays through the canopy -->
+  <g fill="url(#gr-light)">
+    <path d="M300 0 420 760 300 760Z"/>
+    <path d="M560 0 700 760 560 760Z" opacity=".8"/>
+    <path d="M880 0 980 760 860 760Z" opacity=".6"/>
+  </g>
+
+  <!-- canopy -->
+  <g fill="#062018">
+    <ellipse cx="150" cy="60" rx="260" ry="110"/>
+    <ellipse cx="520" cy="20" rx="300" ry="100"/>
+    <ellipse cx="900" cy="50" rx="280" ry="110"/>
+    <ellipse cx="1200" cy="10" rx="240" ry="96"/>
+  </g>
+
+  <!-- giant trunks -->
+  <path d="M120 760C130 520 110 320 150 120 200 320 190 540 200 760Z" fill="url(#gr-trunk)"/>
+  <path d="M420 760C430 540 410 340 450 90 520 320 510 540 520 760Z" fill="url(#gr-trunk)"/>
+  <path d="M760 760C770 520 750 340 790 110 850 330 840 540 850 760Z" fill="url(#gr-trunk)"/>
+  <path d="M1040 760C1050 540 1030 340 1070 120 1130 340 1120 540 1130 760Z" fill="url(#gr-trunk)"/>
+
+  <!-- root bridges -->
+  <path d="M200 640C340 596 480 660 520 700 420 720 300 700 200 700Z" fill="#0A2119"/>
+  <path d="M850 620C960 590 1060 640 1120 690 1020 706 930 690 850 690Z" fill="#0A2119"/>
+
+  <!-- mossy ruin arch -->
+  <g>
+    <path d="M560 760V520a90 90 0 0 1 180 0v240h-34V520a56 56 0 0 0-112 0v240Z" fill="#123A2C"/>
+    <path d="M560 760V520a90 90 0 0 1 90-90v34a56 56 0 0 0-56 56v240Z" fill="url(#gr-moss)" opacity=".7"/>
+    <rect x="540" y="474" width="220" height="26" fill="#0E2C22"/>
+    <rect x="540" y="474" width="220" height="8" fill="url(#gr-moss)" opacity=".8"/>
+  </g>
+
+  <!-- the Antlered Watcher, half-hidden between roots -->
+  <g transform="translate(300 430)" fill="#04120D">
+    <ellipse cx="60" cy="180" rx="66" ry="90"/>
+    <circle cx="60" cy="76" r="30"/>
+    <path d="M40 56C26 30 22 12 26 0l8 4c-2 10 2 24 10 40Z"/>
+    <path d="M80 56C94 30 98 12 94 0l-8 4c2 10-2 24-10 40Z"/>
+    <path d="M30 40 12 26l4 18-14 2 16 8Z"/>
+    <path d="M90 40l18-14-4 18 14 2-16 8Z"/>
+    <path d="M40 240 30 300l14 0 8-46Z"/>
+    <path d="M80 240 90 300l-14 0-8-46Z"/>
+  </g>
+  <g fill="#7FD6E6" opacity=".85">
+    <circle cx="348" cy="510" r="3.4"/><circle cx="374" cy="510" r="3.4"/>
+  </g>
+
+  <!-- fireflies -->
+  <g fill="#FFE9A8">
+    <circle cx="240" cy="600" r="2.4" opacity=".9"/><circle cx="330" cy="660" r="2" opacity=".7"/>
+    <circle cx="620" cy="620" r="2.6" opacity=".9"/><circle cx="700" cy="680" r="2" opacity=".6"/>
+    <circle cx="940" cy="600" r="2.4" opacity=".8"/><circle cx="1010" cy="660" r="2" opacity=".6"/>
+    <circle cx="150" cy="540" r="2" opacity=".7"/><circle cx="820" cy="540" r="2.2" opacity=".7"/>
+  </g>
+
+  <!-- low mist -->
+  <path d="M0 760V640C220 622 440 650 660 636 900 620 1060 646 1200 632V760Z" fill="#0E3B31" opacity=".55"/>
+</svg>

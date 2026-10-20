@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moon Valley — Enter a World Beyond the Moon</title>
+  <meta name="description" content="Moon Valley is an epic dark-fantasy RPG universe of ancient kingdoms, legendary creatures and magic. Explore the world, discover the lore and join the community.">
+  <meta property="og:title" content="Moon Valley — Enter a World Beyond the Moon">
+  <meta property="og:description" content="Beyond ancient mountains and forgotten kingdoms lies a world shaped by magic, legends and the courage of those who dare to explore it.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-image.svg">
+  <meta name="theme-color" content="#071A24">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/core.css">
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+  <!-- ======================= PRELOADER ======================= -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <img class="preloader__emblem" src="assets/logo.svg" alt="" width="96" height="96">
+      <div class="preloader__wordmark">MOON&nbsp;VALLEY</div>
+      <div class="preloader__bar"><span></span></div>
+    </div>
+  </div>
+
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <!-- ======================= HEADER ======================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner container-wide">
+      <a class="brand" href="#home" aria-label="Moon Valley — home">
+        <img class="brand__emblem" src="assets/logo.svg" alt="" width="44" height="44">
+        <span class="brand__name">Moon&nbsp;Valley</span>
+      </a>
+
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#home" data-i18n="nav.home">Home</a></li>
+          <li><a class="site-nav__link" href="#world" data-i18n="nav.world">World</a></li>
+          <li><a class="site-nav__link" href="#news" data-i18n="nav.news">News</a></li>
+          <li><a class="site-nav__link" href="#media" data-i18n="nav.media">Media</a></li>
+          <li><a class="site-nav__link" href="#features" data-i18n="nav.features">Features</a></li>
+          <li><a class="site-nav__link" href="#community" data-i18n="nav.community">Community</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button class="lang-switch__btn is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <span class="lang-switch__sep" aria-hidden="true">|</span>
+          <button class="lang-switch__btn" type="button" data-lang="pt" aria-pressed="false">PT</button>
+        </div>
+        <a class="btn btn--ghost btn--sm header-discord" id="headerDiscord" href="#community">
+          <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.7 16.7 0 0 0 15.1 4l-.2.4a15.6 15.6 0 0 1 3.9 1.6 13.5 13.5 0 0 0-11.6 0A15.6 15.6 0 0 1 11 4.4L10.8 4a16.7 16.7 0 0 0-4.2 1.3C3.9 9.4 3.1 13.4 3.5 17.3a16.8 16.8 0 0 0 5.1 2.6l1-1.7a10.9 10.9 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 10.3 0l.4.3a10.9 10.9 0 0 1-1.7.8l1 1.7a16.8 16.8 0 0 0 5.1-2.6c.5-4.5-.8-8.5-3.1-12zM9.5 14.9c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm5 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>
+          <span data-i18n="cta.discord">Join Discord</span>
+        </a>
+        <a class="btn btn--primary btn--sm header-cta" href="#world" data-i18n="cta.explore">Explore the World</a>
+        <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ======================= HERO ======================= -->
+    <section class="hero" id="home">
+      <div class="hero__scene" aria-hidden="true">
+        <div class="scene-layer scene-layer--sky" data-depth="0.02"></div>
+        <img class="scene-layer scene-layer--stars" src="assets/scene-stars.svg" alt="" data-depth="0.05" fetchpriority="high">
+        <img class="scene-layer scene-layer--mountains" src="assets/scene-mountains.svg" alt="" data-depth="0.10" fetchpriority="high">
+        <img class="scene-layer scene-layer--castle" src="assets/scene-castle.svg" alt="" data-depth="0.18" fetchpriority="high">
+        <div class="scene-layer scene-layer--dragon-wrap" data-depth="0.30"><img class="dragon-glide" src="assets/scene-dragon.svg" alt=""></div>
+        <div class="scene-layer scene-layer--mist" data-depth="0.22"></div>
+        <img class="scene-layer scene-layer--foreground" src="assets/scene-foreground.svg" alt="" data-depth="0.38">
+        <div class="scene-layer scene-layer--particles" id="heroParticles" data-depth="0.46"></div>
+      </div>
+
+      <div class="hero__content container">
+        <div class="hero__emblem-wrap reveal">
+          <img class="hero__emblem" src="assets/logo.svg" alt="" width="108" height="108">
+        </div>
+        <p class="hero__wordmark reveal" aria-hidden="true">Moon Valley</p>
+        <h1 class="hero__title reveal" data-i18n="hero.title">Enter a World Beyond the Moon</h1>
+        <div class="ornament ornament--sm reveal" aria-hidden="true"></div>
+        <p class="hero__lead reveal" data-i18n="hero.lead">Beyond ancient mountains and forgotten kingdoms lies a world shaped by magic, legends and the courage of those who dare to explore it.</p>
+        <div class="hero__actions reveal">
+          <a class="btn btn--primary btn--lg" href="#world">
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm7.9 9h-3.2a15.4 15.4 0 0 0-1.2-5.5A8 8 0 0 1 19.9 11zM12 4c.9 1.2 1.9 3.6 2.2 7H9.8C10.1 7.6 11.1 5.2 12 4zM4.1 13h3.2c.1-2 .5-3.9 1.2-5.5A8 8 0 0 0 4.1 13zm3.2 0H4.1a8 8 0 0 1 4.4-5.5c-.7 1.6-1.1 3.5-1.2 5.5zm1.3 0h6.8c-.4 3.4-1.7 6.1-3.4 7.8-1.7-1.7-3-4.4-3.4-7.8zm8.1 5.5a15.4 15.4 0 0 0 1.2-5.5h3.2a8 8 0 0 1-4.4 5.5z"/></svg>
+            <span data-i18n="cta.explore">Explore the World</span>
+          </a>
+          <button class="btn btn--ghost btn--lg" type="button" data-open-trailer>
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            <span data-i18n="cta.trailer">Watch Trailer</span>
+          </button>
+        </div>
+      </div>
+
+      <a class="hero__scroll-cue" href="#news" aria-label="Scroll to news">
+        <span class="hero__scroll-rune" aria-hidden="true"></span>
+        <span class="hero__scroll-text" data-i18n="hero.scroll">Descend</span>
+      </a>
+    </section>
+
+    <!-- ======================= NEWS ======================= -->
+    <section class="section section--news" id="news">
+      <div class="section__veil" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__eyebrow" data-i18n="news.eyebrow">Chronicles of the Realm</p>
+          <h2 class="section-head__title" data-i18n="news.title">Latest News</h2>
+          <div class="ornament" aria-hidden="true"></div>
+        </header>
+
+        <div class="news-grid" id="newsGrid"><!-- rendered by js --></div>
+
+        <div class="section__foot reveal">
+          <button class="btn btn--ghost" type="button" id="newsViewAll">
+            <span data-i18n="news.viewAll">View All News</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <img src="assets/ornament-divider.svg" alt="" loading="lazy">
+    </div>
+
+    <!-- ======================= WHY MOON VALLEY ======================= -->
+    <section class="section section--why" id="why">
+      <div class="why__scene" aria-hidden="true">
+        <div class="scene-layer scene-layer--why-sky"></div>
+        <img class="scene-layer scene-layer--why-art" src="assets/scene-why.svg" alt="" loading="lazy">
+        <div class="scene-layer scene-layer--mist scene-layer--mist-cold"></div>
+      </div>
+      <div class="container why__inner">
+        <div class="why__copy reveal">
+          <p class="section-head__eyebrow" data-i18n="why.eyebrow">Why Moon Valley?</p>
+          <h2 class="section-head__title section-head__title--left" data-i18n="why.title">A World That Remembers Every Step You Take</h2>
+          <p class="why__text" data-i18n="why.text">Moon Valley is not a backdrop — it is a living realm where frozen kingdoms sleep beneath eternal auroras, forests guard the memory of the first kings, and the moon keeps a debt no hero has yet repaid. Every ruin, every legend and every creature belongs to one continuous story: yours.</p>
+          <div class="why__pillars">
+            <article class="pillar">
+              <span class="pillar__icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path fill="currentColor" d="M24 4 6 12v10c0 11 7.5 18.9 18 22 10.5-3.1 18-11 18-22V12L24 4zm0 6.5 12 5.2v6.8c0 8-5 13.9-12 16.6-7-2.7-12-8.6-12-16.6v-6.8l12-5.2z"/><path fill="currentColor" d="m24 16 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8L24 16z"/></svg>
+              </span>
+              <h3 class="pillar__title" data-i18n="why.p1.title">Explore</h3>
+              <p class="pillar__text" data-i18n="why.p1.text">Four great regions, each with its own climate, fauna and forgotten history — connected by roads no map has finished drawing.</p>
+              <a class="link-rune" href="#world"><span data-i18n="why.p1.link">See the regions</span></a>
+            </article>
+            <article class="pillar">
+              <span class="pillar__icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path fill="currentColor" d="m30.6 6 3.1 6.3 7 1-5 4.9 1.2 6.9-6.3-3.3-6.2 3.3 1.1-6.9-5-4.9 7-1L30.6 6zM14 22l4.5 9.2 10.2 1.5-7.4 7.2 1.8 10.1L14 45.3l-9.1 4.7 1.8-10.1-7.4-7.2 10.2-1.5L14 22z" transform="translate(2 -4) scale(.92)"/><path fill="currentColor" d="M8 40h32v3H8zM11 44h26v3H11z"/></svg>
+              </span>
+              <h3 class="pillar__title" data-i18n="why.p2.title">Conquer</h3>
+              <p class="pillar__text" data-i18n="why.p2.text">Combat shaped by timing, equipment and legend — where a well-timed stance matters more than a thousand identical strikes.</p>
+              <a class="link-rune" href="#features"><span data-i18n="why.p2.link">See the features</span></a>
+            </article>
+            <article class="pillar">
+              <span class="pillar__icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path fill="currentColor" d="M24 3c-6 8-14 13.6-14 24a14 14 0 0 0 28 0C38 16.6 30 11 24 3zm0 6.6c3.9 5.6 8.6 10.1 8.6 17.4a8.6 8.6 0 1 1-17.2 0c0-7.3 4.7-11.8 8.6-17.4z"/><circle fill="currentColor" cx="24" cy="27" r="4.2"/><path fill="currentColor" d="M24 33.5 21.8 45h4.4L24 33.5z"/></svg>
+              </span>
+              <h3 class="pillar__title" data-i18n="why.p3.title">Uncover</h3>
+              <p class="pillar__text" data-i18n="why.p3.text">The lore of Moon Valley is hidden in ruins, bestiaries and half-burned letters. The moon always leaves a clue.</p>
+              <a class="link-rune" href="#news"><span data-i18n="why.p3.link">Read the chronicles</span></a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider divider--flip" aria-hidden="true">
+      <img src="assets/ornament-divider.svg" alt="" loading="lazy">
+    </div>
+
+    <!-- ======================= WORLD ======================= -->
+    <section class="section section--world" id="world">
+      <div class="section__veil" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__eyebrow" data-i18n="world.eyebrow">Realms of the Vale</p>
+          <h2 class="section-head__title" data-i18n="world.title">The World</h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section-head__lead" data-i18n="world.lead">Four great regions hold the balance of Moon Valley. Ice, root, flame and moonlight — each one guards a piece of the first night.</p>
+        </header>
+
+        <div class="region-grid" id="regionGrid"><!-- rendered by js --></div>
+      </div>
+    </section>
+
+    <!-- ======================= FEATURES ======================= -->
+    <section class="section section--features" id="features">
+      <div class="features__bg" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__eyebrow" data-i18n="features.eyebrow">Shaping the Hero</p>
+          <h2 class="section-head__title" data-i18n="features.title">Features</h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section-head__lead" data-i18n="features.lead">The systems that give shape to your journey through the Vale.</p>
+        </header>
+
+        <div class="feature-grid" id="featureGrid"><!-- rendered by js --></div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true">
+      <img src="assets/ornament-divider.svg" alt="" loading="lazy">
+    </div>
+
+    <!-- ======================= MEDIA ======================= -->
+    <section class="section section--media" id="media">
+      <div class="section__veil" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__eyebrow" data-i18n="media.eyebrow">Visions of the Vale</p>
+          <h2 class="section-head__title" data-i18n="media.title">Media</h2>
+          <div class="ornament" aria-hidden="true"></div>
+        </header>
+
+        <div class="media-filters reveal" id="mediaFilters" role="group" aria-label="Media filters"><!-- rendered by js --></div>
+        <div class="media-grid" id="mediaGrid"><!-- rendered by js --></div>
+      </div>
+    </section>
+
+    <!-- ======================= COMMUNITY ======================= -->
+    <section class="section section--community" id="community">
+      <div class="community__bg" aria-hidden="true">
+        <img src="assets/scene-community.svg" alt="" loading="lazy" class="community__art">
+        <div class="scene-layer scene-layer--mist"></div>
+      </div>
+      <div class="container community__inner reveal">
+        <img class="community__emblem" src="assets/logo.svg" alt="" width="92" height="92" loading="lazy">
+        <p class="section-head__eyebrow" data-i18n="community.eyebrow">The Fellowship</p>
+        <h2 class="section-head__title" data-i18n="community.title">Join the Community</h2>
+        <div class="ornament ornament--sm" aria-hidden="true"></div>
+        <p class="community__text" data-i18n="community.text">Every legend begins around a fire. Join the Moon Valley fellowship to follow the development, vote on what comes next and walk the first roads together when the gates open.</p>
+        <div class="community__actions">
+          <a class="btn btn--primary btn--lg" id="communityDiscord" href="#community">
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.7 16.7 0 0 0 15.1 4l-.2.4a15.6 15.6 0 0 1 3.9 1.6 13.5 13.5 0 0 0-11.6 0A15.6 15.6 0 0 1 11 4.4L10.8 4a16.7 16.7 0 0 0-4.2 1.3C3.9 9.4 3.1 13.4 3.5 17.3a16.8 16.8 0 0 0 5.1 2.6l1-1.7a10.9 10.9 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 10.3 0l.4.3a10.9 10.9 0 0 1-1.7.8l1 1.7a16.8 16.8 0 0 0 5.1-2.6c.5-4.5-.8-8.5-3.1-12zM9.5 14.9c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm5 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>
+            <span data-i18n="cta.discord">Join Discord</span>
+          </a>
+        </div>
+        <ul class="social-row" id="socialRow" aria-label="Social links"><!-- rendered by js --></ul>
+        <p class="community__note" id="communityNote" data-i18n="community.note" hidden>The official channels will be revealed soon — the gates are still sealed.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="site-footer">
+    <div class="site-footer__scene" aria-hidden="true">
+      <img src="assets/footer-scene.svg" alt="" loading="lazy">
+      <div class="site-footer__scrim"></div>
+    </div>
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <a class="brand brand--footer" href="#home" aria-label="Moon Valley — home">
+          <img class="brand__emblem" src="assets/logo.svg" alt="" width="56" height="56" loading="lazy">
+          <span class="brand__name brand__name--lg">Moon&nbsp;Valley</span>
+        </a>
+        <p class="site-footer__tag" data-i18n="footer.tag">An epic dark-fantasy realm beyond the moon.</p>
+        <ul class="social-row social-row--footer" id="footerSocialRow" aria-label="Social links"><!-- rendered by js --></ul>
+      </div>
+      <nav class="site-footer__col" aria-label="Explore">
+        <h3 class="site-footer__heading" data-i18n="footer.explore">Explore</h3>
+        <ul>
+          <li><a href="#world" data-i18n="nav.world">World</a></li>
+          <li><a href="#features" data-i18n="nav.features">Features</a></li>
+          <li><a href="#news" data-i18n="nav.news">News</a></li>
+          <li><a href="#media" data-i18n="nav.media">Media</a></li>
+        </ul>
+      </nav>
+      <nav class="site-footer__col" aria-label="Community">
+        <h3 class="site-footer__heading" data-i18n="footer.community">Community</h3>
+        <ul>
+          <li><a href="#community" data-i18n="nav.community">Community</a></li>
+          <li><a href="#" data-open-trailer data-i18n="footer.trailer">Trailer</a></li>
+          <li><a href="#" data-legal="terms" data-i18n="footer.terms">Terms of Use</a></li>
+          <li><a href="#" data-legal="privacy" data-i18n="footer.privacy">Privacy Policy</a></li>
+        </ul>
+      </nav>
+      <div class="site-footer__col">
+        <h3 class="site-footer__heading" data-i18n="footer.language">Language</h3>
+        <div class="lang-switch lang-switch--footer" role="group" aria-label="Language">
+          <button class="lang-switch__btn is-active" type="button" data-lang="en" aria-pressed="true">English</button>
+          <span class="lang-switch__sep" aria-hidden="true">|</span>
+          <button class="lang-switch__btn" type="button" data-lang="pt" aria-pressed="false">Português</button>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__base">
+      <div class="container site-footer__base-inner">
+        <p data-i18n="footer.rights">© 2026 Moon Valley. All rights reserved.</p>
+        <p class="site-footer__disclaimer" data-i18n="footer.disclaimer">Moon Valley is a fantasy game universe in development. Content shown is subject to change.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================= MODALS ======================= -->
+  <div class="modal" id="modalRoot" hidden>
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+      <button class="modal__close" type="button" data-close-modal aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m13.4 12 6.3-6.3-1.4-1.4L12 10.6 5.7 4.3 4.3 5.7l6.3 6.3-6.3 6.3 1.4 1.4 6.3-6.3 6.3 6.3 1.4-1.4-6.3-6.3z"/></svg>
+      </button>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m12 5 7 7-1.4 1.4L13 8.8V20h-2V8.8l-4.6 4.6L5 12l7-7z"/></svg>
+  </button>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+/* ============================================================
+   MOON VALLEY — i18n.js
+   Static UI translations. Keys are referenced in the HTML via
+   data-i18n attributes. Dynamic content lives in content.js.
+   ============================================================ */
+window.MV_I18N = {
+  en: {
+    "a11y.skip": "Skip to content",
+    "nav.home": "Home",
+    "nav.world": "World",
+    "nav.news": "News",
+    "nav.media": "Media",
+    "nav.features": "Features",
+    "nav.community": "Community",
+    "cta.discord": "Join Discord",
+    "cta.explore": "Explore the World",
+    "cta.trailer": "Watch Trailer",
+
+    "hero.title": "Enter a World Beyond the Moon",
+    "hero.lead": "Beyond ancient mountains and forgotten kingdoms lies a world shaped by magic, legends and the courage of those who dare to explore it.",
+    "hero.scroll": "Descend",
+
+    "news.eyebrow": "Chronicles of the Realm",
+    "news.title": "Latest News",
+    "news.viewAll": "View All News",
+    "news.showLess": "Show Less",
+    "news.readMore": "Read the full chronicle",
+
+    "why.eyebrow": "Why Moon Valley?",
+    "why.title": "A World That Remembers Every Step You Take",
+    "why.text": "Moon Valley is not a backdrop — it is a living realm where frozen kingdoms sleep beneath eternal auroras, forests guard the memory of the first kings, and the moon keeps a debt no hero has yet repaid. Every ruin, every legend and every creature belongs to one continuous story: yours.",
+    "why.p1.title": "Explore",
+    "why.p1.text": "Four great regions, each with its own climate, fauna and forgotten history — connected by roads no map has finished drawing.",
+    "why.p1.link": "See the regions",
+    "why.p2.title": "Conquer",
+    "why.p2.text": "Combat shaped by timing, equipment and legend — where a well-timed stance matters more than a thousand identical strikes.",
+    "why.p2.link": "See the features",
+    "why.p3.title": "Uncover",
+    "why.p3.text": "The lore of Moon Valley is hidden in ruins, bestiaries and half-burned letters. The moon always leaves a clue.",
+    "why.p3.link": "Read the chronicles",
+
+    "world.eyebrow": "Realms of the Vale",
+    "world.title": "The World",
+    "world.lead": "Four great regions hold the balance of Moon Valley. Ice, root, flame and moonlight — each one guards a piece of the first night.",
+    "world.explore": "Discover the region",
+
+    "features.eyebrow": "Shaping the Hero",
+    "features.title": "Features",
+    "features.lead": "The systems that give shape to your journey through the Vale.",
+
+    "media.eyebrow": "Visions of the Vale",
+    "media.title": "Media",
+    "media.filter.all": "All",
+    "media.filter.trailer": "Trailers",
+    "media.filter.video": "Videos",
+    "media.filter.screenshot": "Screenshots",
+    "media.filter.art": "Concept Art",
+    "media.play": "Play",
+    "media.view": "View",
+    "media.trailerSoon": "The trailer is being forged",
+    "media.trailerSoonNote": "The first chronicle of Moon Valley is being edited in the halls of the keep. Return soon — the gates will open.",
+
+    "community.eyebrow": "The Fellowship",
+    "community.title": "Join the Community",
+    "community.text": "Every legend begins around a fire. Join the Moon Valley fellowship to follow the development, vote on what comes next and walk the first roads together when the gates open.",
+    "community.note": "The official channels will be revealed soon — the gates are still sealed.",
+
+    "footer.tag": "An epic dark-fantasy realm beyond the moon.",
+    "footer.explore": "Explore",
+    "footer.community": "Community",
+    "footer.trailer": "Trailer",
+    "footer.terms": "Terms of Use",
+    "footer.privacy": "Privacy Policy",
+    "footer.language": "Language",
+    "footer.rights": "© 2026 Moon Valley. All rights reserved.",
+    "footer.disclaimer": "Moon Valley is a fantasy game universe in development. Content shown is subject to change.",
+
+    "modal.close": "Close",
+    "legal.terms.title": "Terms of Use",
+    "legal.privacy.title": "Privacy Policy",
+    "legal.pending": "This document is being written by the scribes of the keep and will be published before the gates of Moon Valley open. Until then, no personal data is collected by this website.",
+    "meta.default": "Moon Valley — Enter a World Beyond the Moon"
+  },
+
+  pt: {
+    "a11y.skip": "Pular para o conteúdo",
+    "nav.home": "Início",
+    "nav.world": "Mundo",
+    "nav.news": "Notícias",
+    "nav.media": "Mídia",
+    "nav.features": "Recursos",
+    "nav.community": "Comunidade",
+    "cta.discord": "Entrar no Discord",
+    "cta.explore": "Explorar o Mundo",
+    "cta.trailer": "Assistir ao Trailer",
+
+    "hero.title": "Entre em um Mundo Além da Lua",
+    "hero.lead": "Além de montanhas antigas e reinos esquecidos existe um mundo moldado por magia, lendas e a coragem daqueles que ousam explorá-lo.",
+    "hero.scroll": "Descer",
+
+    "news.eyebrow": "Crônicas do Reino",
+    "news.title": "Últimas Notícias",
+    "news.viewAll": "Ver Todas as Notícias",
+    "news.showLess": "Mostrar Menos",
+    "news.readMore": "Ler a crônica completa",
+
+    "why.eyebrow": "Por que Moon Valley?",
+    "why.title": "Um Mundo Que Lembra Cada Passo Que Você Dá",
+    "why.text": "Moon Valley não é um pano de fundo — é um reino vivo onde reinos congelados dormem sob auroras eternas, florestas guardam a memória dos primeiros reis e a lua guarda uma dívida que nenhum herói ainda pagou. Cada ruína, cada lenda e cada criatura pertence a uma única história contínua: a sua.",
+    "why.p1.title": "Explore",
+    "why.p1.text": "Quatro grandes regiões, cada uma com seu clima, fauna e história esquecida — ligadas por estradas que nenhum mapa terminou de desenhar.",
+    "why.p1.link": "Ver as regiões",
+    "why.p2.title": "Conquiste",
+    "why.p2.text": "Combate moldado por timing, equipamento e lenda — onde uma postura bem executada vale mais que mil golpes idênticos.",
+    "why.p2.link": "Ver os recursos",
+    "why.p3.title": "Descubra",
+    "why.p3.text": "A lore de Moon Valley está escondida em ruínas, bestiários e cartas meio queimadas. A lua sempre deixa uma pista.",
+    "why.p3.link": "Ler as crônicas",
+
+    "world.eyebrow": "Reinos do Vale",
+    "world.title": "O Mundo",
+    "world.lead": "Quatro grandes regiões mantêm o equilíbrio de Moon Valley. Gelo, raiz, chama e luz da lua — cada uma guarda um fragmento da primeira noite.",
+    "world.explore": "Descobrir a região",
+
+    "features.eyebrow": "Forjando o Herói",
+    "features.title": "Recursos",
+    "features.lead": "Os sistemas que dão forma à sua jornada pelo Vale.",
+
+    "media.eyebrow": "Visões do Vale",
+    "media.title": "Mídia",
+    "media.filter.all": "Tudo",
+    "media.filter.trailer": "Trailers",
+    "media.filter.video": "Vídeos",
+    "media.filter.screenshot": "Capturas",
+    "media.filter.art": "Arte Conceitual",
+    "media.play": "Assistir",
+    "media.view": "Ver",
+    "media.trailerSoon": "O trailer está sendo forjado",
+    "media.trailerSoonNote": "A primeira crônica de Moon Valley está sendo montada nos salões do castelo. Volte em breve — os portões se abrirão.",
+
+    "community.eyebrow": "A Irmandade",
+    "community.title": "Entre na Comunidade",
+    "community.text": "Toda lenda começa em volta de uma fogueira. Entre na irmandade de Moon Valley para acompanhar o desenvolvimento, votar no que vem a seguir e caminhar as primeiras estradas juntos quando os portões se abrirem.",
+    "community.note": "Os canais oficiais serão revelados em breve — os portões ainda estão selados.",
+
+    "footer.tag": "Um reino épico de fantasia sombria além da lua.",
+    "footer.explore": "Explorar",
+    "footer.community": "Comunidade",
+    "footer.trailer": "Trailer",
+    "footer.terms": "Termos de Uso",
+    "footer.privacy": "Política de Privacidade",
+    "footer.language": "Idioma",
+    "footer.rights": "© 2026 Moon Valley. Todos os direitos reservados.",
+    "footer.disclaimer": "Moon Valley é um universo de jogo em desenvolvimento. O conteúdo apresentado está sujeito a alterações.",
+
+    "modal.close": "Fechar",
+    "legal.terms.title": "Termos de Uso",
+    "legal.privacy.title": "Política de Privacidade",
+    "legal.pending": "Este documento está sendo escrito pelos escribas do castelo e será publicado antes que os portões de Moon Valley se abram. Até lá, nenhum dado pessoal é coletado por este site.",
+    "meta.default": "Moon Valley — Entre em um Mundo Além da Lua"
+  }
+};

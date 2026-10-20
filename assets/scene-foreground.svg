@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="fg-dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#061824"/>
+      <stop offset="1" stop-color="#020A11"/>
+    </linearGradient>
+    <radialGradient id="fg-plant-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#7FD6E6" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#7FD6E6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ground ridge -->
+  <path d="M0 560V448C120 430 240 442 360 430 520 414 640 440 800 428 980 414 1120 442 1280 430 1420 420 1520 436 1600 424V560Z" fill="url(#fg-dark)"/>
+
+  <!-- left rock cluster with pines -->
+  <g>
+    <path d="M0 560V430C70 412 150 424 220 404 280 388 330 410 380 448 420 480 450 520 470 560Z" fill="#030D15"/>
+    <!-- pine trees -->
+    <g fill="#02080E">
+      <path d="M120 430 150 360 180 430Z"/>
+      <path d="M112 466 150 380 188 466Z"/>
+      <path d="M104 502 150 400 196 502Z"/>
+      <rect x="145" y="496" width="10" height="64"/>
+
+      <path d="M212 424 238 358 264 424Z"/>
+      <path d="M205 456 238 374 271 456Z"/>
+      <rect x="233" y="450" width="9" height="56"/>
+
+      <path d="M48 448 70 396 92 448Z"/>
+      <path d="M42 476 70 408 98 476Z"/>
+      <rect x="66" y="470" width="8" height="48"/>
+    </g>
+    <!-- rim light on the pines (warm side) -->
+    <g stroke="#F5A34A" stroke-width="1.6" opacity=".5" fill="none">
+      <path d="M150 360 178 428"/>
+      <path d="M238 358 262 422"/>
+      <path d="M70 396 90 446"/>
+    </g>
+  </g>
+
+  <!-- right side: knight silhouette on a rock -->
+  <g>
+    <path d="M1600 560V404C1520 388 1450 410 1380 398 1320 388 1280 430 1250 470 1226 502 1210 534 1200 560Z" fill="#030D15"/>
+
+    <!-- knight -->
+    <g fill="#02080E">
+      <!-- cape, wind to the right -->
+      <path d="M1432 306C1470 300 1508 312 1534 340 1512 336 1490 340 1472 352 1486 372 1494 396 1490 420 1464 392 1430 376 1398 374 1416 350 1428 326 1432 306Z"/>
+      <!-- legs -->
+      <path d="M1414 372 1408 452 1426 452 1430 380Z"/>
+      <path d="M1436 374 1444 452 1460 450 1452 378Z"/>
+      <!-- torso + surcoat -->
+      <path d="M1418 300C1432 292 1452 292 1464 302 1470 320 1470 344 1464 366 1448 372 1430 372 1416 366 1410 344 1410 318 1418 300Z"/>
+      <!-- shoulders -->
+      <path d="M1410 304 1398 318 1412 322Z"/>
+      <path d="M1470 306 1482 320 1468 324Z"/>
+      <!-- head + helm -->
+      <circle cx="1440" cy="278" r="17"/>
+      <path d="M1425 272C1428 258 1452 258 1455 272Z"/>
+      <!-- arm resting on the sword pommel -->
+      <path d="M1466 318C1478 326 1484 340 1482 354L1472 352C1472 340 1468 330 1460 324Z"/>
+    </g>
+    <!-- sword planted in the rock -->
+    <g fill="#02080E">
+      <path d="M1480 356 1488 356 1488 470 1484 486 1480 470Z"/>
+      <rect x="1468" y="352" width="32" height="7" rx="3"/>
+      <circle cx="1484" cy="344" r="7"/>
+    </g>
+    <!-- rim light on the knight (lit by the golden horizon behind) -->
+    <g stroke="#F5A34A" stroke-width="1.8" opacity=".65" fill="none">
+      <path d="M1456 264C1462 268 1464 276 1463 282"/>
+      <path d="M1466 300 1470 330"/>
+      <path d="M1470 306 1481 319"/>
+      <path d="M1458 348 1460 366"/>
+      <path d="M1488 358 1488 468"/>
+      <path d="M1452 292 1462 300"/>
+    </g>
+    <!-- cool rim on the left side of the figure -->
+    <g stroke="#7FD6E6" stroke-width="1.2" opacity=".4" fill="none">
+      <path d="M1424 264C1418 268 1416 276 1417 282"/>
+      <path d="M1414 300 1410 330"/>
+      <path d="M1412 374 1408 450"/>
+    </g>
+  </g>
+
+  <!-- center: low grass tucks + glowing plants -->
+  <g fill="#02080E">
+    <path d="M600 560 612 512 624 560Z"/>
+    <path d="M628 560 646 520 664 560Z"/>
+    <path d="M900 560 916 516 932 560Z"/>
+    <path d="M940 560 952 528 964 560Z"/>
+    <path d="M760 560 772 536 784 560Z"/>
+  </g>
+  <g>
+    <circle cx="646" cy="522" r="26" fill="url(#fg-plant-glow)"/>
+    <circle cx="646" cy="520" r="3" fill="#CFF3FA"/>
+    <circle cx="916" cy="518" r="22" fill="url(#fg-plant-glow)"/>
+    <circle cx="916" cy="516" r="2.6" fill="#CFF3FA"/>
+  </g>
+</svg>

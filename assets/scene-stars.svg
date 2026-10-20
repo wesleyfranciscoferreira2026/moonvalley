@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="starfield" cx="50%" cy="18%" r="85%">
+      <stop offset="0" stop-color="#0C3149" stop-opacity=".9"/>
+      <stop offset=".55" stop-color="#07202E" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#071A24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moon-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#EAF6F8" stop-opacity=".85"/>
+      <stop offset=".28" stop-color="#BFE6EE" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#BFE6EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#starfield)"/>
+
+  <!-- high moon -->
+  <circle cx="1230" cy="150" r="230" fill="url(#moon-halo)"/>
+  <circle cx="1230" cy="150" r="58" fill="#EFF8F9" opacity=".92"/>
+  <circle cx="1212" cy="140" r="8" fill="#D6E7EA" opacity=".5"/>
+  <circle cx="1246" cy="166" r="11" fill="#D6E7EA" opacity=".4"/>
+  <circle cx="1238" cy="128" r="5" fill="#D6E7EA" opacity=".5"/>
+
+  <!-- stars -->
+  <g fill="#E8F2F4">
+    <circle cx="120" cy="90" r="1.6" opacity=".8"/>
+    <circle cx="210" cy="180" r="1.1" opacity=".6"/>
+    <circle cx="330" cy="70" r="1.3" opacity=".7"/>
+    <circle cx="420" cy="220" r="1" opacity=".5"/>
+    <circle cx="520" cy="120" r="1.7" opacity=".85"/>
+    <circle cx="610" cy="300" r="1" opacity=".45"/>
+    <circle cx="700" cy="90" r="1.2" opacity=".65"/>
+    <circle cx="790" cy="190" r="1.5" opacity=".75"/>
+    <circle cx="880" cy="60" r="1" opacity=".55"/>
+    <circle cx="960" cy="240" r="1.3" opacity=".6"/>
+    <circle cx="1040" cy="120" r="1.1" opacity=".6"/>
+    <circle cx="1120" cy="320" r="1" opacity=".4"/>
+    <circle cx="1330" cy="80" r="1.4" opacity=".7"/>
+    <circle cx="1420" cy="200" r="1.2" opacity=".6"/>
+    <circle cx="1500" cy="110" r="1.6" opacity=".8"/>
+    <circle cx="1560" cy="290" r="1" opacity=".5"/>
+    <circle cx="80" cy="300" r="1.2" opacity=".55"/>
+    <circle cx="260" cy="360" r="1" opacity=".4"/>
+    <circle cx="440" cy="40" r="1.4" opacity=".7"/>
+    <circle cx="640" cy="420" r="1" opacity=".35"/>
+    <circle cx="860" cy="380" r="1.2" opacity=".45"/>
+    <circle cx="1060" cy="420" r="1" opacity=".35"/>
+    <circle cx="1260" cy="380" r="1.3" opacity=".5"/>
+    <circle cx="1460" cy="420" r="1" opacity=".35"/>
+    <circle cx="180" cy="480" r="1" opacity=".3"/>
+    <circle cx="520" cy="520" r="1.1" opacity=".3"/>
+    <circle cx="920" cy="520" r="1" opacity=".3"/>
+    <circle cx="1360" cy="500" r="1.1" opacity=".3"/>
+  </g>
+
+  <!-- bright cross-stars -->
+  <g stroke="#FFFFFF" stroke-width="1" opacity=".7">
+    <path d="M520 108v24M508 120h24"/>
+    <path d="M1500 98v22M1489 109h22"/>
+  </g>
+  <g stroke="#BFE6EE" stroke-width="1" opacity=".5">
+    <path d="M120 78v18M111 87h18"/>
+    <path d="M790 178v16M782 186h16"/>
+  </g>
+
+  <!-- drifting clouds -->
+  <g fill="#0A3145" opacity=".45">
+    <path d="M0 560C180 520 320 560 480 540 700 512 860 552 1060 534 1260 516 1440 550 1600 528V640H0Z"/>
+  </g>
+  <g fill="#0D3E55" opacity=".35">
+    <path d="M0 640C220 610 400 646 620 626 860 604 1040 644 1280 622 1420 610 1520 626 1600 616V720H0Z"/>
+  </g>
+</svg>

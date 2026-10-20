@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Moon Valley — Enter a World Beyond the Moon">
+  <defs>
+    <linearGradient id="og-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04101A"/>
+      <stop offset=".55" stop-color="#0A4C61"/>
+      <stop offset="1" stop-color="#B8763F"/>
+    </linearGradient>
+    <radialGradient id="og-glow" cx="72%" cy="82%" r="60%">
+      <stop offset="0" stop-color="#F5A34A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#F5A34A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#og-sky)"/>
+  <rect width="1200" height="630" fill="url(#og-glow)"/>
+
+  <!-- distant ranges -->
+  <path d="M0 470 160 380 280 440 420 340 560 440 700 360 860 450 1020 370 1200 460V630H0Z" fill="#08222F" opacity=".9"/>
+  <path d="M0 520 200 450 360 510 520 430 700 520 880 445 1060 515 1200 460V630H0Z" fill="#05141E"/>
+
+  <!-- castle silhouette -->
+  <g fill="#04101A">
+    <rect x="742" y="330" width="46" height="90"/>
+    <path d="M736 332 794 332 765 282Z"/>
+    <rect x="700" y="376" width="26" height="52"/>
+    <path d="M694 378 732 378 713 344Z"/>
+    <rect x="804" y="368" width="28" height="60"/>
+    <path d="M798 370 838 370 818 334Z"/>
+    <rect x="690" y="410" width="150" height="26"/>
+  </g>
+  <g fill="#F5A34A">
+    <rect x="756" y="352" width="7" height="12" rx="2"/>
+    <rect x="770" y="352" width="7" height="12" rx="2"/>
+    <rect x="708" y="394" width="6" height="10" rx="2"/>
+    <rect x="812" y="388" width="6" height="10" rx="2"/>
+  </g>
+
+  <!-- dragon -->
+  <g fill="#04101A" opacity=".92" transform="translate(210,150) scale(1.1)">
+    <path d="M0 30C26 -6 74 -30 128 -34 108 -20 100 -10 104 2 74 -8 54 0 48 16 32 4 16 8 8 22Z"/>
+    <path d="M4 42C30 24 78 12 132 14 112 26 104 36 108 48 78 40 58 46 52 62 34 50 16 52 4 62Z"/>
+    <ellipse cx="18" cy="36" rx="26" ry="11" transform="rotate(-8 18 36)"/>
+    <path d="M-8 30C-22 24 -38 24 -52 32L-46 38C-34 34 -20 36 -8 42Z"/>
+    <circle cx="-54" cy="31" r="7"/>
+    <path d="M-58 24 66 42 128 74 122 84 58 56 -56 40Z"/>
+    <path d="M128 74 152 68 142 84 156 92 132 92 138 82Z"/>
+  </g>
+
+  <!-- emblem -->
+  <g transform="translate(96,110) scale(1.55)">
+    <circle cx="60" cy="60" r="58" fill="none" stroke="#D8D8CF" stroke-width="1.2" opacity=".55"/>
+    <path d="M60 18A42 42 0 1 0 60 102A36 36 0 1 1 60 18Z" fill="#D8D8CF" opacity=".9"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="96" y="380" font-family="Cinzel, 'Times New Roman', serif" font-size="84" font-weight="700" letter-spacing="14" fill="#F4F4EC">MOON VALLEY</text>
+  <path d="M100 412H760" stroke="#F5A34A" stroke-width="2" opacity=".8"/>
+  <path d="M100 412 92 407 84 412 92 417Z" fill="#F5A34A"/>
+  <text x="100" y="462" font-family="Cinzel, 'Times New Roman', serif" font-size="27" letter-spacing="10" fill="#F5A34A">ENTER A WORLD BEYOND THE MOON</text>
+</svg>

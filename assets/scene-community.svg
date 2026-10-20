@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="cm-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04101A"/>
+      <stop offset=".6" stop-color="#0A3145"/>
+      <stop offset="1" stop-color="#12586E"/>
+    </linearGradient>
+    <radialGradient id="cm-fire" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity=".95"/>
+      <stop offset=".4" stop-color="#F5A34A" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#F5A34A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cm-moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#EAF6F8" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#EAF6F8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#cm-sky)"/>
+
+  <!-- moon + stars -->
+  <circle cx="1240" cy="170" r="200" fill="url(#cm-moon)"/>
+  <circle cx="1240" cy="170" r="52" fill="#E8F3F5" opacity=".65"/>
+  <g fill="#D8E6EA" opacity=".6">
+    <circle cx="180" cy="120" r="1.4"/><circle cx="420" cy="200" r="1.1"/><circle cx="680" cy="110" r="1.5"/>
+    <circle cx="900" cy="220" r="1.1"/><circle cx="1100" cy="90" r="1.3"/><circle cx="1420" cy="240" r="1.1"/>
+    <circle cx="300" cy="300" r="1"/><circle cx="760" cy="320" r="1"/>
+  </g>
+
+  <!-- distant keep -->
+  <g fill="#03101A">
+    <rect x="380" y="380" width="26" height="52"/>
+    <path d="M376 382 410 382 393 354Z"/>
+    <rect x="346" y="406" width="70" height="30"/>
+    <rect x="418" y="398" width="20" height="38"/>
+    <path d="M414 400 442 400 428 374Z"/>
+  </g>
+
+  <!-- far range -->
+  <path d="M0 560 160 460 320 545 480 450 640 550 800 460 960 555 1120 455 1280 550 1440 460 1600 545V900H0Z" fill="#061824"/>
+  <!-- near ridge -->
+  <path d="M0 660 200 600 400 665 600 605 800 670 1000 605 1200 670 1400 610 1600 665V900H0Z" fill="#03101A"/>
+
+  <!-- the company around the campfire (center bottom) -->
+  <g>
+    <!-- fire glow on the ground -->
+    <ellipse cx="800" cy="782" rx="220" ry="52" fill="url(#cm-fire)"/>
+
+    <!-- campfire -->
+    <g fill="#020A12">
+      <path d="M770 782 830 782 810 764 790 764Z"/>
+    </g>
+    <path d="M800 700C816 722 824 742 818 760 812 776 788 776 782 760 776 742 784 722 800 700Z" fill="#F5A34A"/>
+    <path d="M800 716C809 730 813 744 809 755 805 765 795 765 791 755 787 744 791 730 800 716Z" fill="#FFE9A8"/>
+
+    <!-- figure 1: seated with a staff, left of the fire -->
+    <g fill="#020A12" transform="translate(600 620)">
+      <path d="M40 162C28 128 30 92 46 62 54 46 68 36 84 34 76 50 74 70 78 88 86 116 100 140 120 158 96 172 64 174 40 162Z"/>
+      <circle cx="86" cy="16" r="15"/>
+      <path d="M72 4C76 -8 98 -8 102 4Z"/>
+      <path d="M118 20 126 22 108 168 100 166Z"/>
+      <path d="M118 20 142 14 120 26Z"/>
+    </g>
+
+    <!-- figure 2: standing archer, right of the fire -->
+    <g fill="#020A12" transform="translate(960 560)">
+      <path d="M48 232C34 190 34 148 48 110 56 86 72 70 92 64 82 88 80 116 86 140 96 176 112 208 134 232 108 246 74 246 48 232Z"/>
+      <circle cx="94" cy="42" r="16"/>
+      <path d="M79 30C83 17 106 17 110 30Z"/>
+      <path d="M40 92C16 112 8 148 14 182 30 166 46 156 64 152 52 134 44 114 40 92Z"/>
+      <path d="M124 78C152 92 158 140 134 168" fill="none" stroke="#020A12" stroke-width="5"/>
+      <path d="M124 78 134 168" stroke="#020A12" stroke-width="1.6" fill="none"/>
+    </g>
+
+    <!-- figure 3: hooded figure standing behind, small -->
+    <g fill="#020A12" transform="translate(846 596)">
+      <path d="M30 196C22 164 24 130 38 104 46 88 60 78 74 76 68 92 66 112 70 130 78 154 90 176 106 192 86 206 54 208 30 196Z"/>
+      <circle cx="76" cy="58" r="14"/>
+      <path d="M63 47C67 35 87 35 91 47Z"/>
+    </g>
+
+    <!-- warm rim light from the fire -->
+    <g stroke="#F5A34A" stroke-width="2" opacity=".8" fill="none" stroke-linecap="round">
+      <path d="M700 690C708 706 714 726 716 748"/>
+      <path d="M946 674C938 692 934 716 936 740"/>
+      <path d="M900 662C894 676 892 692 894 708"/>
+      <path d="M724 648C716 664 712 682 714 700"/>
+    </g>
+
+    <!-- sparks rising -->
+    <g fill="#FFB54A">
+      <circle cx="796" cy="686" r="2.4" opacity=".9"/><circle cx="812" cy="656" r="2" opacity=".7"/>
+      <circle cx="788" cy="632" r="1.8" opacity=".6"/><circle cx="818" cy="610" r="1.6" opacity=".5"/>
+    </g>
+  </g>
+
+  <!-- night mist -->
+  <path d="M0 900V800C260 782 520 812 780 796 1060 780 1320 810 1600 788V900Z" fill="#0A3145" opacity=".5"/>
+</svg>

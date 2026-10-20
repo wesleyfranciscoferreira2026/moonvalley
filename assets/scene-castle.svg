@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="ca-rock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A2331"/>
+      <stop offset="1" stop-color="#040F19"/>
+    </linearGradient>
+    <linearGradient id="ca-stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0C2B3B"/>
+      <stop offset=".6" stop-color="#071C29"/>
+      <stop offset="1" stop-color="#04101A"/>
+    </linearGradient>
+    <linearGradient id="ca-roof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123044"/>
+      <stop offset="1" stop-color="#05121C"/>
+    </linearGradient>
+    <radialGradient id="ca-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#F5A34A" stop-opacity=".38"/>
+      <stop offset=".55" stop-color="#F5A34A" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#F5A34A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ca-window-glow" x="-300%" y="-300%" width="700%" height="700%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- warm halo behind the keep -->
+  <ellipse cx="1030" cy="560" rx="420" ry="300" fill="url(#ca-halo)"/>
+
+  <!-- cliff -->
+  <path d="M1600 900 1520 830 1460 852 1400 790 1330 826 1270 760 1200 800 1140 742 1060 786 990 730 920 780 860 736 800 800 730 760 690 900Z" fill="url(#ca-rock)"/>
+  <path d="M1140 742 1122 800 1160 786Z" fill="#0E2E3E" opacity=".7"/>
+  <path d="M990 730 970 792 1014 780Z" fill="#0E2E3E" opacity=".6"/>
+
+  <!-- castle silhouette -->
+  <g>
+    <!-- curtain wall -->
+    <path d="M840 720V612h380v108Z" fill="url(#ca-stone)"/>
+    <!-- battlements -->
+    <g fill="url(#ca-stone)">
+      <rect x="836" y="596" width="22" height="20"/><rect x="872" y="596" width="22" height="20"/>
+      <rect x="908" y="596" width="22" height="20"/><rect x="944" y="596" width="22" height="20"/>
+      <rect x="1100" y="596" width="22" height="20"/><rect x="1136" y="596" width="22" height="20"/>
+      <rect x="1172" y="596" width="22" height="20"/><rect x="1208" y="596" width="22" height="20"/>
+    </g>
+
+    <!-- left tower -->
+    <path d="M792 720V520h66v200Z" fill="url(#ca-stone)"/>
+    <path d="M782 522 825 436 868 522Z" fill="url(#ca-roof)"/>
+    <path d="M825 436V410" stroke="#0A2331" stroke-width="4"/>
+    <path d="M825 410 862 420 825 430Z" fill="#B85C43"/>
+
+    <!-- right tower -->
+    <path d="M1150 720V500h70v220Z" fill="url(#ca-stone)"/>
+    <path d="M1140 502 1185 412 1230 502Z" fill="url(#ca-roof)"/>
+    <path d="M1185 412V384" stroke="#0A2331" stroke-width="4"/>
+    <path d="M1185 384 1224 395 1185 406Z" fill="#B85C43"/>
+
+    <!-- central keep -->
+    <path d="M950 720V430h160v290Z" fill="url(#ca-stone)"/>
+    <path d="M934 432 1030 296 1126 432Z" fill="url(#ca-roof)"/>
+    <path d="M1030 296V262" stroke="#0A2331" stroke-width="5"/>
+    <path d="M1030 262 1080 275 1030 288Z" fill="#B85C43"/>
+
+    <!-- small turret between towers -->
+    <path d="M1054 612V498h52v114Z" fill="url(#ca-stone)"/>
+    <path d="M1046 500 1080 442 1114 500Z" fill="url(#ca-roof)"/>
+
+    <!-- gate -->
+    <path d="M1000 720v-84a30 30 0 0 1 60 0v84Z" fill="#030C14"/>
+    <path d="M1000 640a30 30 0 0 1 60 0" fill="none" stroke="#123044" stroke-width="3"/>
+  </g>
+
+  <!-- warm windows (glow + core) -->
+  <g fill="#F5A34A" filter="url(#ca-window-glow)" opacity=".9">
+    <rect x="986" y="470" width="12" height="20" rx="4"/>
+    <rect x="1024" y="470" width="12" height="20" rx="4"/>
+    <rect x="1062" y="470" width="12" height="20" rx="4"/>
+    <rect x="986" y="530" width="12" height="20" rx="4"/>
+    <rect x="1062" y="530" width="12" height="20" rx="4"/>
+    <rect x="812" y="560" width="10" height="17" rx="4"/>
+    <rect x="1172" y="548" width="10" height="17" rx="4"/>
+    <rect x="884" y="646" width="10" height="16" rx="4"/>
+    <rect x="1112" y="646" width="10" height="16" rx="4"/>
+  </g>
+  <g fill="#FFE9C4">
+    <rect x="988" y="472" width="8" height="16" rx="3"/>
+    <rect x="1026" y="472" width="8" height="16" rx="3"/>
+    <rect x="1064" y="472" width="8" height="16" rx="3"/>
+    <rect x="988" y="532" width="8" height="16" rx="3"/>
+    <rect x="1064" y="532" width="8" height="16" rx="3"/>
+    <rect x="814" y="562" width="6" height="13" rx="2.5"/>
+    <rect x="1174" y="550" width="6" height="13" rx="2.5"/>
+    <rect x="886" y="648" width="6" height="12" rx="2.5"/>
+    <rect x="1114" y="648" width="6" height="12" rx="2.5"/>
+  </g>
+
+  <!-- gate light spill -->
+  <path d="M1006 720 1054 720 1066 790 994 790Z" fill="#F5A34A" opacity=".16"/>
+
+  <!-- birds -->
+  <g stroke="#04101A" stroke-width="2.6" fill="none" opacity=".8" stroke-linecap="round">
+    <path d="M660 330c8-8 14-8 20 0 6-8 12-8 20 0"/>
+    <path d="M720 380c6-6 10-6 15 0 5-6 9-6 15 0"/>
+    <path d="M1330 300c7-7 12-7 17 0 5-7 10-7 17 0"/>
+  </g>
+</svg>
