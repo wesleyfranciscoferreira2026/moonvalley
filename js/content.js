@@ -415,27 +415,27 @@ window.MV_CONTENT = {
     {
       id: "theryon",
       tone: "iron",
-      sigil: "shield",
+      sigil: "gun",
       images: [],
       videos: [],
       en: {
         name: "Theryon",
-        role: "Iron Vanguard",
-        text: "Theryon stands where others break. Clad in oath-forged iron, he answers every blow with a promise — and the vale's enemies learn that some walls strike back.",
+        role: "Oath-Gun Sharpshooter",
+        text: "Theryon never misses twice. Bound to an oath-forged rifle, he measures the vale in breaths and trigger pulls — his shot always arrives before the warning.",
         traits: [
-          { label: "Style", value: "Frontline anchor" },
-          { label: "Arsenal", value: "Oath-forged iron & mace" },
-          { label: "Oath", value: "The line holds" }
+          { label: "Style", value: "Ranged precision & burst" },
+          { label: "Arsenal", value: "Oath-forged rifle" },
+          { label: "Oath", value: "One breath, one bullet" }
         ]
       },
       pt: {
         name: "Theryon",
-        role: "Vanguarda de Ferro",
-        text: "Theryon permanece onde outros se partem. Armado em ferro forjado por juramento, responde a cada golpe com uma promessa — e os inimigos do Vale aprendem que algumas paredes revidam.",
+        role: "Atirador Jurado",
+        text: "Theryon nunca erra duas vezes. Ligado a um rifle forjado por juramento, mede o vale em suspiros e disparos — seu tiro sempre chega antes do aviso.",
         traits: [
-          { label: "Estilo", value: "Âncora de frente" },
-          { label: "Arsenal", value: "Ferro jurado e maça" },
-          { label: "Juramento", value: "A linha se mantém" }
+          { label: "Estilo", value: "Precisão à distância e rajadas" },
+          { label: "Arsenal", value: "Rifle forjado por juramento" },
+          { label: "Juramento", value: "Um suspiro, uma bala" }
         ]
       }
     },

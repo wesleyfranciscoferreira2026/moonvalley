@@ -104,20 +104,53 @@
     });
   }
 
+  /* ---------------- hero photo backdrop ---------------- */
+  var heroPhoto = $("#heroPhoto");
+  var heroSection = $(".hero");
+  if (heroPhoto && CONFIG.heroImage) {
+    heroPhoto.src = CONFIG.heroImage;
+    var revealPhoto = function () { heroSection.classList.add("hero--photo"); };
+    if (heroPhoto.complete && heroPhoto.naturalWidth) revealPhoto();
+    else heroPhoto.addEventListener("load", revealPhoto);
+    heroPhoto.addEventListener("error", function () {
+      /* graceful fallback: keep the layered SVG scene */
+      heroSection.classList.remove("hero--photo");
+      heroPhoto.removeAttribute("src");
+    });
+  }
+
   /* ---------------- hero parallax + particles ---------------- */
-  var sceneLayers = $all(".hero .scene-layer");
-  if (!reducedMotion && sceneLayers.length) {
+  var sceneLayers = $all(".hero .scene-layer[data-depth]");
+  var heroContent = $(".hero__content");
+  var scrollCue = $(".hero__scroll-cue");
+  if (!reducedMotion && (sceneLayers.length || heroPhoto)) {
     var ticking = false;
     window.addEventListener("scroll", function () {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(function () {
         var y = window.scrollY;
-        if (y < window.innerHeight * 1.2) {
+        var vh = window.innerHeight || 800;
+        if (y < vh * 1.3) {
+          /* layered SVG scene: layers drift downwards (descending feel) */
           sceneLayers.forEach(function (layer) {
             var depth = parseFloat(layer.dataset.depth || 0);
             layer.style.transform = "translate3d(0," + (y * depth * 100).toFixed(2) + "px,0)";
           });
+          /* photo hero: slow cinematic drift + gentle push-in */
+          if (heroPhoto && heroSection && heroSection.classList.contains("hero--photo")) {
+            var pf = Math.min(y / vh, 1);
+            heroPhoto.style.transform =
+              "translate3d(0," + (-pf * 120).toFixed(1) + "px,0) scale(" + (1 + pf * 0.12).toFixed(4) + ")";
+          }
+          /* hero content lifts away and dissolves as the vale appears */
+          if (heroContent) {
+            var cf = Math.min(y / (vh * 0.55), 1);
+            heroContent.style.opacity = (1 - cf).toFixed(3);
+            heroContent.style.transform = "translate3d(0," + (-cf * 70).toFixed(1) + "px,0)";
+          }
+          /* hide the scroll cue once the descent begins */
+          if (scrollCue) scrollCue.classList.toggle("is-hidden", y > 70);
         }
         ticking = false;
       });
@@ -139,21 +172,6 @@
       dot.style.width = dot.style.height = (3 * scale).toFixed(1) + "px";
       particleHost.appendChild(dot);
     }
-  }
-
-  /* ---------------- hero photo backdrop ---------------- */
-  var heroPhoto = $("#heroPhoto");
-  if (heroPhoto && CONFIG.heroImage) {
-    heroPhoto.src = CONFIG.heroImage;
-    var heroSection = $(".hero");
-    var revealPhoto = function () { heroSection.classList.add("hero--photo"); };
-    if (heroPhoto.complete && heroPhoto.naturalWidth) revealPhoto();
-    else heroPhoto.addEventListener("load", revealPhoto);
-    heroPhoto.addEventListener("error", function () {
-      /* graceful fallback: keep the layered SVG scene */
-      heroSection.classList.remove("hero--photo");
-      heroPhoto.removeAttribute("src");
-    });
   }
 
   /* ---------------- feature icons ---------------- */
@@ -385,7 +403,8 @@
     blade: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8 34 32"/><path d="M38 8 14 32"/><path d="m8 34 6 6M40 34l-6 6"/><path fill="currentColor" stroke="none" d="m24 17 4.5 7L24 31l-4.5-7z"/></svg>',
     shield: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 5 8 11v12c0 9.5 6.6 16.4 16 19 9.4-2.6 16-9.5 16-19V11L24 5z"/><path fill="currentColor" stroke="none" d="m24 15 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L24 15z"/></svg>',
     arcane: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="13"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8M13 13l5.5 5.5M29.5 29.5 35 35M35 13l-5.5 5.5M18.5 29.5 13 35"/><circle fill="currentColor" stroke="none" cx="24" cy="24" r="3.5"/></svg>',
-    bow: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7c13 6.5 13 27.5 0 34"/><path d="M15 7v34"/><path d="M8 24h28"/><path d="m31 18 6 6-6 6"/></svg>'
+    bow: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7c13 6.5 13 27.5 0 34"/><path d="M15 7v34"/><path d="M8 24h28"/><path d="m31 18 6 6-6 6"/></svg>',
+    gun: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17v-7h7M31 10h7v7M38 31v7h-7M17 38h-7v-7"/><path d="M24 13v22M13 24h22"/><circle fill="currentColor" stroke="none" cx="24" cy="24" r="3.5"/></svg>'
   };
 
   function classGallery(item, c) {
