@@ -748,7 +748,7 @@
         "</div>" +
         '<div class="profile-form__field">' +
           '<label class="profile-form__label" for="profileName">' + t("profile.nameLabel") + "</label>" +
-          '<input class="profile-form__input" id="profileName" type="text" maxlength="18" autocomplete="off" placeholder="' + t("profile.namePlaceholder") + '" value="' + esc(profileDraft.name) + '">' +
+          '<input class="profile-form__input" id="profileName" type="text" maxlength="20" autocomplete="off" placeholder="' + t("profile.namePlaceholder") + '" value="' + esc(profileDraft.name) + '">' +
           '<p class="profile-form__error" id="profileNameError" role="alert" hidden>' + t("profile.nameError") + "</p>" +
         "</div>" +
         '<div class="profile-form__grid">' +
@@ -1197,24 +1197,80 @@
 
   /* ---------------- DROPLIST ---------------- */
   var dropGrid = $("#dropGrid");
+  var dropView = "guardians";
+
+  function dropRarKey(rarity) {
+    return rarity === "rare" || rarity === "common" ? "drop.rarity." + rarity : "shop.tier." + rarity;
+  }
+  function dropChanceText(chance) {
+    return String(chance).replace(".", lang === "pt" ? "," : ".");
+  }
+
+  /* item index: every drop flattened, deduped and sorted by rarity */
+  function renderDropItems() {
+    var rarOrder = { legendary: 0, epic: 1, elite: 2, rare: 3, common: 4 };
+    var merged = {};
+    var order = [];
+    (CONTENT.droplist || []).forEach(function (table) {
+      var where = loc(table).region;
+      table.drops.forEach(function (drop) {
+        var name = loc(drop).name;
+        if (!merged[name]) { merged[name] = { drop: drop, wheres: [] }; order.push(name); }
+        merged[name].wheres.push(where);
+      });
+    });
+    var rows = order
+      .map(function (n) { return merged[n]; })
+      .sort(function (a, b) { return rarOrder[a.drop.rarity] - rarOrder[b.drop.rarity]; })
+      .map(function (entry) {
+        var d = loc(entry.drop);
+        return '<li class="drop-row">' +
+          '<span class="rar-chip rar-chip--' + entry.drop.rarity + '">' + t(dropRarKey(entry.drop.rarity)) + "</span>" +
+          '<span class="drop-row__name">' + esc(d.name) + "</span>" +
+          '<span class="drop-row__where">' + esc(entry.wheres.join(" · ")) + "</span>" +
+          '<span class="drop-row__chance">' + dropChanceText(entry.drop.chance) + "</span>" +
+          "</li>";
+      }).join("");
+    var board = document.createElement("article");
+    board.className = "frame drop-card drop-items reveal";
+    board.innerHTML = GEMS + '<ul class="drop-list drop-list--items">' + rows + "</ul>";
+    dropGrid.appendChild(board);
+  }
 
   function renderDroplist() {
     if (!dropGrid) return;
+    var dropTabs = $("#dropTabs");
+    if (dropTabs) {
+      dropTabs.innerHTML = "";
+      [["guardians", "droplist.tab.guardians"], ["items", "droplist.tab.items"]].forEach(function (pair) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "rank-tab" + (dropView === pair[0] ? " is-active" : "");
+        btn.setAttribute("aria-pressed", dropView === pair[0] ? "true" : "false");
+        btn.textContent = t(pair[1]);
+        btn.addEventListener("click", function () {
+          dropView = pair[0];
+          renderDroplist();
+        });
+        dropTabs.appendChild(btn);
+      });
+    }
     dropGrid.innerHTML = "";
+    if (dropView === "items") {
+      renderDropItems();
+      registerReveals();
+      return;
+    }
     (CONTENT.droplist || []).forEach(function (table) {
       var c = loc(table);
       var card = document.createElement("article");
       card.className = "frame drop-card drop-card--" + table.tone + " reveal";
       var rows = table.drops.map(function (drop) {
         var d = loc(drop);
-        var rarKey = drop.rarity === "rare" || drop.rarity === "common"
-          ? "drop.rarity." + drop.rarity
-          : "shop.tier." + drop.rarity;
-        var chance = String(drop.chance).replace(".", lang === "pt" ? "," : ".");
         return '<li class="drop-row">' +
-          '<span class="rar-chip rar-chip--' + drop.rarity + '">' + t(rarKey) + "</span>" +
+          '<span class="rar-chip rar-chip--' + drop.rarity + '">' + t(dropRarKey(drop.rarity)) + "</span>" +
           '<span class="drop-row__name">' + esc(d.name) + "</span>" +
-          '<span class="drop-row__chance">' + chance + "</span>" +
+          '<span class="drop-row__chance">' + dropChanceText(drop.chance) + "</span>" +
           "</li>";
       }).join("");
       card.innerHTML = GEMS +

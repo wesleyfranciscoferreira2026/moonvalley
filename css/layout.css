@@ -1481,6 +1481,21 @@
   color: var(--solar);
   font-variant-numeric: tabular-nums;
 }
+.drop-row__where {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  color: var(--silver-dim);
+}
+.drop-list--items { gap: .45rem; }
+@media (max-width: 560px) {
+  .drop-row__where { display: none; }
+}
 .rar-chip {
   flex: 0 0 auto;
   font-size: .54rem;
