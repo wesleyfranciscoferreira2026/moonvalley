@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "ranking", "features", "media", "youtube", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "ranking", "roadmap", "features", "media", "youtube", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -1212,7 +1212,7 @@
     var merged = {};
     var order = [];
     (CONTENT.droplist || []).forEach(function (table) {
-      var where = loc(table).region;
+      var where = loc(table).name;
       table.drops.forEach(function (drop) {
         var name = loc(drop).name;
         if (!merged[name]) { merged[name] = { drop: drop, wheres: [] }; order.push(name); }
@@ -1224,10 +1224,13 @@
       .sort(function (a, b) { return rarOrder[a.drop.rarity] - rarOrder[b.drop.rarity]; })
       .map(function (entry) {
         var d = loc(entry.drop);
+        var srcList = entry.wheres.length > 3
+          ? entry.wheres.slice(0, 3).join(" · ") + " · …"
+          : entry.wheres.join(" · ");
         return '<li class="drop-row">' +
           '<span class="rar-chip rar-chip--' + entry.drop.rarity + '">' + t(dropRarKey(entry.drop.rarity)) + "</span>" +
           '<span class="drop-row__name">' + esc(d.name) + "</span>" +
-          '<span class="drop-row__where">' + esc(entry.wheres.join(" · ")) + "</span>" +
+          '<span class="drop-row__where">' + esc(srcList) + "</span>" +
           '<span class="drop-row__chance">' + dropChanceText(entry.drop.chance) + "</span>" +
           "</li>";
       }).join("");
@@ -1274,8 +1277,9 @@
           "</li>";
       }).join("");
       card.innerHTML = GEMS +
-        '<p class="drop-card__region">' + esc(c.region) + "</p>" +
-        '<h3 class="drop-card__boss">' + esc(c.boss) + "</h3>" +
+        '<p class="drop-card__region">' + esc(c.region) +
+          '<span class="drop-type drop-type--' + table.kind + '">' + t("drop.type." + table.kind) + "</span></p>" +
+        '<h3 class="drop-card__boss">' + esc(c.name) + "</h3>" +
         '<p class="drop-card__text">' + esc(c.text) + "</p>" +
         '<ul class="drop-list">' + rows + "</ul>";
       dropGrid.appendChild(card);
@@ -1349,6 +1353,49 @@
       html += '<p class="rank-board__hint">' + t("ranking.createProfileHint") + "</p>";
     }
     rankBoard.innerHTML = html;
+    registerReveals();
+  }
+
+  /* ---------------- ROADMAP ---------------- */
+  var planTabs = $("#planTabs");
+  var planGrid = $("#planGrid");
+  var planFilter = "all";
+
+  function renderRoadmap() {
+    if (!planGrid) return;
+    if (planTabs) {
+      planTabs.innerHTML = "";
+      ["all", "idea", "planned", "development", "launch"].forEach(function (key) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "rank-tab" + (planFilter === key ? " is-active" : "");
+        btn.setAttribute("aria-pressed", planFilter === key ? "true" : "false");
+        btn.textContent = key === "all" ? t("roadmap.tab.all") : t("roadmap.status." + key);
+        btn.addEventListener("click", function () {
+          planFilter = key;
+          renderRoadmap();
+        });
+        planTabs.appendChild(btn);
+      });
+    }
+    var plans = (CONTENT.roadmap || []).filter(function (p) {
+      return planFilter === "all" || p.status === planFilter;
+    });
+    if (!plans.length) {
+      planGrid.innerHTML = '<p class="rank-board__hint">' + t("roadmap.empty") + "</p>";
+      return;
+    }
+    planGrid.innerHTML = plans.map(function (p) {
+      var c = loc(p);
+      return '<article class="frame plan-card reveal">' + GEMS +
+        '<div class="plan-card__head">' +
+          '<span class="plan-status plan-status--' + p.status + '">' + t("roadmap.status." + p.status) + "</span>" +
+          '<span class="plan-cat">' + t("roadmap.cat." + p.category) + "</span>" +
+        "</div>" +
+        '<h3 class="plan-card__title">' + esc(c.title) + "</h3>" +
+        '<p class="plan-card__text">' + esc(c.text) + "</p>" +
+        "</article>";
+    }).join("");
     registerReveals();
   }
 
@@ -1717,6 +1764,7 @@
     renderShop();
     renderDroplist();
     renderRanking();
+    renderRoadmap();
     renderFeatures();
     renderMediaFilters();
     renderMedia();

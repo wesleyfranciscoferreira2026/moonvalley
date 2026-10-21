@@ -1443,6 +1443,18 @@
   text-transform: uppercase;
   color: var(--solar);
 }
+.drop-type {
+  margin-left: .6em;
+  padding: .18em .62em .14em;
+  font-size: .78em;
+  letter-spacing: .18em;
+  text-indent: .18em;
+  color: var(--silver-dim);
+  border: 1px solid rgba(216, 216, 207, .35);
+  vertical-align: middle;
+}
+.drop-type--boss { color: #F5A34A; border-color: rgba(245, 163, 74, .55); }
+.drop-type--mob { color: #11A9C4; border-color: rgba(17, 169, 196, .55); }
 .drop-card__boss {
   margin: .35rem 0 0;
   font-family: var(--font-title);
@@ -1644,6 +1656,60 @@
   vertical-align: middle;
 }
 .rank-board__hint { margin-top: 1rem; text-align: center; font-size: .8rem; letter-spacing: .06em; color: var(--silver-dim); }
+
+/* ---------------- roadmap (dev plans) ---------------- */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 1rem;
+}
+.plan-card {
+  padding: 1.15rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.plan-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+}
+.plan-status {
+  padding: .3em .75em .24em;
+  font-family: var(--font-title);
+  font-size: .56rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-indent: .2em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  border: 1px solid rgba(216, 216, 207, .35);
+}
+.plan-status--idea { color: #8FB8DE; border-color: rgba(143, 184, 222, .55); }
+.plan-status--planned { color: #D8D8CF; border-color: rgba(216, 216, 207, .5); }
+.plan-status--development { color: #F5A34A; border-color: rgba(245, 163, 74, .55); }
+.plan-status--launch { color: #11A9C4; border-color: rgba(17, 169, 196, .55); }
+.plan-cat {
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-indent: .18em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  opacity: .85;
+  text-align: right;
+}
+.plan-card__title {
+  margin: .1rem 0 0;
+  font-family: var(--font-title);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.plan-card__text { margin: 0; font-size: .85rem; line-height: 1.62; color: var(--silver-dim); }
 @media (max-width: 560px) {
   .rank-row { grid-template-columns: 34px 1fr minmax(80px, auto); }
   .rank-row__class { display: none; }

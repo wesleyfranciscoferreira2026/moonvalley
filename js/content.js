@@ -992,89 +992,338 @@ window.MV_CONTENT = {
      legendary | epic | elite | rare | common; `chance` is a
      display string ("0.4%") — rendered with a comma in PT. */
   droplist: [
+    /* Sources: kind "boss" (guardians) and "mob" (regular enemies).
+       Drops are the real armory gear + consumables — farm the Vale. */
     {
       id: "drop-ashenmaw",
+      kind: "boss",
       tone: "blood",
       en: {
         region: "Ashenmaw",
-        boss: "The Ashen Maw",
+        name: "The Ashen Maw",
         text: "A furnace-beast that devoured the first caravan. The heat of its hoard never faded — neither did the grudge."
       },
       pt: {
         region: "Ashenmaw",
-        boss: "A Boca de Cinzas",
+        name: "A Boca de Cinzas",
         text: "Um monstro-fornalha que devorou a primeira caravana. O calor do seu tesouro nunca esfriou — nem o rancor."
       },
       drops: [
-        { rarity: "legendary", chance: "0.4%", en: { name: "Emberwing Sigil" }, pt: { name: "Selo Asa Incandescente" } },
-        { rarity: "epic", chance: "2.5%", en: { name: "Ashen Bride Veil" }, pt: { name: "Véu da Noiva de Cinzas" } },
-        { rarity: "elite", chance: "6%", en: { name: "Furnace Core" }, pt: { name: "Núcleo da Fornalha" } },
-        { rarity: "rare", chance: "12%", en: { name: "Cinderblade" }, pt: { name: "Lâmina de Cinzas" } },
+        { rarity: "legendary", chance: "0.4%", en: { name: "Oath-Forged Rifle" }, pt: { name: "Rifle Forjada por Juramento" } },
+        { rarity: "epic", chance: "2.5%", en: { name: "Blood-Gem Chains" }, pt: { name: "Correntes de Gema Rubra" } },
+        { rarity: "epic", chance: "5%", en: { name: "Cinder Warden Cloak" }, pt: { name: "Manto do Guardião de Cinzas" } },
+        { rarity: "common", chance: "40%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
         { rarity: "common", chance: "100%", en: { name: "Moon Shards ×50" }, pt: { name: "Fragmentos de Lua ×50" } }
       ]
     },
     {
       id: "drop-frostvale",
+      kind: "boss",
       tone: "ice",
       en: {
         region: "Frostvale",
-        boss: "The Frostvale Warden",
+        name: "The Frostvale Warden",
         text: "Blizzard paths circle the glacier heart. The riders who return speak little — and never about the cold."
       },
       pt: {
         region: "Frostvale",
-        boss: "Guardião do Frostvale",
+        name: "Guardião do Frostvale",
         text: "Trilhas de nevasca cercam o coração da glaciar. Os cavaleiros que voltam falam pouco — e nunca sobre o frio."
       },
       drops: [
+        { rarity: "legendary", chance: "0.5%", en: { name: "Aurora Plate" }, pt: { name: "Placa da Aurora" } },
         { rarity: "elite", chance: "3%", en: { name: "Frostvale Charger" }, pt: { name: "Corcel do Frostvale" } },
-        { rarity: "epic", chance: "4%", en: { name: "Aurora Cloak" }, pt: { name: "Manto da Aurora" } },
-        { rarity: "rare", chance: "15%", en: { name: "Glacier Fang Bow" }, pt: { name: "Arco Presa Glacial" } },
-        { rarity: "common", chance: "40%", en: { name: "Frozen Elixir" }, pt: { name: "Elixir Congelado" } },
-        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×30" }, pt: { name: "Fragmentos de Lua ×30" } }
+        { rarity: "rare", chance: "15%", en: { name: "Moonsteel Longbow" }, pt: { name: "Arco Longo de Aço Lunar" } },
+        { rarity: "common", chance: "40%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×50" }, pt: { name: "Fragmentos de Lua ×50" } }
       ]
     },
     {
       id: "drop-moongate",
+      kind: "boss",
       tone: "moon",
       en: {
         region: "Moongate",
-        boss: "The Moongate Revenant",
-        text: "The gate opens only when both moons align. Whatever the Revenant drops, it dropped a long time ago."
+        name: "The Moongate Revenant",
+        text: "The gate opens only when both moons align. Whatever the Revenant guards, it guarded a long time ago."
       },
       pt: {
         region: "Moongate",
-        boss: "Revenante do Moongate",
-        text: "O portão só se abre quando as duas luas se alinham. O que o Revenante solta, ele soltou há muito tempo."
+        name: "Revenante do Moongate",
+        text: "O portão só se abre quando as duas luas se alinham. O que o Revenante guarda, ele guarda há muito tempo."
       },
       drops: [
-        { rarity: "legendary", chance: "0.8%", en: { name: "Starborn Fragment" }, pt: { name: "Fragmento da Filha das Estrelas" } },
-        { rarity: "epic", chance: "5%", en: { name: "Moonprowler Mask" }, pt: { name: "Máscara do Caçador da Lua" } },
-        { rarity: "elite", chance: "7%", en: { name: "Moonwell Vial" }, pt: { name: "Frasco do Poço da Lua" } },
-        { rarity: "rare", chance: "14%", en: { name: "Revenant Longbow" }, pt: { name: "Arco do Revenante" } },
-        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×30" }, pt: { name: "Fragmentos de Lua ×30" } }
+        { rarity: "legendary", chance: "0.8%", en: { name: "Star-Eater's Shard" }, pt: { name: "Caco do Devorador de Estrelas" } },
+        { rarity: "epic", chance: "4%", en: { name: "Lunar Signet" }, pt: { name: "Selo Lunar" } },
+        { rarity: "rare", chance: "14%", en: { name: "Moonsteel Longbow" }, pt: { name: "Arco Longo de Aço Lunar" } },
+        { rarity: "common", chance: "38%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×50" }, pt: { name: "Fragmentos de Lua ×50" } }
       ]
     },
     {
       id: "drop-eldergrove",
+      kind: "boss",
       tone: "arcane",
       en: {
         region: "Eldergrove",
-        boss: "The Eldergrove Ancient",
+        name: "The Eldergrove Ancient",
         text: "The oldest trees remember the first night. Their roots guard gear from every oath ever broken beneath them."
       },
       pt: {
         region: "Eldergrove",
-        boss: "Ancião do Eldergrove",
+        name: "Ancião do Eldergrove",
         text: "As árvores mais velhas lembram da primeira noite. Suas raízes guardam equipamentos de todo juramento quebrado sob elas."
       },
       drops: [
-        { rarity: "legendary", chance: "0.6%", en: { name: "Voidreign Shard" }, pt: { name: "Lasca do Reinado do Vazio" } },
-        { rarity: "elite", chance: "8%", en: { name: "Ironclad Plate" }, pt: { name: "Placa do Blindado" } },
-        { rarity: "rare", chance: "13%", en: { name: "Druidwood Staff" }, pt: { name: "Cajado de Madeira-Druida" } },
-        { rarity: "common", chance: "42%", en: { name: "Verdant Elixir" }, pt: { name: "Elixir Verdejante" } },
-        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×30" }, pt: { name: "Fragmentos de Lua ×30" } }
+        { rarity: "epic", chance: "1.5%", en: { name: "Runestone Staff" }, pt: { name: "Cajado de Pedra Rúnica" } },
+        { rarity: "epic", chance: "5%", en: { name: "Blood-Gem Chains" }, pt: { name: "Correntes de Gema Rubra" } },
+        { rarity: "rare", chance: "13%", en: { name: "Antlered Warden Helm" }, pt: { name: "Elmo do Guardião de Chifres" } },
+        { rarity: "common", chance: "42%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×50" }, pt: { name: "Fragmentos de Lua ×50" } }
       ]
+    },
+    /* --- regular mobs --- */
+    {
+      id: "mob-cinder-imps",
+      kind: "mob",
+      tone: "blood",
+      en: {
+        region: "Ashenmaw",
+        name: "Cinder Imps",
+        text: "Small furnace-imps that strip caravans bare in packs. Their hoard is tiny — but a Warden's cloak has ended up in it more than once."
+      },
+      pt: {
+        region: "Ashenmaw",
+        name: "Diabinhos de Cinzas",
+        text: "Pequenos diabos-fornalha que descarregam caravanas em bando. Seu saque é miúdo — mas o manto de um Guardião já parou nele mais de uma vez."
+      },
+      drops: [
+        { rarity: "epic", chance: "0.7%", en: { name: "Cinder Warden Cloak" }, pt: { name: "Manto do Guardião de Cinzas" } },
+        { rarity: "common", chance: "30%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "70%", en: { name: "Moon Shards ×20" }, pt: { name: "Fragmentos de Lua ×20" } }
+      ]
+    },
+    {
+      id: "mob-frost-wraiths",
+      kind: "mob",
+      tone: "ice",
+      en: {
+        region: "Frostvale",
+        name: "Frost Wraiths",
+        text: "Cold hollows that drain the warmth from riders' bones. The riders leave offerings of cloth and elixir — the wraiths take both."
+      },
+      pt: {
+        region: "Frostvale",
+        name: "Espectros de Gelo",
+        text: "Vazios frios que drenam o calor dos ossos dos cavaleiros. Os cavaleiros deixam oferendas de tecido e elixir — os espectros levam as duas."
+      },
+      drops: [
+        { rarity: "rare", chance: "1.5%", en: { name: "Antlered Warden Helm" }, pt: { name: "Elmo do Guardião de Chifres" } },
+        { rarity: "common", chance: "28%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "65%", en: { name: "Moon Shards ×20" }, pt: { name: "Fragmentos de Lua ×20" } }
+      ]
+    },
+    {
+      id: "mob-moongate-sentinels",
+      kind: "mob",
+      tone: "moon",
+      en: {
+        region: "Moongate",
+        name: "Moongate Sentinels",
+        text: "Gatekeepers who never left their post. They judge travelers by what they carry — the worthy pass, the rest drop their gear."
+      },
+      pt: {
+        region: "Moongate",
+        name: "Sentinelas do Moongate",
+        text: "Guardiões que nunca deixaram o posto. Julgam os viajantes pelo que carregam — os dignos passam, o resto solta o equipamento."
+      },
+      drops: [
+        { rarity: "epic", chance: "0.9%", en: { name: "Lunar Signet" }, pt: { name: "Selo Lunar" } },
+        { rarity: "common", chance: "32%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "72%", en: { name: "Moon Shards ×20" }, pt: { name: "Fragmentos de Lua ×20" } }
+      ]
+    },
+    {
+      id: "mob-groveroot-spriggans",
+      kind: "mob",
+      tone: "arcane",
+      en: {
+        region: "Eldergrove",
+        name: "Groveroot Spriggans",
+        text: "Root-walkers older than the grove's own name. Their circles drain the magic from steel and return it to the earth."
+      },
+      pt: {
+        region: "Eldergrove",
+        name: "Spriggans Raizverde",
+        text: "Caminhantes-raiz mais velhos que a floresta com o próprio nome. Seus círculos drenam a magia do aço e a devolvem à terra."
+      },
+      drops: [
+        { rarity: "epic", chance: "0.5%", en: { name: "Runestone Staff" }, pt: { name: "Cajado de Pedra Rúnica" } },
+        { rarity: "common", chance: "30%", en: { name: "Vale Elixir ×3" }, pt: { name: "Elixir do Vale ×3" } },
+        { rarity: "common", chance: "68%", en: { name: "Moon Shards ×20" }, pt: { name: "Fragmentos de Lua ×20" } }
+      ]
+    }
+  ],
+
+  /* ---------- ROADMAP (dev plans, preview) ----------
+     Statuses: idea | planned | development | launch
+     Categories: gameplay | world | classes | systems | community */
+  roadmap: [
+    {
+      id: "plan-guilds",
+      status: "planned",
+      category: "community",
+      en: {
+        title: "Guilds & Guild Wars",
+        text: "Create guilds, raise your banner and fight for territory in weekly guild wars. Guild halls will be a shared home base for your members."
+      },
+      pt: {
+        title: "Guildas e Guerras de Guildas",
+        text: "Crie guildas, hasteie seu estandarte e lute por território em guerras semanais. Salões de guilda serão uma casa compartilhada para os membros."
+      }
+    },
+    {
+      id: "plan-fifth-hero",
+      status: "idea",
+      category: "classes",
+      en: {
+        title: "The Fifth Hero",
+        text: "A fifth class is under thought — every hero proposal that fits the lore of Moon Valley is welcome at the dev desk."
+      },
+      pt: {
+        title: "O Quinto Herói",
+        text: "Uma quinta classe está em análise — toda proposta de herói que encaixe no lore de Moon Valley é bem-vinda na mesa dos devs."
+      }
+    },
+    {
+      id: "plan-mounts",
+      status: "planned",
+      category: "gameplay",
+      en: {
+        title: "Mount System",
+        text: "Tame the creatures of the Vale — from frost elks to the Frostvale Charger itself — and ride across the regions."
+      },
+      pt: {
+        title: "Sistema de Montarias",
+        text: "Domestique as criaturas do Vale — dos alces de gelo ao próprio Corcel do Frostvale — e atravesse as regiões montado."
+      }
+    },
+    {
+      id: "plan-raids",
+      status: "planned",
+      category: "gameplay",
+      en: {
+        title: "Co-op Raids",
+        text: "Five-player raids against world bosses far bigger than the Ashen Maw — with loot tables of their own."
+      },
+      pt: {
+        title: "Raids Cooperativas",
+        text: "Raids de cinco jogadores contra chefes mundiais muito maiores que a Boca de Cinzas — com tabelas de loot próprias."
+      }
+    },
+    {
+      id: "plan-housing",
+      status: "idea",
+      category: "systems",
+      en: {
+        title: "Player Housing",
+        text: "A corner of Moon Valley to call home — decorated with the trophies of every drop you've farmed."
+      },
+      pt: {
+        title: "Casas dos Jogadores",
+        text: "Um canto de Moon Valley para chamar de seu — decorado com as troféus de cada drop que você farmou."
+      }
+    },
+    {
+      id: "plan-sunkencoast",
+      status: "idea",
+      category: "world",
+      en: {
+        title: "The Sunken Coast",
+        text: "A fourth region is being drawn: a drowned coast where the tide keeps something that should stay asleep."
+      },
+      pt: {
+        title: "A Costa Afogada",
+        text: "Uma quarta região está sendo desenhada: uma costa afogada onde a maré guarda algo que deveria continuar dormindo."
+      }
+    },
+    {
+      id: "plan-seasons",
+      status: "idea",
+      category: "systems",
+      en: {
+        title: "Season System",
+        text: "Seasons with modifiers, ranked resets and exclusive rewards — the ladder never sleeps."
+      },
+      pt: {
+        title: "Sistema de Temporadas",
+        text: "Temporadas com modificadores, reset de ranking e recompensas exclusivas — a escada nunca dorme."
+      }
+    },
+    {
+      id: "plan-customization",
+      status: "development",
+      category: "systems",
+      en: {
+        title: "Character Customization",
+        text: "Scars, tattoos, hair and faces — tools for the barbershop of Moon Valley are being carved right now."
+      },
+      pt: {
+        title: "Customização de Personagem",
+        text: "Cicatrizes, tatuagens, cabelos e rostos — as ferramentas da barbearia de Moon Valley estão sendo esculpidas agora."
+      }
+    },
+    {
+      id: "plan-launch-client",
+      status: "development",
+      category: "gameplay",
+      en: {
+        title: "The Launch Client",
+        text: "The client itself — combat, worlds, classes and loot — is the biggest build on the desk today."
+      },
+      pt: {
+        title: "O Cliente de Lançamento",
+        text: "O próprio cliente — combate, mundos, classes e loot — é o maior build na mesa hoje."
+      }
+    },
+    {
+      id: "plan-beta",
+      status: "launch",
+      category: "systems",
+      en: {
+        title: "Open Beta",
+        text: "A public beta before launch, to break things the right way. The date will be announced here and on our socials first."
+      },
+      pt: {
+        title: "Beta Aberta",
+        text: "Uma beta pública antes do lançamento, para quebrar tudo do jeito certo. A data será anunciada aqui e nas nossas redes primeiro."
+      }
+    },
+    {
+      id: "plan-cloud",
+      status: "launch",
+      category: "systems",
+      en: {
+        title: "Cloud Saves",
+        text: "Cross-device saves with the account system at launch — your hero follows you."
+      },
+      pt: {
+        title: "Saves na Nuvem",
+        text: "Saves entre dispositivos com o sistema de contas no lançamento — seu herói vai com você."
+      }
+    },
+    {
+      id: "plan-companion",
+      status: "planned",
+      category: "systems",
+      en: {
+        title: "Companion App",
+        text: "Check your profile, collection and the market from your phone. The game itself stays PC-first."
+      },
+      pt: {
+        title: "App Companheiro",
+        text: "Veja seu perfil, coleção e mercado pelo celular. O jogo em si continua PC-first."
+      }
     }
   ],
 
