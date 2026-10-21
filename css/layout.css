@@ -1710,6 +1710,58 @@
   color: var(--silver);
 }
 .plan-card__text { margin: 0; font-size: .85rem; line-height: 1.62; color: var(--silver-dim); }
+
+/* ---------------- auth (header + modal) ---------------- */
+.auth-nav { display: flex; align-items: center; gap: .5rem; }
+.auth-btn { white-space: nowrap; }
+.auth-user {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  font-family: var(--font-title);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #9FE3F0;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.auth-user__dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #11A9C4;
+  box-shadow: 0 0 8px #11A9C4;
+}
+.auth-tabs { justify-content: flex-start; margin: -.2rem 0 1.2rem; }
+.auth-form { display: grid; gap: .55rem; }
+.auth-form .profile-form__label { margin-top: .35rem; }
+.auth-submit { margin-top: .8rem; width: 100%; }
+.auth-error { margin: .2rem 0 0; font-size: .8rem; letter-spacing: .04em; color: #E07856; }
+.auth-note { margin: 1.1rem 0 0; font-size: .72rem; line-height: 1.55; letter-spacing: .04em; color: var(--silver-dim); opacity: .8; }
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.6rem;
+  transform: translate(-50%, 1rem);
+  z-index: 200;
+  padding: .75em 1.4em;
+  font-family: var(--font-title);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: #9FE3F0;
+  background: rgba(7, 26, 36, .96);
+  border: 1px solid rgba(17, 169, 196, .55);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+}
+.toast.is-in { opacity: 1; transform: translate(-50%, 0); }
 @media (max-width: 560px) {
   .rank-row { grid-template-columns: 34px 1fr minmax(80px, auto); }
   .rank-row__class { display: none; }
@@ -2043,6 +2095,7 @@
   .shop-modal__art--cover::before { display: none; }
   body::after { animation: none; }
   .cookie-banner { transition: none; }
+  .toast { transition: none; }
 }
 
 /* ============================================================

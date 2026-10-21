@@ -1594,6 +1594,141 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
+  /* ---------------- AUTH (local account — browser only) ----------------
+     Honest by design: no server exists for this site, so accounts are
+     stored in localStorage as SHA-256 hashes of "moonvalley:user:pass".
+     mv-users  = { username: { hash, since } }
+     mv-session = username string while "logged in" */
+  var AUTH_USERS = "mv-users";
+  var AUTH_SESSION = "mv-session";
+  var authNav = $("#authNav");
+  var authMode = "login";
+
+  function loadUsers() {
+    try { return JSON.parse(localStorage.getItem(AUTH_USERS) || "{}"); } catch (e) { return {}; }
+  }
+  function getSession() {
+    try { return localStorage.getItem(AUTH_SESSION) || ""; } catch (e) { return ""; }
+  }
+  function hashPass(user, pass) {
+    var data = "moonvalley:" + user.toLowerCase() + ":" + pass;
+    if (window.crypto && crypto.subtle && crypto.subtle.digest) {
+      return crypto.subtle.digest("SHA-256", new TextEncoder().encode(data)).then(function (buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+          return ("0" + b.toString(16)).slice(-2);
+        }).join("");
+      });
+    }
+    var h = 5381; /* ancient-browser fallback */
+    for (var i = 0; i < data.length; i++) h = ((h << 5) + h + data.charCodeAt(i)) >>> 0;
+    return Promise.resolve("fb" + h.toString(16));
+  }
+
+  function toast(msg) {
+    var el = document.createElement("div");
+    el.className = "toast";
+    el.textContent = msg;
+    document.body.appendChild(el);
+    requestAnimationFrame(function () { el.classList.add("is-in"); });
+    setTimeout(function () {
+      el.classList.remove("is-in");
+      setTimeout(function () { if (el.parentNode) el.remove(); }, 400);
+    }, 2800);
+  }
+
+  function renderAuthNav() {
+    if (!authNav) return;
+    var user = getSession();
+    if (user && loadUsers()[user]) {
+      authNav.innerHTML =
+        '<span class="auth-user"><i class="auth-user__dot" aria-hidden="true"></i>' + esc(user) + "</span>" +
+        '<button class="btn btn--ghost btn--sm auth-btn" type="button" data-auth-logout>' + t("auth.logout") + "</button>";
+      $("[data-auth-logout]", authNav).addEventListener("click", function () {
+        try { localStorage.removeItem(AUTH_SESSION); } catch (e) {}
+        renderAuthNav();
+        toast(t("auth.bye"));
+      });
+    } else {
+      authNav.innerHTML =
+        '<button class="btn btn--ghost btn--sm auth-btn" type="button" data-auth-login>' + t("auth.login") + "</button>" +
+        '<button class="btn btn--primary btn--sm auth-btn" type="button" data-auth-register>' + t("auth.register") + "</button>";
+      $("[data-auth-login]", authNav).addEventListener("click", function () { openAuthModal("login"); });
+      $("[data-auth-register]", authNav).addEventListener("click", function () { openAuthModal("register"); });
+    }
+  }
+
+  function authFormHTML(mode) {
+    var isLogin = mode === "login";
+    return '<h3 class="modal-title" id="modalTitle">' + t(isLogin ? "auth.loginTitle" : "auth.registerTitle") + "</h3>" +
+      '<div class="rank-tabs auth-tabs" role="tablist">' +
+        '<button class="rank-tab' + (isLogin ? " is-active" : "") + '" type="button" data-auth-tab="login" aria-pressed="' + isLogin + '">' + t("auth.login") + "</button>" +
+        '<button class="rank-tab' + (!isLogin ? " is-active" : "") + '" type="button" data-auth-tab="register" aria-pressed="' + !isLogin + '">' + t("auth.register") + "</button>" +
+      "</div>" +
+      '<form class="auth-form" novalidate>' +
+        '<label class="profile-form__label" for="authUser">' + t("auth.username") + "</label>" +
+        '<input class="profile-form__input" id="authUser" type="text" maxlength="20" autocomplete="username" placeholder="' + t("auth.usernamePlaceholder") + '">' +
+        '<label class="profile-form__label" for="authPass">' + t("auth.password") + "</label>" +
+        '<input class="profile-form__input" id="authPass" type="password" maxlength="64" autocomplete="' + (isLogin ? "current-password" : "new-password") + '" placeholder="' + t("auth.passwordPlaceholder") + '">' +
+        (isLogin ? "" :
+          '<label class="profile-form__label" for="authPass2">' + t("auth.password2") + "</label>" +
+          '<input class="profile-form__input" id="authPass2" type="password" maxlength="64" autocomplete="new-password" placeholder="' + t("auth.passwordPlaceholder") + '">') +
+        '<p class="auth-error" id="authError" role="alert" hidden></p>' +
+        '<button class="btn btn--primary auth-submit" type="submit">' + t(isLogin ? "auth.login" : "auth.register") + "</button>" +
+      "</form>" +
+      '<p class="auth-note">' + t("auth.localNote") + "</p>";
+  }
+
+  function openAuthModal(mode) {
+    authMode = mode;
+    openModal(authFormHTML(mode));
+    wireAuthForm();
+  }
+
+  function authFail(msg) {
+    var box = $("#authError");
+    if (box) { box.textContent = msg; box.hidden = false; }
+  }
+
+  function wireAuthForm() {
+    $all("[data-auth-tab]", modalBody).forEach(function (btn) {
+      btn.addEventListener("click", function () { openAuthModal(btn.getAttribute("data-auth-tab")); });
+    });
+    var form = $(".auth-form", modalBody);
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var user = $("#authUser").value.trim();
+      var pass = $("#authPass").value;
+      var pass2El = $("#authPass2");
+      var users = loadUsers();
+      if (user.length < 3) return authFail(t("auth.errUser"));
+      if (pass.length < 4) return authFail(t("auth.errPass"));
+      if (authMode === "login") {
+        if (!users[user]) return authFail(t("auth.errNoUser"));
+        hashPass(user, pass).then(function (hash) {
+          if (users[user].hash !== hash) return authFail(t("auth.errWrongPass"));
+          localStorage.setItem(AUTH_SESSION, user);
+          closeModal();
+          renderAuthNav();
+          toast(t("auth.welcome").replace("{name}", user));
+        });
+      } else {
+        if (users[user]) return authFail(t("auth.errTaken"));
+        if (pass2El && pass2El.value !== pass) return authFail(t("auth.errMatch"));
+        hashPass(user, pass).then(function (hash) {
+          users[user] = { hash: hash, since: new Date().toISOString().slice(0, 10) };
+          localStorage.setItem(AUTH_USERS, JSON.stringify(users));
+          localStorage.setItem(AUTH_SESSION, user);
+          closeModal();
+          renderAuthNav();
+          toast(t("auth.created").replace("{name}", user));
+        });
+      }
+    });
+    var userField = $("#authUser");
+    if (userField) userField.focus();
+  }
+
   function embedUrl(raw) {
     if (!raw) return null;
     var yt = raw.match(/(?:youtube\.com\/.*v=|youtu\.be\/)([\w-]{6,})/);
@@ -1765,6 +1900,8 @@
     renderDroplist();
     renderRanking();
     renderRoadmap();
+    renderAuthNav();
+    if (!modalRoot.hidden && $(".auth-form", modalBody)) openAuthModal(authMode);
     renderFeatures();
     renderMediaFilters();
     renderMedia();
