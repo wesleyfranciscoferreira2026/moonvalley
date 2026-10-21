@@ -1024,7 +1024,8 @@
   }
 
   function renderSocials() {
-    var rows = [$("#socialRow"), $("#footerSocialRow")].filter(Boolean);
+    /* Social network buttons live only in the footer (site's end). */
+    var rows = [$("#footerSocialRow")].filter(Boolean);
     rows.forEach(function (row) { row.innerHTML = ""; });
 
     var items = [
