@@ -92,7 +92,11 @@ Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:
 
 - **`news`** — notícias; o primeiro item recebe destaque automático. Itens além do 4º são revelados por "View All News".
 - **`regions`** — regiões do mundo (`scene`: imagem da região; `map`: `{x,y}` em % posiciona o pino no mapa-múndi).
-- **`classes`** — abas de classes (`tone`: cor da aba; `sigil`: `blade`/`shield`/`arcane`/`bow`; `images`: galeria; `videos`: `[{src, poster}]`). Sem arte, o painel mostra um brasão honesto.
+- **`classes`** — abas de classes (`tone`: cor da aba; `sigil`: `blade`/`shield`/`arcane`/`bow`/`gun`; `images`: galeria; `videos`: `[{src, poster}]`; `stats`: barras de atributos 0–100 por idioma). Sem arte, o painel mostra um brasão honesto.
+- **`books`** — livros da lore (`tone`: cor da capa; `icon`: `star`/`beast`/`moon`/`flame`); capa desenhada em CSS + modal com o texto.
+- **`armory`** — arsenal (`kind`: `weapon`/`armor`/`item` com filtros; `rarity`: `common`/`rare`/`epic`/`legendary`; `icon` de sigilo; `stats` por item).
+- **`shop`** — loja de skins e itens (`kind`: `skin`/`bundle`/`item`; `tone`; `sigil`; `price` em Fragmentos de Lua). O botão Comprar abre um estado honesto de checkout pendente com link real do Discord.
+- **Perfil do jogador** — criado/gerenciado na seção #profile; fica no `localStorage` do navegador (`mv-profile`), sem servidor. Textos em `js/i18n.js` (`profile.*`).
 - **`features`** — sistemas de gameplay (`icon`: `sword`, `shield`, `compass`, `beast`, `star`, `banner`).
 - **`media`** — `kind`: `trailer`, `video` (abrem modal), `screenshot`, `art` (lightbox com navegação). `url` local (`.mp4`) abre com player nativo.
 - Textos da interface (títulos, botões, rodapé) ficam em `js/i18n.js`.
@@ -121,5 +125,6 @@ Seletor EN | PT no cabeçalho e no rodapé. A escolha é salva em `localStorage`
 
 ## Limitações conhecidas (para produção)
 
+- A loja é um catálogo de prévia: o checkout real exige backend, pagamentos e contas de jogo.
 - Termos de uso e política de privacidade exibem aviso de "em elaboração" até o texto jurídico ser fornecido.
 - Todo texto provisório (lore, notícias, recursos, descrições das classes) deve ser revisado conforme a história real do jogo, conforme o PRD.

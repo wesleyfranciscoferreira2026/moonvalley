@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "classes", "features", "media", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "features", "media", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -181,7 +181,15 @@
     compass: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M24 4a20 20 0 1 0 0 40 20 20 0 0 0 0-40zm0 4.5a15.5 15.5 0 1 1 0 31 15.5 15.5 0 0 1 0-31z"/><path fill="currentColor" d="m31.4 14.6-4.9 11.9-11.9 4.9 4.9-11.9 11.9-4.9zM24 21.4a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2z"/></svg>',
     beast: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M24 12c-3.3 0-6 2.7-6 6 0 1.4.5 2.7 1.3 3.7-3.9 1.7-6.8 5.3-7.6 9.7-.2 1 .6 1.9 1.6 1.7 2.1-.4 4-.4 5.8.2l1.1 3.4c.3.9 1.5 1.1 2 .3L23 34h2l.8 3c.5.8 1.7.6 2-.3l1.1-3.4c1.8-.6 3.7-.6 5.8-.2 1 .2 1.8-.7 1.6-1.7-.8-4.4-3.7-8-7.6-9.7.8-1 1.3-2.3 1.3-3.7 0-3.3-2.7-6-6-6zm-8.5-8c.9 0 1.7.9 2.4 2.4.5 1.2.8 2.5.9 3.5-1.6-.5-3-1.3-4-2.2-.6-.6-.4-1.7.4-2 .9-.4 1.9-.6 2.6-.7h-2.3zm17 0c.7.1 1.7.3 2.6.7.8.3 1 1.4.4 2-1 .9-2.4 1.7-4 2.2.1-1 .4-2.3.9-3.5.7-1.5 1.5-2.4 2.4-2.4z"/></svg>',
     star: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="m24 3 5.4 12.3L43 17l-9.7 8.6L36.1 39 24 32.2 11.9 39l2.8-13.4L5 17l13.6-1.7L24 3z"/></svg>',
-    banner: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M10 4h3v40h-3zM16 6h20l-4 6 4 6H16z"/><path fill="currentColor" d="m26 24 8 6-8 6v-4h-6v-4h6z" opacity=".55"/></svg>'
+    banner: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M10 4h3v40h-3zM16 6h20l-4 6 4 6H16z"/><path fill="currentColor" d="m26 24 8 6-8 6v-4h-6v-4h6z" opacity=".55"/></svg>',
+    moon: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M27 6a18 18 0 1 0 12 31A20.5 20.5 0 0 1 27 6z"/><path fill="currentColor" d="m38.5 5 1.7 4.3 4.3 1.7-4.3 1.7-1.7 4.3-1.7-4.3-4.3-1.7 4.3-1.7L38.5 5z"/></svg>',
+    flame: '<svg viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" d="M24 4c6 8 14 13 14 24a14 14 0 1 1-28 0C10 17 18 12 24 4zm0 13.5A10.5 10.5 0 0 0 13.5 28 10.5 10.5 0 0 0 24 38.5 10.5 10.5 0 0 0 34.5 28 10.5 10.5 0 0 0 24 17.5z"/></svg>',
+    gun: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M21 4h6v6.7A15 15 0 0 1 37.3 17H44v6h-6.7A15 15 0 0 1 27 37.3V44h-6v-6.7A15 15 0 0 1 10.7 24H4v-6h6.7A15 15 0 0 1 21 10.7V4zm3 10a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><circle cx="24" cy="24" r="3.6" fill="currentColor"/></svg>',
+    bow: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M24 4C12 9 6 16.5 6 24s6 15 18 20v-6.8C14.5 33.7 11 29 11 24s3.5-9.7 13-7.2V4z"/><path fill="currentColor" d="M23.3 4h1.4v40h-1.4z"/><path fill="currentColor" d="M15 22.9h22v2.2H15z"/><path fill="currentColor" d="m37 19.5 7 4.5-7 4.5v-9z"/></svg>',
+    staff: '<svg viewBox="0 0 48 48"><circle cx="37" cy="9" r="6" fill="currentColor"/><path fill="currentColor" d="M34.4 13.6 38.8 18 15 41.8l-4.4-4.4z"/><path fill="currentColor" d="m10.5 23 3.2 3.2-3.2 3.2-3.2-3.2z"/><path fill="currentColor" d="m22 33 2.6 2.6L22 38.2 19.4 35.6z"/></svg>',
+    helm: '<svg viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" d="M24 4c9 0 15 5.4 15 14v10.5c0 8-5.6 13.6-15 15.5-9.4-1.9-15-7.5-15-15.5V18C9 9.4 15 4 24 4zm-8 16v4.5h16V20a8 8 0 0 0-16 0zm3 9h10v3.5H19z"/></svg>',
+    ring: '<svg viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" d="M24 8a17 17 0 1 0 0 34 17 17 0 0 0 0-34zm0 7a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"/><path fill="currentColor" d="m24 3 5.5 7.5h-11L24 3z"/><path fill="currentColor" d="m13.5 10.5 4-3.5 3.5 4-4 3.5zM34.5 10.5l-4-3.5-3.5 4 4 3.5z" opacity=".8"/></svg>',
+    potion: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M20 3h8v5.5h-8z"/><path fill="currentColor" d="M21 8.5h6v6.8c5 2.8 8 7.8 8 13.2a13 13 0 0 1-26 0c0-5.4 3-10.4 8-13.2V8.5z"/><path fill="currentColor" d="M14 27.5a13 13 0 0 0 8.6 11.9 20 20 0 0 0 6.9-2.4c-3.8-1.6-6.4-4.6-7.3-9.5H14z" opacity=".55"/></svg>'
   };
 
   /* ---------------- NEWS ---------------- */
@@ -475,8 +483,18 @@
     html += '<div class="class-info">' +
       '<p class="class-info__role">' + c.role + "</p>" +
       '<h3 class="class-info__name">' + c.name + "</h3>" +
-      '<p class="class-info__text">' + c.text + "</p>" +
-      '<ul class="class-info__traits">';
+      '<p class="class-info__text">' + c.text + "</p>";
+    if (c.stats && c.stats.length) {
+      html += '<div class="class-stats">';
+      c.stats.forEach(function (st) {
+        html += '<div class="class-stat">' +
+          '<div class="class-stat__head"><span class="class-stat__label">' + st.label + '</span><span class="class-stat__val">' + st.value + "</span></div>" +
+          '<div class="class-stat__track"><span class="class-stat__fill" style="--w:' + (st.value / 100) + '"></span></div>' +
+          "</div>";
+      });
+      html += "</div>";
+    }
+    html += '<ul class="class-info__traits">';
     (c.traits || []).forEach(function (tr) {
       html += '<li class="class-trait"><span class="class-trait__label">' + tr.label + '</span><span class="class-trait__value">' + tr.value + "</span></li>";
     });
@@ -544,6 +562,356 @@
       var tabs = $all(".class-tab", classTabs);
       if (tabs[activeClass]) tabs[activeClass].focus();
     });
+  }
+
+  /* ---------------- BOOKS ---------------- */
+  var bookGrid = $("#bookGrid");
+
+  function openBook(item) {
+    var c = loc(item);
+    openModal(
+      '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + c.kind + "</span>" +
+      '<h3 class="modal-title" id="modalTitle">' + c.title + "</h3>" +
+      '<p class="modal-meta"><span class="book-card__status">' + c.status + "</span></p>" +
+      '<div class="modal-prose"><p>' + c.text + "</p></div>"
+    );
+  }
+
+  function renderBooks() {
+    if (!bookGrid) return;
+    bookGrid.innerHTML = "";
+    CONTENT.books.forEach(function (item) {
+      var c = loc(item);
+      var card = document.createElement("article");
+      card.className = "book-card book-card--" + item.tone + " reveal";
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", c.title);
+      card.innerHTML =
+        '<div class="book-cover">' +
+        '<span class="book-cover__sigil" aria-hidden="true">' + (ICONS[item.icon] || ICONS.star) + "</span>" +
+        '<span class="book-cover__title">' + c.title + "</span>" +
+        '<span class="book-cover__rule" aria-hidden="true"></span>' +
+        "</div>" +
+        '<div class="book-card__body">' +
+        '<span class="book-card__kind">' + c.kind + "</span>" +
+        '<span class="book-card__status">' + c.status + "</span>" +
+        '<span class="book-card__open">' + t("books.open") + " →</span>" +
+        "</div>";
+      function open() { openBook(item); }
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+      bookGrid.appendChild(card);
+    });
+    registerReveals();
+  }
+
+  /* ---------------- PLAYER PROFILE ---------------- */
+  var profileSlot = $("#profileSlot");
+  var PROFILE_KEY = "mv-profile";
+  var profileDraft = { name: "", classId: null };
+  var profileEditing = false;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+    });
+  }
+  function loadProfile() {
+    try {
+      var raw = localStorage.getItem(PROFILE_KEY);
+      var p = raw ? JSON.parse(raw) : null;
+      return p && p.name && findClass(p.classId) ? p : null;
+    } catch (err) { return null; }
+  }
+  function storeProfile(p) {
+    try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch (err) { /* private mode */ }
+  }
+  function findClass(id) {
+    for (var i = 0; i < CONTENT.classes.length; i++) if (CONTENT.classes[i].id === id) return CONTENT.classes[i];
+    return null;
+  }
+  function profileDate(iso) {
+    try {
+      return new Date(iso).toLocaleDateString(lang === "pt" ? "pt-BR" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
+    } catch (err) { return iso || ""; }
+  }
+  var GEMS = '<span class="gem gem--tl"></span><span class="gem gem--tr"></span><span class="gem gem--bl"></span><span class="gem gem--br"></span>';
+
+  function updateProfileFormState() {
+    var submit = $("#profileSubmit");
+    if (!submit) return;
+    var input = $("#profileName");
+    var name = ((input && input.value) || "").trim();
+    var err = $("#profileNameError");
+    if (err) err.hidden = name.length === 0 || name.length >= 3;
+    submit.disabled = name.length < 3 || !profileDraft.classId;
+  }
+
+  function renderProfileForm() {
+    profileSlot.innerHTML =
+      '<div class="profile-card profile-card--form frame reveal">' + GEMS +
+      '<form class="profile-form" id="profileForm" novalidate>' +
+        '<div class="profile-form__field">' +
+          '<label class="profile-form__label" for="profileName">' + t("profile.nameLabel") + "</label>" +
+          '<input class="profile-form__input" id="profileName" type="text" maxlength="18" autocomplete="off" placeholder="' + t("profile.namePlaceholder") + '" value="' + esc(profileDraft.name) + '">' +
+          '<p class="profile-form__error" id="profileNameError" role="alert" hidden>' + t("profile.nameError") + "</p>" +
+        "</div>" +
+        '<fieldset class="profile-form__fieldset">' +
+          "<legend>" + t("profile.chooseClass") + "</legend>" +
+          '<div class="profile-picker" id="profilePicker"></div>' +
+        "</fieldset>" +
+        '<div class="profile-form__actions">' +
+          '<button class="btn btn--primary" type="submit" id="profileSubmit" disabled>' + t(profileEditing ? "profile.save" : "profile.create") + "</button>" +
+          (profileEditing ? '<button class="btn btn--ghost" type="button" data-profile-cancel>' + t("profile.cancel") + "</button>" : "") +
+        "</div>" +
+      "</form>" +
+      '<p class="profile-card__note">' + t("profile.localNote") + "</p>" +
+      "</div>";
+
+    var picker = $("#profilePicker");
+    CONTENT.classes.forEach(function (item) {
+      var c = loc(item);
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "profile-pick profile-pick--" + item.tone + (profileDraft.classId === item.id ? " is-active" : "");
+      btn.setAttribute("aria-pressed", profileDraft.classId === item.id ? "true" : "false");
+      btn.innerHTML =
+        '<span class="profile-pick__sigil" aria-hidden="true">' + (CLASS_SIGILS[item.sigil] || CLASS_SIGILS.arcane) + "</span>" +
+        '<span class="profile-pick__name">' + c.name + "</span>" +
+        '<span class="profile-pick__role">' + c.role + "</span>";
+      btn.addEventListener("click", function () {
+        profileDraft.classId = profileDraft.classId === item.id ? null : item.id;
+        $all(".profile-pick", picker).forEach(function (el) {
+          el.classList.remove("is-active");
+          el.setAttribute("aria-pressed", "false");
+        });
+        if (profileDraft.classId === item.id) {
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-pressed", "true");
+        }
+        updateProfileFormState();
+      });
+      picker.appendChild(btn);
+    });
+
+    $("#profileName").addEventListener("input", function (e) {
+      profileDraft.name = e.target.value;
+      updateProfileFormState();
+    });
+    $("#profileForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = profileDraft.name.trim();
+      if (name.length < 3 || !profileDraft.classId) return;
+      var prev = loadProfile();
+      storeProfile({
+        name: name,
+        classId: profileDraft.classId,
+        since: profileEditing && prev && prev.since ? prev.since : new Date().toISOString()
+      });
+      profileEditing = false;
+      renderProfile();
+    });
+    var cancelBtn = $("[data-profile-cancel]", profileSlot);
+    if (cancelBtn) {
+      cancelBtn.addEventListener("click", function () {
+        profileEditing = false;
+        var p = loadProfile();
+        profileDraft = p ? { name: p.name, classId: p.classId } : { name: "", classId: null };
+        renderProfile();
+      });
+    }
+    updateProfileFormState();
+  }
+
+  function renderProfileCard(p) {
+    var item = findClass(p.classId);
+    var c = loc(item);
+    profileSlot.innerHTML =
+      '<div class="profile-card profile-card--filled is-filled frame reveal">' + GEMS +
+      '<div class="profile-card__crest profile-card__crest--' + item.tone + '" aria-hidden="true">' +
+        (CLASS_SIGILS[item.sigil] || CLASS_SIGILS.arcane) +
+      "</div>" +
+      '<div class="profile-card__body">' +
+        '<p class="profile-card__eyebrow">' + c.role + "</p>" +
+        '<h3 class="profile-card__name">' + esc(p.name) + "</h3>" +
+        '<div class="profile-card__meta">' +
+          '<span class="profile-card__class">' + c.name + "</span>" +
+          '<span class="profile-card__since">' + t("profile.since") + " " + profileDate(p.since) + "</span>" +
+        "</div>" +
+        '<p class="profile-card__note">' + t("profile.localNote") + "</p>" +
+        '<div class="profile-card__actions">' +
+          '<button class="btn btn--ghost btn--sm" type="button" data-profile-view>' + t("profile.viewClass") + "</button>" +
+          '<button class="btn btn--ghost btn--sm" type="button" data-profile-edit>' + t("profile.edit") + "</button>" +
+          '<button class="profile-card__reset" type="button" data-profile-reset>' + t("profile.reset") + "</button>" +
+        "</div>" +
+      "</div>" +
+      "</div>";
+
+    $("[data-profile-view]", profileSlot).addEventListener("click", function () {
+      for (var i = 0; i < CONTENT.classes.length; i++) {
+        if (CONTENT.classes[i].id === p.classId) { activeClass = i; break; }
+      }
+      renderClasses();
+      var section = $("#classes");
+      if (section) section.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+    });
+    $("[data-profile-edit]", profileSlot).addEventListener("click", function () {
+      profileDraft = { name: p.name, classId: p.classId };
+      profileEditing = true;
+      renderProfile();
+      var input = $("#profileName");
+      if (input) input.focus();
+    });
+    $("[data-profile-reset]", profileSlot).addEventListener("click", function () {
+      if (!window.confirm(t("profile.reset") + "?")) return;
+      try { localStorage.removeItem(PROFILE_KEY); } catch (err) { /* private mode */ }
+      profileEditing = false;
+      profileDraft = { name: "", classId: null };
+      renderProfile();
+    });
+  }
+
+  function renderProfile() {
+    if (!profileSlot) return;
+    var p = loadProfile();
+    if (p && !profileEditing) renderProfileCard(p);
+    else renderProfileForm();
+    registerReveals();
+  }
+
+  /* ---------------- ARMORY ---------------- */
+  var armoryGrid = $("#armoryGrid");
+  var armoryFilters = $("#armoryFilters");
+  var armoryFilter = "all";
+  var ARMORY_KINDS = ["all", "weapon", "armor", "item"];
+
+  function renderArmoryFilters() {
+    if (!armoryFilters) return;
+    armoryFilters.innerHTML = "";
+    ARMORY_KINDS.forEach(function (key) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "media-filter" + (armoryFilter === key ? " is-active" : "");
+      btn.textContent = t("armory.filter." + key);
+      btn.setAttribute("aria-pressed", armoryFilter === key ? "true" : "false");
+      btn.addEventListener("click", function () {
+        armoryFilter = key;
+        renderArmoryFilters();
+        renderArmory();
+      });
+      armoryFilters.appendChild(btn);
+    });
+  }
+
+  function openArmoryItem(item) {
+    var c = loc(item);
+    var statsHtml = "";
+    (c.stats || []).forEach(function (st) {
+      statsHtml += '<div class="armory-stat">' +
+        '<span class="armory-stat__label">' + st.label + "</span>" +
+        '<span class="armory-stat__track"><span class="armory-stat__fill" style="width:' + st.value + '%"></span></span>' +
+        '<span class="armory-stat__val">' + st.value + "</span>" +
+        "</div>";
+    });
+    openModal(
+      '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + c.type + "</span>" +
+      '<h3 class="modal-title" id="modalTitle">' + c.name + "</h3>" +
+      '<p class="modal-meta"><span class="rarity rarity--' + item.rarity + '">' + t("rarity." + item.rarity) + "</span></p>" +
+      '<div class="modal-prose"><p>' + c.text + "</p></div>" +
+      (statsHtml ? '<div class="armory-stats">' + statsHtml + "</div>" : "")
+    );
+  }
+
+  function renderArmory() {
+    if (!armoryGrid) return;
+    armoryGrid.innerHTML = "";
+    CONTENT.armory.forEach(function (item) {
+      if (armoryFilter !== "all" && item.kind !== armoryFilter) return;
+      var c = loc(item);
+      var card = document.createElement("article");
+      card.className = "frame armory-card armory-card--" + item.rarity + " reveal";
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", c.name);
+      card.innerHTML = GEMS +
+        '<span class="armory-card__sigil" aria-hidden="true">' + (ICONS[item.icon] || ICONS.sword) + "</span>" +
+        '<span class="rarity rarity--' + item.rarity + '">' + t("rarity." + item.rarity) + "</span>" +
+        '<h3 class="armory-card__name">' + c.name + "</h3>" +
+        '<span class="armory-card__type">' + c.type + "</span>";
+      function open() { openArmoryItem(item); }
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+      armoryGrid.appendChild(card);
+    });
+    registerReveals();
+  }
+
+  /* ---------------- SHOP ---------------- */
+  var shopGrid = $("#shopGrid");
+
+  function shopSigil(item) {
+    return CLASS_SIGILS[item.sigil] || ICONS[item.sigil] || ICONS.star;
+  }
+
+  function openShopPending() {
+    modalBody.innerHTML =
+      '<h3 class="modal-title" id="modalTitle">' + t("shop.pendingTitle") + "</h3>" +
+      '<div class="modal-prose"><p>' + t("shop.pendingNote") + "</p></div>" +
+      (CONFIG.discordUrl
+        ? '<p class="modal-actions"><a class="btn btn--primary" href="' + CONFIG.discordUrl + '" target="_blank" rel="noopener noreferrer">' + t("shop.joinDiscord") + "</a></p>"
+        : "");
+    if (modalDialog) modalDialog.focus();
+  }
+
+  function openShopItem(item) {
+    var c = loc(item);
+    openModal(
+      '<div class="shop-modal__art shop-modal__art--' + item.tone + '" aria-hidden="true">' + shopSigil(item) + "</div>" +
+      '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + t("shop.kind." + item.kind) + "</span>" +
+      '<h3 class="modal-title" id="modalTitle">' + c.name + "</h3>" +
+      '<div class="modal-prose"><p>' + c.text + "</p></div>" +
+      '<div class="shop-buyrow">' +
+        '<span class="shop-buyrow__price"><strong>' + item.price + "</strong> " + t("shop.currency") + "</span>" +
+        '<button class="btn btn--primary" type="button" data-shop-buy>' + t("shop.buy") + "</button>" +
+      "</div>"
+    );
+    var buyBtn = $("[data-shop-buy]", modalBody);
+    if (buyBtn) buyBtn.addEventListener("click", openShopPending);
+  }
+
+  function renderShop() {
+    if (!shopGrid) return;
+    shopGrid.innerHTML = "";
+    CONTENT.shop.forEach(function (item) {
+      var c = loc(item);
+      var card = document.createElement("article");
+      card.className = "frame shop-card shop-card--" + item.tone + " reveal";
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", c.name);
+      card.innerHTML = GEMS +
+        '<div class="shop-card__art" aria-hidden="true"><span class="shop-card__sigil">' + shopSigil(item) + "</span></div>" +
+        '<div class="shop-card__body">' +
+          '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
+          '<h3 class="shop-card__name">' + c.name + "</h3>" +
+          '<div class="shop-card__foot">' +
+            '<span class="shop-card__price"><strong>' + item.price + "</strong> " + t("shop.currency") + "</span>" +
+            '<span class="shop-card__buy">' + t("shop.buy") + "</span>" +
+          "</div>" +
+        "</div>";
+      function open() { openShopItem(item); }
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+      });
+      shopGrid.appendChild(card);
+    });
+    registerReveals();
   }
 
   /* ---------------- SOCIAL / DISCORD ---------------- */
@@ -816,6 +1184,11 @@
     renderRegions();
     renderMapPins();
     renderClasses();
+    renderProfile();
+    renderBooks();
+    renderArmoryFilters();
+    renderArmory();
+    renderShop();
     renderFeatures();
     renderMediaFilters();
     renderMedia();

@@ -395,6 +395,12 @@ window.MV_CONTENT = {
         name: "Kaelith",
         role: "Blood-Gem Duelist",
         text: "Silver-haired and sharp-eyed, Kaelith fights with chains, blades and blood-gems. She turns every wound into leverage — a dueliste who ends the fight the moment her opponent hesitates.",
+        stats: [
+          { label: "Damage", value: 85 },
+          { label: "Survivability", value: 55 },
+          { label: "Mobility", value: 90 },
+          { label: "Range", value: 30 }
+        ],
         traits: [
           { label: "Style", value: "Agile duelist & counters" },
           { label: "Arsenal", value: "Blood-gem chains, twin blades" },
@@ -405,6 +411,12 @@ window.MV_CONTENT = {
         name: "Kaelith",
         role: "Duelista Rubra",
         text: "De cabelos prateados e olhos vermelhos, Kaelith luta com correntes, lâminas e gemas de sangue. Transforma cada ferida em vantagem — uma duelista que encerra a luta no instante em que o oponente hesita.",
+        stats: [
+          { label: "Dano", value: 85 },
+          { label: "Sobrevivência", value: 55 },
+          { label: "Mobilidade", value: 90 },
+          { label: "Alcance", value: 30 }
+        ],
         traits: [
           { label: "Estilo", value: "Duelista ágil e contragolpes" },
           { label: "Arsenal", value: "Correntes de gema e lâminas gêmeas" },
@@ -422,6 +434,12 @@ window.MV_CONTENT = {
         name: "Theryon",
         role: "Oath-Gun Sharpshooter",
         text: "Theryon never misses twice. Bound to an oath-forged rifle, he measures the vale in breaths and trigger pulls — his shot always arrives before the warning.",
+        stats: [
+          { label: "Damage", value: 90 },
+          { label: "Survivability", value: 50 },
+          { label: "Mobility", value: 60 },
+          { label: "Range", value: 95 }
+        ],
         traits: [
           { label: "Style", value: "Ranged precision & burst" },
           { label: "Arsenal", value: "Oath-forged rifle" },
@@ -432,6 +450,12 @@ window.MV_CONTENT = {
         name: "Theryon",
         role: "Atirador Jurado",
         text: "Theryon nunca erra duas vezes. Ligado a um rifle forjado por juramento, mede o vale em suspiros e disparos — seu tiro sempre chega antes do aviso.",
+        stats: [
+          { label: "Dano", value: 90 },
+          { label: "Sobrevivência", value: 50 },
+          { label: "Mobilidade", value: 60 },
+          { label: "Alcance", value: 95 }
+        ],
         traits: [
           { label: "Estilo", value: "Precisão à distância e rajadas" },
           { label: "Arsenal", value: "Rifle forjado por juramento" },
@@ -449,6 +473,12 @@ window.MV_CONTENT = {
         name: "Nyfheris",
         role: "Arcane Seer",
         text: "Nyfheris reads the runes the moon left behind. Where they point, the air remembers older laws — and obeys.",
+        stats: [
+          { label: "Damage", value: 80 },
+          { label: "Survivability", value: 45 },
+          { label: "Mobility", value: 50 },
+          { label: "Range", value: 75 }
+        ],
         traits: [
           { label: "Style", value: "Spellcraft & control" },
           { label: "Arsenal", value: "Rune staff, starfire" },
@@ -459,6 +489,12 @@ window.MV_CONTENT = {
         name: "Nyfheris",
         role: "Vidente Arcano",
         text: "Nyfheris lê as runas que a lua deixou para trás. Onde aponta, o ar lembra leis mais antigas — e obedece.",
+        stats: [
+          { label: "Dano", value: 80 },
+          { label: "Sobrevivência", value: 45 },
+          { label: "Mobilidade", value: 50 },
+          { label: "Alcance", value: 75 }
+        ],
         traits: [
           { label: "Estilo", value: "Feitiçaria e controle" },
           { label: "Arsenal", value: "Cajado rúnico e fogo estelar" },
@@ -476,6 +512,12 @@ window.MV_CONTENT = {
         name: "Vaelthor",
         role: "Moonlit Ranger",
         text: "Vaelthor walks the roads no map keeps. Arrow first, question later — the night owes him nothing, and he collects anyway.",
+        stats: [
+          { label: "Damage", value: 75 },
+          { label: "Survivability", value: 60 },
+          { label: "Mobility", value: 80 },
+          { label: "Range", value: 85 }
+        ],
         traits: [
           { label: "Style", value: "Precision at range" },
           { label: "Arsenal", value: "Longbow & moonsteel" },
@@ -486,11 +528,383 @@ window.MV_CONTENT = {
         name: "Vaelthor",
         role: "Patrulheiro da Lua",
         text: "Vaelthor percorre estradas que nenhum mapa guarda. Primeiro o flecha, depois a pergunta — a noite nada lhe deve, e ele cobra assim mesmo.",
+        stats: [
+          { label: "Dano", value: 75 },
+          { label: "Sobrevivência", value: 60 },
+          { label: "Mobilidade", value: 80 },
+          { label: "Alcance", value: 85 }
+        ],
         traits: [
           { label: "Estilo", value: "Precisão à distância" },
           { label: "Arsenal", value: "Arco longo e aço lunar" },
           { label: "Juramento", value: "Um tiro, uma dívida" }
         ]
+      }
+    }
+  ],
+
+  /* ==========================================================
+     BOOKS — lore volumes shown in the Books section.
+     icon: star | beast | moon | flame | compass | banner
+     tone: ice | forest | fire | moon (cover colors)
+     ========================================================== */
+  books: [
+    {
+      id: "aurora-codex",
+      tone: "ice",
+      icon: "star",
+      en: {
+        title: "The Aurora Codex",
+        kind: "Lore Codex",
+        status: "In development",
+        text: "The first volume of the Vale's library gathers everything the frost-scribes could confirm about the eternal light above Frostvale: bell-tones beneath the ice, the drowned cathedral, and the signal that answers once every moon. What sleeps below the frozen lake is not dead — the codex is being copied chapter by chapter as the archives are decrypted."
+      },
+      pt: {
+        title: "O Códice da Aurora",
+        kind: "Códice de Lore",
+        status: "Em desenvolvimento",
+        text: "O primeiro volume da biblioteca do Vale reúne tudo o que os escribas do gelo puderam confirmar sobre a luz eterna acima do Frostvale: toques de sino sob o gelo, a catedral submersa e o sinal que responde uma vez a cada lua. O que dorme sob o lago congelado não está morto — o códice está sendo copiado capítulo a capítulo conforme os arquivos são decifrados."
+      }
+    },
+    {
+      id: "bestiary-vale",
+      tone: "forest",
+      icon: "beast",
+      en: {
+        title: "Bestiary of the Vale",
+        kind: "Field Journal",
+        status: "In development",
+        text: "Pages of sketches, pawprints and half-true warnings gathered by the rangers of Eldergrove. It opens with the Antlered Watchers — figures that follow travelers in silence for days, judging intent before the forest decides — and continues with the beasts of ash, root and starlight. New entries are added whenever an expedition returns with more than it left with."
+      },
+      pt: {
+        title: "Bestiário do Vale",
+        kind: "Diário de Campo",
+        status: "Em desenvolvimento",
+        text: "Páginas de espegas, pegadas e avisos meio verdadeiros reunidos pelos rangeres da Eldergrove. Abre com os Vigias de Chifres — figuras que seguem viajantes em silêncio por dias, julgando a intenção antes de a floresta decidir — e segue com as bestas de cinza, raiz e luz estelar. Novas entradas surgem quando uma expedição volta com mais do que levou."
+      }
+    },
+    {
+      id: "debts-of-the-moon",
+      tone: "moon",
+      icon: "moon",
+      en: {
+        title: "Debts of the Moon",
+        kind: "Forbidden Folio",
+        status: "In development",
+        text: "A slim, chain-bound folio on the Moongate and whatever stands on the other side of it. It counts the debts the moon keeps: names written in starlight, crossings made at the silver hour, and the price Vharûn, the Star-Eater, collects for every torch that burns inside his arena. Readers are advised to finish it before the next full moon."
+      },
+      pt: {
+        title: "Dívidas da Lua",
+        kind: "Fólio Proibido",
+        status: "Em desenvolvimento",
+        text: "Um fino fólio preso por correntes sobre o Moongate e o que quer que exista do outro lado. Conta as dívidas que a lua guarda: nomes escritos em luz estelar, travessias feitas na hora prata e o preço que Vharûn, o Devorador de Estrelas, cobra de toda tocha que queima dentro de sua arena. Recomenda-se terminá-lo antes da próxima lua cheia."
+      }
+    },
+    {
+      id: "ash-and-oaths",
+      tone: "fire",
+      icon: "flame",
+      en: {
+        title: "Ash & Oaths",
+        kind: "Forge Chronicle",
+        status: "In development",
+        text: "The story of the forges that once armed the whole vale, told by the Cinder Wardens who still keep them burning. Heat, ash and old debts: which blades were sworn, which were broken, and why the obsidian spines of Ashenmaw remember every promise hammered into them. The final chapter is waiting for a name to be returned to the fire."
+      },
+      pt: {
+        title: "Cinzas e Juramentos",
+        kind: "Crônica da Forja",
+        status: "Em desenvolvimento",
+        text: "A história das forjas que uniram o vale inteiro, contada pelos Guardiões das Cinzas que ainda as mantêm acesas. Calor, cinzas e dívidas antigas: quais lâminas foram juradas, quais foram quebradas e por que os espinhos de obsidiana da Ashenmaw lembram todo promessa martelada nelas. O capítulo final espera um nome de volta ao fogo."
+      }
+    }
+  ],
+
+  /* ==========================================================
+     ARMORY — weapons, armor and relics of the Vale.
+     kind: weapon | armor | item
+     rarity: common | rare | epic | legendary
+     icon: sword | gun | bow | staff | shield | helm | ring
+           | potion | star | flame | beast | banner
+     ========================================================== */
+  armory: [
+    {
+      id: "bloodgem-chains",
+      kind: "weapon",
+      rarity: "epic",
+      icon: "sword",
+      en: {
+        name: "Blood-Gem Chains",
+        type: "Twin blades & chain",
+        text: "Kaelith's own weapons: blades strung on chain links set with blood-gems that drink every wound. The gem warms when the duel nears its end — for her opponent, that warmth is the last thing felt.",
+        stats: [ { label: "Damage", value: 88 }, { label: "Speed", value: 84 }, { label: "Reach", value: 65 } ]
+      },
+      pt: {
+        name: "Correntes de Gema Rubra",
+        type: "Lâminas gêmeas e corrente",
+        text: "As próprias armas de Kaelith: lâminas presas a elos com gemas de sangue que bebem cada ferida. A gema esquenta quando o duelo se aproxima do fim — para o oponente, esse calor é a última coisa sentido.",
+        stats: [ { label: "Dano", value: 88 }, { label: "Velocidade", value: 84 }, { label: "Alcance", value: 65 } ]
+      }
+    },
+    {
+      id: "oath-rifle",
+      kind: "weapon",
+      rarity: "legendary",
+      icon: "gun",
+      en: {
+        name: "Oath-Forged Rifle",
+        type: "Marksman rifle",
+        text: "Forged in the Cinder Wardens' pits and sworn on the day Theryon took his oath. Its barrel records every shot fired in its owner's name — and each name must eventually be collected.",
+        stats: [ { label: "Damage", value: 95 }, { label: "Speed", value: 55 }, { label: "Reach", value: 98 } ]
+      },
+      pt: {
+        name: "Rifle Forjada por Juramento",
+        type: "Rifle de atirador",
+        text: "Forjada nas forjas dos Guardiões das Cinzas e jurada no dia em que Theryon fez seu pacto. Seu cano registra cada disparo feito em nome do dono — e todo nome deve ser cobrado um dia.",
+        stats: [ { label: "Dano", value: 95 }, { label: "Velocidade", value: 55 }, { label: "Alcance", value: 98 } ]
+      }
+    },
+    {
+      id: "moonsteel-longbow",
+      kind: "weapon",
+      rarity: "rare",
+      icon: "bow",
+      en: {
+        name: "Moonsteel Longbow",
+        type: "Longbow",
+        text: "Drawn from moonsteel that only answers at night. Vaelthor's bow makes no sound when the string is released — the arrow simply arrives, as if it were always there.",
+        stats: [ { label: "Damage", value: 78 }, { label: "Speed", value: 74 }, { label: "Reach", value: 90 } ]
+      },
+      pt: {
+        name: "Arco Longo de Aço Lunar",
+        type: "Arco longo",
+        text: "Feito de aço lunar que só responde à noite. O arco de Vaelthor não faz som quando a corda se solta — a flecha simplesmente chega, como se sempre estivesse lá.",
+        stats: [ { label: "Dano", value: 78 }, { label: "Velocidade", value: 74 }, { label: "Alcance", value: 90 } ]
+      }
+    },
+    {
+      id: "runestone-staff",
+      kind: "weapon",
+      rarity: "epic",
+      icon: "staff",
+      en: {
+        name: "Runestone Staff",
+        type: "Arcane focus",
+        text: "A focus carved from a fallen Moongate shard. The runes on Nyfheris's staff rewrite themselves between castings — no two spells ever leave it the same way twice.",
+        stats: [ { label: "Power", value: 90 }, { label: "Control", value: 88 }, { label: "Reach", value: 70 } ]
+      },
+      pt: {
+        name: "Cajado de Pedra Rúnica",
+        type: "Foco arcano",
+        text: "Um foco talhado de um caco caído do Moongate. As runas do cajado de Nyfheris se reescrevem entre conjurações — nenhum feitiço sai dele igual ao anterior.",
+        stats: [ { label: "Poder", value: 90 }, { label: "Controle", value: 88 }, { label: "Alcance", value: 70 } ]
+      }
+    },
+    {
+      id: "aurora-plate",
+      kind: "armor",
+      rarity: "legendary",
+      icon: "shield",
+      en: {
+        name: "Aurora Plate",
+        type: "Heavy plate",
+        text: "Forged under Frostvale's eternal aurora so the light itself is sealed between its layers. The plate has never been breached — it has, however, been returned to the forge three times.",
+        stats: [ { label: "Defense", value: 94 }, { label: "Weight", value: 80 }, { label: "Warmth", value: 95 } ]
+      },
+      pt: {
+        name: "Placa da Aurora",
+        type: "Armadura pesada",
+        text: "Forjada sob a aurora eterna do Frostvale para selar a própria luz entre suas camadas. A armadura nunca foi atravessada — mas já voltou à forja três vezes.",
+        stats: [ { label: "Defesa", value: 94 }, { label: "Peso", value: 80 }, { label: "Calor", value: 95 } ]
+      }
+    },
+    {
+      id: "warden-helm",
+      kind: "armor",
+      rarity: "rare",
+      icon: "helm",
+      en: {
+        name: "Antlered Warden Helm",
+        type: "Light helm",
+        text: "Crowned with the antlers of a Watcher that chose not to attack. Wearers report hearing the Eldergrove's silence through it — a silence that sometimes answers questions.",
+        stats: [ { label: "Defense", value: 68 }, { label: "Weight", value: 35 }, { label: "Awareness", value: 85 } ]
+      },
+      pt: {
+        name: "Elmo do Guardião de Chifres",
+        type: "Elmo leve",
+        text: "Coroado com os chifres de um Vigia que escolheu não atacar. Quem usa relata ouvir o silêncio da Eldergrove através dele — um silêncio que às vezes responde perguntas.",
+        stats: [ { label: "Defesa", value: 68 }, { label: "Peso", value: 35 }, { label: "Percepção", value: 85 } ]
+      }
+    },
+    {
+      id: "cinder-cloak",
+      kind: "armor",
+      rarity: "epic",
+      icon: "flame",
+      en: {
+        name: "Cinder Warden Cloak",
+        type: "Warden cloak",
+        text: "A cloak woven from ember-thread that never goes out. It drinks the heat of any flame it touches — Ashenmaw's forges burn a little colder when one of these passes through.",
+        stats: [ { label: "Defense", value: 58 }, { label: "Weight", value: 30 }, { label: "Fireward", value: 92 } ]
+      },
+      pt: {
+        name: "Manto do Guardião de Cinzas",
+        type: "Manto de guardião",
+        text: "Um manto tecido com fio-brasa que jamais se apaga. Bebe o calor de qualquer chama que toca — as forjas da Ashenmaw queimam um pouco mais frias quando um desses passa por lá.",
+        stats: [ { label: "Defesa", value: 58 }, { label: "Peso", value: 30 }, { label: "Antichama", value: 92 } ]
+      }
+    },
+    {
+      id: "lunar-signet",
+      kind: "item",
+      rarity: "epic",
+      icon: "ring",
+      en: {
+        name: "Lunar Signet",
+        type: "Trinket ring",
+        text: "A silver ring worn by Moongate's gatekeepers. Under a full moon its inner face shows the name of whoever last crossed the gate — and it is never the same name twice.",
+        stats: [ { label: "Luck", value: 76 }, { label: "Insight", value: 80 }, { label: "Silence", value: 70 } ]
+      },
+      pt: {
+        name: "Selo Lunar",
+        type: "Anel talismã",
+        text: "Um anel de prata usado pelos guardiões do Moongate. Sob a lua cheia, sua face interna mostra o nome de quem atravessou o portão por último — e nunca é o mesmo nome duas vezes.",
+        stats: [ { label: "Sorte", value: 76 }, { label: "Visão", value: 80 }, { label: "Silêncio", value: 70 } ]
+      }
+    },
+    {
+      id: "vale-elixir",
+      kind: "item",
+      rarity: "common",
+      icon: "potion",
+      en: {
+        name: "Vale Elixir",
+        type: "Consumable",
+        text: "Brewed from Eldergrove roots and frostwater. Tastes like pine and regret, mends what steel and stubbornness cannot — the first item every expedition packs, and the last one they ever run out of.",
+        stats: [ { label: "Restoration", value: 70 }, { label: "Duration", value: 45 }, { label: "Weight", value: 10 } ]
+      },
+      pt: {
+        name: "Elixir do Vale",
+        type: "Consumível",
+        text: "Bebido de raízes da Eldergrove e água de degelo. Tem gosto de pinheiro e arrependimento, conserta o que o aço e a teimosia não consertam — o primeiro item de toda expedição e o último de que acabam.",
+        stats: [ { label: "Restauração", value: 70 }, { label: "Duração", value: 45 }, { label: "Peso", value: 10 } ]
+      }
+    },
+    {
+      id: "star-eater-shard",
+      kind: "item",
+      rarity: "legendary",
+      icon: "star",
+      en: {
+        name: "Star-Eater's Shard",
+        type: "Forbidden relic",
+        text: "A splinter of the black stone Vharûn wears above his arena. It grows warmer the closer its bearer stands to the Moongate — and cold the moment they turn their back on it.",
+        stats: [ { label: "Power", value: 96 }, { label: "Risk", value: 90 }, { label: "Hunger", value: 85 } ]
+      },
+      pt: {
+        name: "Caco do Devorador de Estrelas",
+        type: "Relíquia proibida",
+        text: "Um caco da pedra negra que Vharûn usa acima de sua arena. Esquenta quanto mais perto o portador fica do Moongate — e esfria no momento em que as costas se voltam para ele.",
+        stats: [ { label: "Poder", value: 96 }, { label: "Risco", value: 90 }, { label: "Fome", value: 85 } ]
+      }
+    }
+  ],
+
+  /* ==========================================================
+     SHOP — skins, bundles and special items (preview catalog).
+     kind: skin | bundle | item
+     sigil: blade | gun | arcane | bow | star | shield | banner
+     tone: blood | iron | arcane | moon | gold | ice
+     price: whole numbers in Moon Shards
+     ========================================================== */
+  shop: [
+    {
+      id: "skin-ashen-bride",
+      kind: "skin",
+      tone: "blood",
+      sigil: "blade",
+      price: 1200,
+      en: {
+        name: "Kaelith — Ashen Bride",
+        text: "A blood-red duelist set veiled in funeral silk. Chains turn to black lace, the blades keep their edge — the dress, somehow, never tears."
+      },
+      pt: {
+        name: "Kaelith — Noiva de Cinzas",
+        text: "Um conjunto de duelista rubro envolto em renda fúnebre. As correntes viram renda preta, as lâminas mantêm o fio — o vestido, de alguma forma, jamais rasga."
+      }
+    },
+    {
+      id: "skin-ironclad",
+      kind: "skin",
+      tone: "iron",
+      sigil: "gun",
+      price: 950,
+      en: {
+        name: "Theryon — Ironclad Marksman",
+        text: "Full plate over the longcoat, rifle stock in gunmetal and ash. Heavier, louder, and completely uninterested in taking cover."
+      },
+      pt: {
+        name: "Theryon — Atirador Blindado",
+        text: "Armadura completa sobre o sobretudo, coronha em metal de guarnição e cinza. Mais pesado, mais alto, e completamente desinteressado em cobertura."
+      }
+    },
+    {
+      id: "skin-starborn",
+      kind: "skin",
+      tone: "arcane",
+      sigil: "arcane",
+      price: 1100,
+      en: {
+        name: "Nyfheris — Starborn",
+        text: "Robes stitched with the night sky of the first moon. Runes drift across the fabric as if the staff, not the cloth, were casting the spells."
+      },
+      pt: {
+        name: "Nyfheris — Filha das Estrelas",
+        text: "Túnicas costuradas com o céu noturno da primeira lua. Runas deslizam pelo pano como se fosse o cajado, e não o tecido, conjurando os feitiços."
+      }
+    },
+    {
+      id: "skin-moonprowler",
+      kind: "skin",
+      tone: "moon",
+      sigil: "bow",
+      price: 950,
+      en: {
+        name: "Vaelthor — Moonprowler",
+        text: "Silent grey leathers with a hood that drinks the moonlight. Arrows leave no trail; neither does he."
+      },
+      pt: {
+        name: "Vaelthor — Caçador da Lua",
+        text: "Couro cinza silencioso e capuz que bebe a luz da lua. As flechas não deixam rastro; ele também não."
+      }
+    },
+    {
+      id: "bundle-founders",
+      kind: "bundle",
+      tone: "gold",
+      sigil: "star",
+      price: 2900,
+      en: {
+        name: "Founder's Cache",
+        text: "A bundle for the first oath-sworn: one skin of choice, the Vale Elixir pack, a profile emblem, and your name carved into the first Moongate ledger."
+      },
+      pt: {
+        name: "Cofre do Fundador",
+        text: "Um pacote para os primeiros jurados: uma skin à escolha, o pack Elixir do Vale, um emblema de perfil e seu nome gravado no primeiro livro do Moongate."
+      }
+    },
+    {
+      id: "mount-frostvale",
+      kind: "item",
+      tone: "ice",
+      sigil: "banner",
+      price: 1500,
+      en: {
+        name: "Frostvale Charger",
+        text: "A glacier-maned warhorse raised beneath the aurora. Leaves no hoofprints in the snow — Frostvale's riders have never explained why."
+      },
+      pt: {
+        name: "Corcel do Frostvale",
+        text: "Um cavalo de guerra de crina glaciar criado sob a aurora. Não deixa pegadas na neve — os cavaleiros do Frostvale nunca explicaram por quê."
       }
     }
   ],

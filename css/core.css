@@ -314,15 +314,15 @@ h1, h2, h3 { margin: 0; font-family: var(--font-title); font-weight: 700; line-h
 .brand:hover .brand__name { color: #fff; }
 
 .site-nav { margin-inline: auto; }
-.site-nav__list { display: flex; gap: clamp(1rem, 2.4vw, 2.2rem); }
+.site-nav__list { display: flex; gap: clamp(.7rem, 1.5vw, 2.2rem); }
 .site-nav__link {
   position: relative;
   display: inline-block;
   padding: .5em .1em;
   font-family: var(--font-title);
-  font-size: .78rem;
+  font-size: clamp(.64rem, .92vw, .78rem);
   font-weight: 600;
-  letter-spacing: .2em;
+  letter-spacing: clamp(.07em, .13vw, .2em);
   text-transform: uppercase;
   color: var(--silver-dim);
   transition: color .3s;
