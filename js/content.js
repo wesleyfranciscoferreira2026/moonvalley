@@ -480,7 +480,9 @@ window.MV_CONTENT = {
       tone: "arcane",
       sigil: "arcane",
       images: [],
-      videos: [],
+      videos: [
+        { src: "assets/videos/nyfheris-1.mp4", poster: "assets/videos/nyfheris-1-poster.jpg" }
+      ],
       en: {
         name: "Nyfheris",
         role: "Arcane Seer",
@@ -561,6 +563,23 @@ window.MV_CONTENT = {
      tone: ice | forest | fire | moon (cover colors)
      ========================================================== */
   books: [
+    {
+      id: "curiosidades",
+      tone: "ink",
+      cover: "assets/books/curiosidades-cover.jpg",
+      en: {
+        title: "Moon Valley — Curiosities & Information",
+        kind: "Compendium",
+        status: "Coming soon",
+        text: "Curiosities and information about the Moon Valley universe, gathered by Wendel Francisco Ferreira and Wesley Francisco Ferreira. The first official volume collects behind-the-scenes, mysteries and details of the vale — from Frostvale to the Moongate — for those who want to know every stone of the story before crossing the gate."
+      },
+      pt: {
+        title: "Moon Valley — Curiosidades e Informações",
+        kind: "Compêndio",
+        status: "Em breve",
+        text: "Curiosidades e informações sobre o universo de Moon Valley, reunidas por Wendel Francisco Ferreira e Wesley Francisco Ferreira. O primeiro volume oficial reúne bastidores, mistérios e detalhes do vale — do Frostvale ao Moongate — para quem quer conhecer cada pedra da história antes de cruzar o portão."
+      }
+    },
     {
       id: "aurora-codex",
       tone: "ice",

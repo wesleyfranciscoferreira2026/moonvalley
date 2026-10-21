@@ -670,6 +670,27 @@
 .book-card--forest { --cover-a: #123A2B; --cover-b: #071C15; --cover-accent: #8FD9A6; }
 .book-card--moon { --cover-a: #2A1E52; --cover-b: #120B28; --cover-accent: #CDBBFF; }
 .book-card--fire { --cover-a: #4A1E0C; --cover-b: #1F0C05; --cover-accent: #F5A34A; }
+.book-card--ink { --cover-a: #4A403A; --cover-b: #241E1A; --cover-accent: #EFE3C8; }
+
+/* real cover artwork: fills the whole book cover edge to edge */
+.book-cover.book-cover--image { padding: 0; display: block; }
+.book-cover--image::after { display: none; }
+.book-cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.book-modal__cover {
+  display: block;
+  max-height: 300px;
+  width: auto;
+  margin: 0 auto 1.4rem;
+  border: 1px solid rgba(216, 216, 207, .3);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .55);
+}
 
 .book-cover {
   position: relative;

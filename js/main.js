@@ -570,6 +570,7 @@
   function openBook(item) {
     var c = loc(item);
     openModal(
+      (item.cover ? '<img class="book-modal__cover" src="' + item.cover + '" alt="">' : "") +
       '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + c.kind + "</span>" +
       '<h3 class="modal-title" id="modalTitle">' + c.title + "</h3>" +
       '<p class="modal-meta"><span class="book-card__status">' + c.status + "</span></p>" +
@@ -588,11 +589,15 @@
       card.setAttribute("role", "button");
       card.setAttribute("aria-label", c.title);
       card.innerHTML =
-        '<div class="book-cover">' +
-        '<span class="book-cover__sigil" aria-hidden="true">' + (ICONS[item.icon] || ICONS.star) + "</span>" +
-        '<span class="book-cover__title">' + c.title + "</span>" +
-        '<span class="book-cover__rule" aria-hidden="true"></span>' +
-        "</div>" +
+        (item.cover
+          ? '<div class="book-cover book-cover--image">' +
+            '<img class="book-cover__img" src="' + item.cover + '" alt="' + c.title + '" loading="lazy">' +
+            "</div>"
+          : '<div class="book-cover">' +
+            '<span class="book-cover__sigil" aria-hidden="true">' + (ICONS[item.icon] || ICONS.star) + "</span>" +
+            '<span class="book-cover__title">' + c.title + "</span>" +
+            '<span class="book-cover__rule" aria-hidden="true"></span>' +
+            "</div>") +
         '<div class="book-card__body">' +
         '<span class="book-card__kind">' + c.kind + "</span>" +
         '<span class="book-card__status">' + c.status + "</span>" +
