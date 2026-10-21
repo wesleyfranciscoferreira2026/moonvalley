@@ -845,7 +845,9 @@ window.MV_CONTENT = {
      kind: skin | bundle | item
      sigil: blade | gun | arcane | bow | star | shield | banner
      tone: blood | iron | arcane | moon | gold | ice
-     price: whole numbers in Moon Shards
+     price: number in Moon Shards (whole numbers), or set
+            currency: "BRL" to price the item in Reais
+            (price: 249.9 + currency: "BRL" -> R$ 249,90)
      ========================================================== */
   shop: [
     {
@@ -884,7 +886,8 @@ window.MV_CONTENT = {
       tone: "arcane",
       sigil: "arcane",
       art: "assets/shop/skin-starborn.jpg",
-      price: 1100,
+      price: 249.9,
+      currency: "BRL",
       en: {
         name: "Nyfheris — Starborn",
         text: "Robes stitched with the night sky of the first moon. Runes drift across the fabric as if the staff, not the cloth, were casting the spells."

@@ -863,6 +863,15 @@
     return CLASS_SIGILS[item.sigil] || ICONS[item.sigil] || ICONS.star;
   }
 
+  /* Price markup: items with currency "BRL" show Reais (R$ 249,90),
+     everything else stays in Moon Shards (price + label). */
+  function shopPrice(item) {
+    if (item.currency === "BRL") {
+      return "<strong>" + item.price.toLocaleString(lang === "pt" ? "pt-BR" : "en-US", { style: "currency", currency: "BRL" }) + "</strong>";
+    }
+    return "<strong>" + item.price + "</strong> " + t("shop.currency");
+  }
+
   function openShopPending() {
     modalBody.innerHTML =
       '<h3 class="modal-title" id="modalTitle">' + t("shop.pendingTitle") + "</h3>" +
@@ -883,7 +892,7 @@
       '<h3 class="modal-title" id="modalTitle">' + c.name + "</h3>" +
       '<div class="modal-prose"><p>' + c.text + "</p></div>" +
       '<div class="shop-buyrow">' +
-        '<span class="shop-buyrow__price"><strong>' + item.price + "</strong> " + t("shop.currency") + "</span>" +
+        '<span class="shop-buyrow__price">' + shopPrice(item) + "</span>" +
         '<button class="btn btn--primary" type="button" data-shop-buy>' + t("shop.buy") + "</button>" +
       "</div>"
     );
@@ -910,7 +919,7 @@
           '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
           '<h3 class="shop-card__name">' + c.name + "</h3>" +
           '<div class="shop-card__foot">' +
-            '<span class="shop-card__price"><strong>' + item.price + "</strong> " + t("shop.currency") + "</span>" +
+            '<span class="shop-card__price">' + shopPrice(item) + "</span>" +
             '<span class="shop-card__buy">' + t("shop.buy") + "</span>" +
           "</div>" +
         "</div>";
