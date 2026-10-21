@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "features", "media", "youtube", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "features", "media", "youtube", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -911,11 +911,15 @@
     var list = items.length
       ? '<ul class="profile-collection__list">' + items.map(function (item) {
           var tier = item.tier || "collector";
-          return '<li class="owned-card owned-card--' + item.tone + (item.art ? " owned-card--cover" : "") + '"' +
-            (item.art ? ' style="background-image:url(' + item.art + ')"' : "") + ">" +
-            '<span class="owned-card__tier owned-card__tier--' + tier + '">' + t("shop.tier." + tier) + "</span>" +
-            '<span class="owned-card__name">' + esc(loc(item).name) + "</span>" +
-            '<button class="owned-card__remove" type="button" data-own-remove="' + item.id + '" aria-label="' + t("profile.removeItem") + '" title="' + t("profile.removeItem") + '"><span aria-hidden="true">×</span></button>' +
+          var badge = '<span class="owned-card__tier owned-card__tier--' + tier + '">' + t("shop.tier." + tier) + "</span>";
+          return '<li class="owned-card owned-card--' + item.tone + '">' +
+            (item.art
+              ? '<div class="owned-card__art owned-card__art--cover"><img src="' + item.art + '" alt="" loading="lazy">' + badge + "</div>"
+              : '<div class="owned-card__art"><span class="owned-card__sigil">' + shopSigil(item) + "</span>" + badge + "</div>") +
+            '<div class="owned-card__body">' +
+              '<span class="owned-card__name">' + esc(loc(item).name) + "</span>" +
+              '<button class="owned-card__remove" type="button" data-own-remove="' + item.id + '" aria-label="' + t("profile.removeItem") + '" title="' + t("profile.removeItem") + '"><span aria-hidden="true">×</span></button>' +
+            "</div>" +
             "</li>";
         }).join("") + "</ul>"
       : '<p class="profile-collection__empty">' + t("profile.collectionEmpty") + "</p>";
@@ -1187,6 +1191,38 @@
       sec.appendChild(grid);
       items.forEach(function (item) { grid.appendChild(buildShopCard(item)); });
       shopGrid.appendChild(sec);
+    });
+    registerReveals();
+  }
+
+  /* ---------------- DROPLIST ---------------- */
+  var dropGrid = $("#dropGrid");
+
+  function renderDroplist() {
+    if (!dropGrid) return;
+    dropGrid.innerHTML = "";
+    (CONTENT.droplist || []).forEach(function (table) {
+      var c = loc(table);
+      var card = document.createElement("article");
+      card.className = "frame drop-card drop-card--" + table.tone + " reveal";
+      var rows = table.drops.map(function (drop) {
+        var d = loc(drop);
+        var rarKey = drop.rarity === "rare" || drop.rarity === "common"
+          ? "drop.rarity." + drop.rarity
+          : "shop.tier." + drop.rarity;
+        var chance = String(drop.chance).replace(".", lang === "pt" ? "," : ".");
+        return '<li class="drop-row">' +
+          '<span class="rar-chip rar-chip--' + drop.rarity + '">' + t(rarKey) + "</span>" +
+          '<span class="drop-row__name">' + esc(d.name) + "</span>" +
+          '<span class="drop-row__chance">' + chance + "</span>" +
+          "</li>";
+      }).join("");
+      card.innerHTML = GEMS +
+        '<p class="drop-card__region">' + esc(c.region) + "</p>" +
+        '<h3 class="drop-card__boss">' + esc(c.boss) + "</h3>" +
+        '<p class="drop-card__text">' + esc(c.text) + "</p>" +
+        '<ul class="drop-list">' + rows + "</ul>";
+      dropGrid.appendChild(card);
     });
     registerReveals();
   }
@@ -1554,6 +1590,7 @@
     renderArmoryFilters();
     renderArmory();
     renderShop();
+    renderDroplist();
     renderFeatures();
     renderMediaFilters();
     renderMedia();

@@ -987,6 +987,97 @@ window.MV_CONTENT = {
     }
   ],
 
+  /* ---------- DROPLIST (preview of loot tables) ----------
+     One entry per guardian/dungeon. `drops[].rarity` uses
+     legendary | epic | elite | rare | common; `chance` is a
+     display string ("0.4%") — rendered with a comma in PT. */
+  droplist: [
+    {
+      id: "drop-ashenmaw",
+      tone: "blood",
+      en: {
+        region: "Ashenmaw",
+        boss: "The Ashen Maw",
+        text: "A furnace-beast that devoured the first caravan. The heat of its hoard never faded — neither did the grudge."
+      },
+      pt: {
+        region: "Ashenmaw",
+        boss: "A Boca de Cinzas",
+        text: "Um monstro-fornalha que devorou a primeira caravana. O calor do seu tesouro nunca esfriou — nem o rancor."
+      },
+      drops: [
+        { rarity: "legendary", chance: "0.4%", en: { name: "Emberwing Sigil" }, pt: { name: "Selo Asa Incandescente" } },
+        { rarity: "epic", chance: "2.5%", en: { name: "Ashen Bride Veil" }, pt: { name: "Véu da Noiva de Cinzas" } },
+        { rarity: "elite", chance: "6%", en: { name: "Furnace Core" }, pt: { name: "Núcleo da Fornalha" } },
+        { rarity: "rare", chance: "12%", en: { name: "Cinderblade" }, pt: { name: "Lâmina de Cinzas" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×50" }, pt: { name: "Fragmentos de Lua ×50" } }
+      ]
+    },
+    {
+      id: "drop-frostvale",
+      tone: "ice",
+      en: {
+        region: "Frostvale",
+        boss: "The Frostvale Warden",
+        text: "Blizzard paths circle the glacier heart. The riders who return speak little — and never about the cold."
+      },
+      pt: {
+        region: "Frostvale",
+        boss: "Guardião do Frostvale",
+        text: "Trilhas de nevasca cercam o coração da glaciar. Os cavaleiros que voltam falam pouco — e nunca sobre o frio."
+      },
+      drops: [
+        { rarity: "elite", chance: "3%", en: { name: "Frostvale Charger" }, pt: { name: "Corcel do Frostvale" } },
+        { rarity: "epic", chance: "4%", en: { name: "Aurora Cloak" }, pt: { name: "Manto da Aurora" } },
+        { rarity: "rare", chance: "15%", en: { name: "Glacier Fang Bow" }, pt: { name: "Arco Presa Glacial" } },
+        { rarity: "common", chance: "40%", en: { name: "Frozen Elixir" }, pt: { name: "Elixir Congelado" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×30" }, pt: { name: "Fragmentos de Lua ×30" } }
+      ]
+    },
+    {
+      id: "drop-moongate",
+      tone: "moon",
+      en: {
+        region: "Moongate",
+        boss: "The Moongate Revenant",
+        text: "The gate opens only when both moons align. Whatever the Revenant drops, it dropped a long time ago."
+      },
+      pt: {
+        region: "Moongate",
+        boss: "Revenante do Moongate",
+        text: "O portão só se abre quando as duas luas se alinham. O que o Revenante solta, ele soltou há muito tempo."
+      },
+      drops: [
+        { rarity: "legendary", chance: "0.8%", en: { name: "Starborn Fragment" }, pt: { name: "Fragmento da Filha das Estrelas" } },
+        { rarity: "epic", chance: "5%", en: { name: "Moonprowler Mask" }, pt: { name: "Máscara do Caçador da Lua" } },
+        { rarity: "elite", chance: "7%", en: { name: "Moonwell Vial" }, pt: { name: "Frasco do Poço da Lua" } },
+        { rarity: "rare", chance: "14%", en: { name: "Revenant Longbow" }, pt: { name: "Arco do Revenante" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×30" }, pt: { name: "Fragmentos de Lua ×30" } }
+      ]
+    },
+    {
+      id: "drop-eldergrove",
+      tone: "arcane",
+      en: {
+        region: "Eldergrove",
+        boss: "The Eldergrove Ancient",
+        text: "The oldest trees remember the first night. Their roots guard gear from every oath ever broken beneath them."
+      },
+      pt: {
+        region: "Eldergrove",
+        boss: "Ancião do Eldergrove",
+        text: "As árvores mais velhas lembram da primeira noite. Suas raízes guardam equipamentos de todo juramento quebrado sob elas."
+      },
+      drops: [
+        { rarity: "legendary", chance: "0.6%", en: { name: "Voidreign Shard" }, pt: { name: "Lasca do Reinado do Vazio" } },
+        { rarity: "elite", chance: "8%", en: { name: "Ironclad Plate" }, pt: { name: "Placa do Blindado" } },
+        { rarity: "rare", chance: "13%", en: { name: "Druidwood Staff" }, pt: { name: "Cajado de Madeira-Druida" } },
+        { rarity: "common", chance: "42%", en: { name: "Verdant Elixir" }, pt: { name: "Elixir Verdejante" } },
+        { rarity: "common", chance: "100%", en: { name: "Moon Shards ×30" }, pt: { name: "Fragmentos de Lua ×30" } }
+      ]
+    }
+  ],
+
   /* ==========================================================
      YOUTUBE — videos of the official channel.
      url: full YouTube link (watch, youtu.be or shorts).
