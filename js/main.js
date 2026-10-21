@@ -927,7 +927,6 @@
         '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
         '<h3 class="shop-card__name">' + c.name + "</h3>" +
         '<div class="shop-card__foot">' +
-          '<span class="shop-card__price">' + shopPrice(item) + "</span>" +
           '<span class="shop-card__buy">' + shopPriceText(item) + "</span>" +
         "</div>" +
       "</div>";
