@@ -48,6 +48,7 @@
           <li><a class="site-nav__link" href="#armory" data-i18n="nav.armory">Armory</a></li>
           <li><a class="site-nav__link" href="#shop" data-i18n="nav.shop">Shop</a></li>
           <li><a class="site-nav__link" href="#droplist" data-i18n="nav.droplist">Droplist</a></li>
+          <li><a class="site-nav__link" href="#ranking" data-i18n="nav.ranking">Ranking</a></li>
           <li><a class="site-nav__link" href="#news" data-i18n="nav.news">News</a></li>
           <li><a class="site-nav__link" href="#media" data-i18n="nav.media">Media</a></li>
           <li><a class="site-nav__link" href="#youtube" data-i18n="nav.youtube">YouTube</a></li>
@@ -308,6 +309,22 @@
 
         <div class="drop-grid" id="dropGrid"><!-- rendered by js: one card per guardian --></div>
         <p class="shop-note reveal" data-i18n="droplist.note">Drop rates are a preview and may change before launch.</p>
+      </div>
+    </section>
+
+    <!-- ======================= RANKING ======================= -->
+    <section class="section section--ranking" id="ranking">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="section-head__eyebrow" data-i18n="ranking.eyebrow">Hall of the Vale</p>
+          <h2 class="section-head__title" data-i18n="ranking.title">Ranking</h2>
+          <div class="ornament" aria-hidden="true"></div>
+          <p class="section-head__lead" data-i18n="ranking.lead">Three ladders will rule Moon Valley: player kills, mob kills and honor in the ranked arena.</p>
+        </header>
+
+        <div class="rank-tabs reveal" id="rankTabs" role="tablist" aria-label="Ranking boards"><!-- rendered by js --></div>
+        <div class="rank-board frame reveal" id="rankBoard"><!-- rendered by js: header row + top ten --></div>
+        <p class="shop-note reveal" data-i18n="ranking.note">Sample ladder — the official ranking opens at launch.</p>
       </div>
     </section>
 

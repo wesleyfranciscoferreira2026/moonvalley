@@ -1499,6 +1499,141 @@
 .rar-chip--rare { --rar-c: #8FB8DE; }
 .rar-chip--common { --rar-c: #9AA5AA; }
 
+/* ---------------- ranking (hall of the vale) ---------------- */
+.rank-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+  margin: -0.6rem 0 1.6rem;
+}
+.rank-tab {
+  font-family: var(--font-title);
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-indent: .16em;
+  text-transform: uppercase;
+  padding: .7em 1.4em;
+  cursor: pointer;
+  color: var(--silver-dim);
+  background: rgba(7, 26, 36, .6);
+  border: 1px solid rgba(216, 216, 207, .2);
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+  transition: color .25s, border-color .25s, background .25s;
+}
+.rank-tab:hover { color: var(--silver); border-color: rgba(245, 163, 74, .5); }
+.rank-tab.is-active {
+  color: #1B0F06;
+  background: linear-gradient(160deg, #FFC46A, var(--solar));
+  border-color: var(--solar);
+}
+.rank-board { padding: clamp(1rem, 2.6vw, 1.6rem); }
+.rank-row {
+  display: grid;
+  grid-template-columns: 44px 1fr 150px minmax(90px, auto);
+  align-items: center;
+  gap: .8rem;
+  padding: .62rem .8rem;
+  border-top: 1px solid rgba(216, 216, 207, .1);
+}
+.rank-row--head {
+  border-top: 0;
+  font-family: var(--font-title);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-indent: .22em;
+  text-transform: uppercase;
+  color: var(--solar);
+  opacity: .9;
+}
+.rank-row--head .rank-row__value { text-align: right; }
+.rank-row__num {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--silver-dim);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.rank-row__player {
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: var(--silver);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rank-row__class {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  letter-spacing: .04em;
+  color: var(--silver-dim);
+}
+.rank-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  transform: rotate(45deg);
+  background: var(--dot, var(--silver-dim));
+  box-shadow: 0 0 8px var(--dot, transparent);
+}
+.rank-dot--blood { --dot: #B85C43; }
+.rank-dot--iron { --dot: #7D94A0; }
+.rank-dot--moon { --dot: #11A9C4; }
+.rank-dot--arcane { --dot: #8C6EDC; }
+.rank-dot--gold { --dot: #F5A34A; }
+.rank-row__value {
+  text-align: right;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: .95rem;
+  letter-spacing: .05em;
+  color: var(--solar);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.rank-row__record {
+  display: block;
+  font-size: .64rem;
+  font-style: normal;
+  letter-spacing: .1em;
+  color: var(--silver-dim);
+  font-weight: 400;
+}
+/* podium accents */
+.rank-row--1 { background: linear-gradient(90deg, rgba(255, 196, 106, .1), transparent 60%); border-left: 3px solid #FFC46A; }
+.rank-row--2 { background: linear-gradient(90deg, rgba(216, 216, 207, .08), transparent 60%); border-left: 3px solid #C9CDD2; }
+.rank-row--3 { background: linear-gradient(90deg, rgba(205, 127, 50, .09), transparent 60%); border-left: 3px solid #CD7F32; }
+.rank-row--1 .rank-row__num { color: #FFC46A; font-size: 1.15rem; text-shadow: 0 0 10px rgba(255, 196, 106, .6); }
+.rank-row--2 .rank-row__num { color: #C9CDD2; }
+.rank-row--3 .rank-row__num { color: #CD7F32; }
+/* your local row */
+.rank-row--you { background: rgba(17, 169, 196, .08); border-left: 3px solid rgba(17, 169, 196, .6); }
+.rank-row--you .rank-row__player { color: #9FE3F0; }
+.rank-row__tag {
+  font-style: normal;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-indent: .16em;
+  text-transform: uppercase;
+  color: #9FE3F0;
+  border: 1px solid rgba(17, 169, 196, .5);
+  padding: .2em .6em;
+  margin-left: .4em;
+  vertical-align: middle;
+}
+.rank-board__hint { margin-top: 1rem; text-align: center; font-size: .8rem; letter-spacing: .06em; color: var(--silver-dim); }
+@media (max-width: 560px) {
+  .rank-row { grid-template-columns: 34px 1fr minmax(80px, auto); }
+  .rank-row__class { display: none; }
+}
+
 .shop-card__foot {
   margin-top: auto;
   padding-top: 1rem;

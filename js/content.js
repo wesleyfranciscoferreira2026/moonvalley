@@ -1078,6 +1078,49 @@ window.MV_CONTENT = {
     }
   ],
 
+  /* ---------- RANKING (sample ladders, preview) ----------
+     Three boards: player kills, mob kills and ranked arena.
+     Entries: { name (gamertag), classId, value } — arena also
+     carries wins/losses shown as the record. */
+  ranking: {
+    kills: [
+      { name: "NyxRavenna", classId: "kaelith", value: 1842 },
+      { name: "Moonbitten", classId: "nyfheris", value: 1731 },
+      { name: "Kaeldros", classId: "theryon", value: 1688 },
+      { name: "VesperHex", classId: "vaelthor", value: 1502 },
+      { name: "GrimHollow", classId: "kaelith", value: 1449 },
+      { name: "Solvane", classId: "nyfheris", value: 1310 },
+      { name: "Ashcroft", classId: "theryon", value: 1204 },
+      { name: "Thornwake", classId: "vaelthor", value: 1157 },
+      { name: "Rivenmoor", classId: "kaelith", value: 1088 },
+      { name: "Eclipsia", classId: "nyfheris", value: 995 }
+    ],
+    mobs: [
+      { name: "GrimHollow", classId: "kaelith", value: 52103 },
+      { name: "Kaeldros", classId: "theryon", value: 49887 },
+      { name: "Solvane", classId: "nyfheris", value: 46320 },
+      { name: "NyxRavenna", classId: "kaelith", value: 44158 },
+      { name: "Thornwake", classId: "vaelthor", value: 41002 },
+      { name: "Moonbitten", classId: "nyfheris", value: 38774 },
+      { name: "Ashcroft", classId: "theryon", value: 36551 },
+      { name: "VesperHex", classId: "vaelthor", value: 33209 },
+      { name: "Eclipsia", classId: "nyfheris", value: 30884 },
+      { name: "Rivenmoor", classId: "kaelith", value: 28773 }
+    ],
+    arena: [
+      { name: "NyxRavenna", classId: "kaelith", value: 2410, wins: 128, losses: 41 },
+      { name: "Moonbitten", classId: "nyfheris", value: 2355, wins: 119, losses: 44 },
+      { name: "VesperHex", classId: "vaelthor", value: 2290, wins: 110, losses: 48 },
+      { name: "Kaeldros", classId: "theryon", value: 2244, wins: 104, losses: 49 },
+      { name: "GrimHollow", classId: "kaelith", value: 2187, wins: 99, losses: 52 },
+      { name: "Solvane", classId: "nyfheris", value: 2131, wins: 92, losses: 55 },
+      { name: "Thornwake", classId: "vaelthor", value: 2098, wins: 88, losses: 57 },
+      { name: "Ashcroft", classId: "theryon", value: 2040, wins: 81, losses: 60 },
+      { name: "Rivenmoor", classId: "kaelith", value: 1995, wins: 76, losses: 62 },
+      { name: "Eclipsia", classId: "nyfheris", value: 1933, wins: 70, losses: 66 }
+    ]
+  },
+
   /* ==========================================================
      YOUTUBE — videos of the official channel.
      url: full YouTube link (watch, youtu.be or shorts).

@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "features", "media", "youtube", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "ranking", "features", "media", "youtube", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -1227,6 +1227,75 @@
     registerReveals();
   }
 
+  /* ---------------- RANKING ---------------- */
+  var rankTabs = $("#rankTabs");
+  var rankBoard = $("#rankBoard");
+  var rankBoardKey = "kills";
+
+  function rankNum(n) {
+    return n.toLocaleString(lang === "pt" ? "pt-BR" : "en-US");
+  }
+
+  function renderRanking() {
+    if (!rankTabs || !rankBoard) return;
+    var keys = ["kills", "mobs", "arena"];
+    rankTabs.innerHTML = "";
+    keys.forEach(function (key) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "rank-tab" + (rankBoardKey === key ? " is-active" : "");
+      btn.setAttribute("aria-pressed", rankBoardKey === key ? "true" : "false");
+      btn.textContent = t("ranking.tab." + key);
+      btn.addEventListener("click", function () {
+        rankBoardKey = key;
+        renderRanking();
+      });
+      rankTabs.appendChild(btn);
+    });
+
+    var rows = (CONTENT.ranking && CONTENT.ranking[rankBoardKey]) || [];
+    var isArena = rankBoardKey === "arena";
+    var html =
+      '<div class="rank-row rank-row--head">' +
+        '<span class="rank-row__num">#</span>' +
+        '<span class="rank-row__player">' + t("ranking.col.player") + "</span>" +
+        '<span class="rank-row__class">' + t("ranking.col.class") + "</span>" +
+        '<span class="rank-row__value">' + t("ranking.stat." + rankBoardKey) + "</span>" +
+      "</div>";
+
+    var p = loadProfile();
+    if (p && findClass(p.classId)) {
+      var pc = loc(findClass(p.classId));
+      html +=
+        '<div class="rank-row rank-row--you">' +
+          '<span class="rank-row__num">—</span>' +
+          '<span class="rank-row__player">' + esc(p.name) + ' <em class="rank-row__tag">' + t("ranking.you") + "</em></span>" +
+          '<span class="rank-row__class"><i class="rank-dot rank-dot--' + findClass(p.classId).tone + '"></i>' + pc.name + "</span>" +
+          '<span class="rank-row__value">—</span>' +
+        "</div>";
+    }
+
+    html += rows.map(function (row, i) {
+      var item = findClass(row.classId);
+      var c = item ? loc(item) : { name: "" };
+      var value = isArena
+        ? rankNum(row.value) + ' <em class="rank-row__record">' + row.wins + "W / " + row.losses + "L</em>"
+        : rankNum(row.value);
+      return '<div class="rank-row rank-row--' + (i + 1) + '">' +
+        '<span class="rank-row__num">' + (i + 1) + "</span>" +
+        '<span class="rank-row__player">' + esc(row.name) + "</span>" +
+        '<span class="rank-row__class"><i class="rank-dot rank-dot--' + (item ? item.tone : "moon") + '"></i>' + c.name + "</span>" +
+        '<span class="rank-row__value">' + value + "</span>" +
+        "</div>";
+    }).join("");
+
+    if (!p) {
+      html += '<p class="rank-board__hint">' + t("ranking.createProfileHint") + "</p>";
+    }
+    rankBoard.innerHTML = html;
+    registerReveals();
+  }
+
   /* ---------------- YOUTUBE ---------------- */
   var youtubeGrid = $("#youtubeGrid");
 
@@ -1591,6 +1660,7 @@
     renderArmory();
     renderShop();
     renderDroplist();
+    renderRanking();
     renderFeatures();
     renderMediaFilters();
     renderMedia();
