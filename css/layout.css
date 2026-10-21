@@ -1022,6 +1022,53 @@
   max-width: 1120px;
   margin-inline: auto;
 }
+/* ---------- shop tiers (Collector / Legendary / Epic / Elite) ---------- */
+.shop-tier { margin-bottom: clamp(2.2rem, 5vw, 3.4rem); }
+.shop-tier:last-child { margin-bottom: 0; }
+.shop-tier__label {
+  display: flex;
+  align-items: center;
+  gap: clamp(.9rem, 3vw, 1.6rem);
+  justify-content: center;
+  margin: 0 0 1.7rem;
+  font-family: var(--font-title);
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: .34em;
+  text-indent: .34em;
+  text-transform: uppercase;
+  color: #EFEDE4;
+}
+.shop-tier__label::before,
+.shop-tier__label::after {
+  content: "";
+  height: 1px;
+  flex: 0 0 clamp(44px, 13vw, 150px);
+  background: linear-gradient(90deg, transparent, rgba(245, 163, 74, .5));
+}
+.shop-tier__label::after {
+  background: linear-gradient(90deg, rgba(245, 163, 74, .5), transparent);
+}
+.shop-tier__label--collector { color: #D8D8CF; }
+.shop-tier__label--epic { color: #B9A2F8; }
+.shop-tier__label--elite { color: #4FD6EC; }
+/* the word "Legendary / Lendárias" shimmers laterally */
+.shop-tier__label--legendary { color: #F5A34A; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .shop-tier__label--legendary {
+    background-image: linear-gradient(100deg, #F5A34A 30%, #FFF6E0 47%, #FFFFFF 52%, #FFF6E0 57%, #F5A34A 74%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: tier-gleam 2.6s linear infinite;
+  }
+}
+@keyframes tier-gleam {
+  0% { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
 .shop-card { display: flex; flex-direction: column; cursor: pointer; }
 .shop-card, .shop-modal__art {
   --tone-a: rgba(17, 169, 196, .28);
@@ -1072,6 +1119,77 @@
   transition: transform .55s var(--ease-out);
 }
 .shop-card:hover .shop-card__img { transform: scale(1.05); }
+/* sheen: a light sweep traveling across the skin artwork */
+.shop-card__art--cover::before,
+.shop-modal__art--cover::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -70%;
+  width: 55%;
+  height: 160%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .18) 30%, rgba(255, 255, 255, .55) 50%, rgba(255, 255, 255, .18) 70%, transparent 100%);
+  transform: skewX(-16deg) translateX(0);
+  mix-blend-mode: screen;
+  animation: skin-sheen 4.4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes skin-sheen {
+  0% { transform: skewX(-16deg) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  58% { opacity: 1; }
+  72%, 100% { transform: skewX(-16deg) translateX(340%); opacity: 0; }
+}
+/* ---------- tier badge (Collector / Legendary / Epic / Elite) ---------- */
+.shop-card__tier {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  overflow: hidden;
+  font-family: var(--font-title);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-indent: .24em;
+  text-transform: uppercase;
+  padding: .5em 1.05em;
+  background: rgba(4, 16, 26, .8);
+  border: 1px solid var(--tier-c, rgba(216, 216, 207, .55));
+  color: var(--tier-c, #EFEDE4);
+  clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+  pointer-events: none;
+}
+.shop-card__tier--collector { --tier-c: #D8D8CF; }
+.shop-card__tier--epic { --tier-c: #B9A2F8; }
+.shop-card__tier--elite { --tier-c: #4FD6EC; }
+/* legendary: the word itself glows... */
+.shop-card__tier--legendary {
+  --tier-c: #F5A34A;
+  color: #FFD79A;
+  box-shadow: 0 0 16px rgba(245, 163, 74, .5);
+  animation: tier-word-glow 1.9s ease-in-out infinite;
+}
+@keyframes tier-word-glow {
+  0%, 100% { text-shadow: 0 0 5px rgba(245, 163, 74, .55); }
+  50% { text-shadow: 0 0 12px rgba(255, 215, 154, .95), 0 0 26px rgba(245, 163, 74, .75); }
+}
+/* ...and a shine sweeps laterally across every tier badge */
+.shop-card__tier::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%);
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  animation: tier-badge-sweep 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes tier-badge-sweep {
+  0% { background-position: 150% 0; }
+  55%, 100% { background-position: -150% 0; }
+}
 .shop-card__body { display: flex; flex-direction: column; gap: .4rem; padding: 1.15rem 1.25rem 1.3rem; flex: 1; }
 .shop-card__kind {
   font-family: var(--font-title);
@@ -1109,20 +1227,20 @@
   position: relative;
   overflow: hidden;
   font-family: var(--font-title);
-  font-size: .72rem;
+  font-size: .88rem;
   font-weight: 700;
   letter-spacing: .22em;
   text-indent: .22em;
   text-transform: uppercase;
   color: var(--abyss);
   background: linear-gradient(180deg, #FFD79A, var(--solar));
-  padding: .85em 2em;
+  padding: 1.05em 2.7em;
   clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
-  box-shadow: 0 0 12px rgba(245, 163, 74, .4);
-  animation: buy-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 16px rgba(245, 163, 74, .5);
+  animation: buy-pulse 1.6s ease-in-out infinite;
   transition: transform .3s var(--ease-out);
 }
-.shop-card:hover .shop-card__buy { transform: scale(1.07); }
+.shop-card:hover .shop-card__buy { transform: scale(1.12); }
 .shop-card__buy::after {
   content: "";
   position: absolute;
@@ -1132,7 +1250,7 @@
   height: 100%;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .6), transparent);
   transform: skewX(-20deg);
-  animation: buy-shimmer 3s ease-in-out infinite;
+  animation: buy-shimmer 1.7s ease-in-out infinite;
 }
 /* traveling glow around the skin card */
 .shop-card__ring {
@@ -1144,8 +1262,8 @@
   animation: ring-glow 3.2s ease-in-out infinite;
 }
 @keyframes buy-pulse {
-  0%, 100% { box-shadow: 0 0 10px rgba(245, 163, 74, .35); }
-  50% { box-shadow: 0 0 26px rgba(245, 163, 74, .9), 0 0 48px rgba(245, 163, 74, .4); }
+  0%, 100% { box-shadow: 0 0 12px rgba(245, 163, 74, .45); }
+  50% { box-shadow: 0 0 34px rgba(245, 163, 74, 1), 0 0 64px rgba(245, 163, 74, .6), inset 0 0 16px rgba(255, 255, 255, .4); }
 }
 @keyframes buy-shimmer {
   0% { left: -75%; }
@@ -1188,7 +1306,7 @@
 .shop-buyrow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1.6rem;
@@ -1200,10 +1318,10 @@
 .shop-buyrow .btn {
   position: relative;
   overflow: hidden;
-  font-size: .78rem;
-  padding: .9em 2.2em;
+  font-size: .9rem;
+  padding: 1.05em 2.6em;
   letter-spacing: .2em;
-  animation: buy-pulse 2.4s ease-in-out infinite;
+  animation: buy-pulse 1.6s ease-in-out infinite;
 }
 .shop-buyrow .btn::after {
   content: "";
@@ -1214,7 +1332,7 @@
   height: 100%;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .55), transparent);
   transform: skewX(-20deg);
-  animation: buy-shimmer 3s ease-in-out infinite;
+  animation: buy-shimmer 1.7s ease-in-out infinite;
 }
 .modal-actions { margin-top: 1.5rem; }
 
@@ -1404,9 +1522,15 @@
   .shop-card__buy,
   .shop-buyrow .btn,
   .shop-card__ring,
+  .shop-card__tier,
+  .shop-card__tier::after,
+  .shop-tier__label--legendary,
   .yt-card__play-ring { animation: none; }
   .shop-card__buy::after,
   .shop-buyrow .btn::after { display: none; }
+  .shop-card__art--cover::before,
+  .shop-modal__art--cover::before { display: none; }
+  body::after { animation: none; }
   .cookie-banner { transition: none; }
 }
 

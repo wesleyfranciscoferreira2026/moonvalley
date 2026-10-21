@@ -848,11 +848,13 @@ window.MV_CONTENT = {
      price: number in Moon Shards (whole numbers), or set
             currency: "BRL" to price the item in Reais
             (price: 249.9 + currency: "BRL" -> R$ 249,90)
+     tier: collector | legendary | epic | elite (shop grouping)
      ========================================================== */
   shop: [
     {
       id: "skin-ashen-bride",
       kind: "skin",
+      tier: "epic",
       tone: "blood",
       sigil: "blade",
       price: 1200,
@@ -868,6 +870,7 @@ window.MV_CONTENT = {
     {
       id: "skin-ironclad",
       kind: "skin",
+      tier: "elite",
       tone: "iron",
       sigil: "gun",
       price: 950,
@@ -883,6 +886,7 @@ window.MV_CONTENT = {
     {
       id: "skin-starborn",
       kind: "skin",
+      tier: "legendary",
       tone: "arcane",
       sigil: "arcane",
       art: "assets/shop/skin-starborn.jpg",
@@ -900,6 +904,7 @@ window.MV_CONTENT = {
     {
       id: "skin-moonprowler",
       kind: "skin",
+      tier: "epic",
       tone: "moon",
       sigil: "bow",
       price: 950,
@@ -915,6 +920,7 @@ window.MV_CONTENT = {
     {
       id: "bundle-founders",
       kind: "bundle",
+      tier: "collector",
       tone: "gold",
       sigil: "star",
       price: 2900,
@@ -930,6 +936,7 @@ window.MV_CONTENT = {
     {
       id: "mount-frostvale",
       kind: "item",
+      tier: "elite",
       tone: "ice",
       sigil: "banner",
       price: 1500,

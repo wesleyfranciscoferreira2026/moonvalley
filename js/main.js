@@ -872,6 +872,14 @@
     return "<strong>" + item.price + "</strong> " + t("shop.currency");
   }
 
+  /* Compact price text — used inside the buy button (in place of "Buy"). */
+  function shopPriceText(item) {
+    if (item.currency === "BRL") {
+      return item.price.toLocaleString(lang === "pt" ? "pt-BR" : "en-US", { style: "currency", currency: "BRL" });
+    }
+    return String(item.price);
+  }
+
   function openShopPending() {
     modalBody.innerHTML =
       '<h3 class="modal-title" id="modalTitle">' + t("shop.pendingTitle") + "</h3>" +
@@ -884,51 +892,76 @@
 
   function openShopItem(item) {
     var c = loc(item);
+    var tier = item.tier || "collector";
     openModal(
       (item.art
         ? '<div class="shop-modal__art shop-modal__art--' + item.tone + ' shop-modal__art--cover"><img src="' + item.art + '" alt=""></div>'
         : '<div class="shop-modal__art shop-modal__art--' + item.tone + '" aria-hidden="true">' + shopSigil(item) + "</div>") +
+      '<span class="shop-card__tier shop-card__tier--' + tier + '" style="position:static;display:inline-block;margin:0 .6rem .7rem 0">' + t("shop.tier." + tier) + "</span>" +
       '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + t("shop.kind." + item.kind) + "</span>" +
       '<h3 class="modal-title" id="modalTitle">' + c.name + "</h3>" +
       '<div class="modal-prose"><p>' + c.text + "</p></div>" +
       '<div class="shop-buyrow">' +
-        '<span class="shop-buyrow__price">' + shopPrice(item) + "</span>" +
-        '<button class="btn btn--primary" type="button" data-shop-buy>' + t("shop.buy") + "</button>" +
+        '<button class="btn btn--primary" type="button" data-shop-buy>' + shopPrice(item) + "</button>" +
       "</div>"
     );
     var buyBtn = $("[data-shop-buy]", modalBody);
     if (buyBtn) buyBtn.addEventListener("click", openShopPending);
   }
 
+  function buildShopCard(item) {
+    var c = loc(item);
+    var tier = item.tier || "collector";
+    var tierBadge = '<span class="shop-card__tier shop-card__tier--' + tier + '">' + t("shop.tier." + tier) + "</span>";
+    var card = document.createElement("article");
+    card.className = "frame shop-card shop-card--" + item.tone + " reveal";
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", c.name);
+    card.innerHTML = GEMS +
+      '<span class="shop-card__ring" aria-hidden="true"></span>' +
+      (item.art
+        ? '<div class="shop-card__art shop-card__art--cover" aria-hidden="true">' + tierBadge + '<img class="shop-card__img" src="' + item.art + '" alt="" loading="lazy"></div>'
+        : '<div class="shop-card__art" aria-hidden="true">' + tierBadge + '<span class="shop-card__sigil">' + shopSigil(item) + "</span></div>") +
+      '<div class="shop-card__body">' +
+        '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
+        '<h3 class="shop-card__name">' + c.name + "</h3>" +
+        '<div class="shop-card__foot">' +
+          '<span class="shop-card__price">' + shopPrice(item) + "</span>" +
+          '<span class="shop-card__buy">' + shopPriceText(item) + "</span>" +
+        "</div>" +
+      "</div>";
+    function open() { openShopItem(item); }
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+    });
+    return card;
+  }
+
   function renderShop() {
     if (!shopGrid) return;
     shopGrid.innerHTML = "";
-    CONTENT.shop.forEach(function (item) {
-      var c = loc(item);
-      var card = document.createElement("article");
-      card.className = "frame shop-card shop-card--" + item.tone + " reveal";
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("role", "button");
-      card.setAttribute("aria-label", c.name);
-      card.innerHTML = GEMS +
-        '<span class="shop-card__ring" aria-hidden="true"></span>' +
-        (item.art
-          ? '<div class="shop-card__art shop-card__art--cover" aria-hidden="true"><img class="shop-card__img" src="' + item.art + '" alt="" loading="lazy"></div>'
-          : '<div class="shop-card__art" aria-hidden="true"><span class="shop-card__sigil">' + shopSigil(item) + "</span></div>") +
-        '<div class="shop-card__body">' +
-          '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
-          '<h3 class="shop-card__name">' + c.name + "</h3>" +
-          '<div class="shop-card__foot">' +
-            '<span class="shop-card__price">' + shopPrice(item) + "</span>" +
-            '<span class="shop-card__buy">' + t("shop.buy") + "</span>" +
-          "</div>" +
-        "</div>";
-      function open() { openShopItem(item); }
-      card.addEventListener("click", open);
-      card.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
-      });
-      shopGrid.appendChild(card);
+    /* items grouped by tier, in the order below */
+    [
+      { tier: "collector", label: t("shop.tierGroup.collector") },
+      { tier: "legendary", label: t("shop.tierGroup.legendary") },
+      { tier: "epic", label: t("shop.tierGroup.epic") },
+      { tier: "elite", label: t("shop.tierGroup.elite") }
+    ].forEach(function (group) {
+      var items = CONTENT.shop.filter(function (item) { return (item.tier || "collector") === group.tier; });
+      if (!items.length) return;
+      var sec = document.createElement("div");
+      sec.className = "shop-tier";
+      var head = document.createElement("h3");
+      head.className = "shop-tier__label shop-tier__label--" + group.tier;
+      head.textContent = group.label;
+      var grid = document.createElement("div");
+      grid.className = "shop-grid";
+      sec.appendChild(head);
+      sec.appendChild(grid);
+      items.forEach(function (item) { grid.appendChild(buildShopCard(item)); });
+      shopGrid.appendChild(sec);
     });
     registerReveals();
   }
