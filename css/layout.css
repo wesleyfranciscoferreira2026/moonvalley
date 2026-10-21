@@ -1334,6 +1334,7 @@
    FOOTER APP BADGE
    ============================================================ */
 .footer-app { margin-top: 1.2rem; }
+.footer-app__badges { display: flex; gap: .6rem; flex-wrap: wrap; }
 .footer-app__label {
   font-family: var(--font-title);
   font-size: .62rem;

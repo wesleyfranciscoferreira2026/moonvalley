@@ -77,6 +77,7 @@ window.MV_CONFIG = {
   trailerUrl: "assets/videos/kaelith-1.mp4", // trailer (arquivo local ou YouTube/Vimeo)
   heroImage: "assets/hero-valley.jpg",       // imagem de fundo do topo (null = cena SVG)
   appStoreUrl: null,                          // link real da App Store (null = estado honesto)
+  playStoreUrl: null,                         // link real do Google Play (null = estado honesto)
   socials: [                                  // Instagram/Facebook/YouTube/TikTok já listados
     { key: "instagram", label: "Instagram", url: null }, // cole o URL real para ativar
   ]
@@ -84,7 +85,7 @@ window.MV_CONFIG = {
 ```
 
 - `socials`: YouTube, Instagram, Facebook e TikTok já aparecem nos rodapés comunitários; enquanto `url: null`, o botão abre o aviso honesto de "em breve".
-- `appStoreUrl`: o badge da App Store fica no rodapé (`assets/store/app-store-badge.png`); com `url: null`, o clique abre o aviso de app em desenvolvimento.
+- `appStoreUrl` / `playStoreUrl`: os badges das lojas ficam no rodapé (`assets/store/`); com `url: null`, o clique abre o aviso de app em desenvolvimento.
 - `youtube` (em `MV_CONTENT`): vídeos do canal — ao definir `url` (link real do YouTube), o card vira link e redireciona para o vídeo; sem URL, mostra "Em breve" (a miniatura é derivada automaticamente do link quando definido).
 
 - `trailerUrl` aceita links do YouTube/Vimeo **ou** arquivos de vídeo locais (`.mp4`, `.webm`, `.ogg` — player nativo com `controls`).

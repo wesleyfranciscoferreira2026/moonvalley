@@ -107,9 +107,9 @@ window.MV_I18N = {
     "shop.pendingNote": "The store is a preview — purchases are not active yet. Join the official Discord to be notified when the Moon Merchant opens its doors.",
     "shop.joinDiscord": "Join Discord",
 
-    "nav.youtube": "YouTube",
+    "nav.youtube": "Videos",
     "youtube.eyebrow": "From the Channel",
-    "youtube.title": "YouTube",
+    "youtube.title": "Videos",
     "youtube.lead": "Trailers, chronicles and dev diaries in motion — click a video to watch it on YouTube.",
     "youtube.watch": "Watch on YouTube",
     "youtube.soon": "Coming soon",
@@ -262,9 +262,9 @@ window.MV_I18N = {
     "shop.pendingNote": "A loja é uma prévia — as compras ainda não estão ativas. Entre no Discord oficial para ser avisado quando o Mercador da Lua abrir as portas.",
     "shop.joinDiscord": "Entrar no Discord",
 
-    "nav.youtube": "YouTube",
+    "nav.youtube": "Vídeos",
     "youtube.eyebrow": "Do Canal",
-    "youtube.title": "YouTube",
+    "youtube.title": "Vídeos",
     "youtube.lead": "Trailers, crônicas e diários de desenvolvimento em movimento — clique em um vídeo para assisti-lo no YouTube.",
     "youtube.watch": "Assistir no YouTube",
     "youtube.soon": "Em breve",

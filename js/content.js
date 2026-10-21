@@ -19,6 +19,8 @@ window.MV_CONFIG = {
   /* Real App Store link of the game. While null, the badge shows
      an honest "app in development" state. */
   appStoreUrl: null,
+  /* Real Google Play link of the game (same honest state). */
+  playStoreUrl: null,
   socials: [
     /* Add real profile URLs to enable the links. While url is null,
        the button honestly shows a "coming soon" state. */

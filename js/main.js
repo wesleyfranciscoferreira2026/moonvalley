@@ -986,20 +986,21 @@
     });
   }
 
-  /* ---------------- APP STORE ---------------- */
-  var appStoreBadge = $("#appStoreBadge");
-  if (appStoreBadge) {
-    if (CONFIG.appStoreUrl) {
-      appStoreBadge.href = CONFIG.appStoreUrl;
-      appStoreBadge.target = "_blank";
-      appStoreBadge.rel = "noopener noreferrer";
+  /* ---------------- STORE BADGES ---------------- */
+  [{ sel: "#appStoreBadge", url: CONFIG.appStoreUrl }, { sel: "#googlePlayBadge", url: CONFIG.playStoreUrl }].forEach(function (store) {
+    var badge = $(store.sel);
+    if (!badge) return;
+    if (store.url) {
+      badge.href = store.url;
+      badge.target = "_blank";
+      badge.rel = "noopener noreferrer";
     } else {
-      appStoreBadge.addEventListener("click", function (e) {
+      badge.addEventListener("click", function (e) {
         e.preventDefault();
         openPending();
       });
     }
-  }
+  });
 
   /* ---------------- SOCIAL / DISCORD ---------------- */
   function socialButton(key, label, url) {
