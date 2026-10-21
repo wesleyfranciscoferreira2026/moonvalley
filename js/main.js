@@ -102,6 +102,23 @@
       el.style.setProperty("--reveal-delay", (i % 4) * 0.08 + "s");
       revealObserver.observe(el);
     });
+    /* safety net: if the observer never fired (page loaded in a background
+       tab, odd visibility states), reveal anything already inside the
+       viewport as soon as the page becomes visible again */
+    var sweepReveals = function () {
+      revealables.forEach(function (el) {
+        if (el.classList.contains("is-in")) return;
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.94 && rect.bottom > 0) {
+          el.classList.add("is-in");
+          revealObserver.unobserve(el);
+        }
+      });
+    };
+    window.addEventListener("load", sweepReveals);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) sweepReveals();
+    });
   }
 
   /* ---------------- hero photo backdrop ---------------- */
@@ -616,7 +633,8 @@
   /* ---------------- PLAYER PROFILE ---------------- */
   var profileSlot = $("#profileSlot");
   var PROFILE_KEY = "mv-profile";
-  var profileDraft = { name: "", classId: null };
+  var OWNED_KEY = "mv-owned-skins";
+  var profileDraft = { name: "", classId: null, avatar: null, level: "", title: "", guild: "", server: "" };
   var profileEditing = false;
 
   function esc(s) {
@@ -645,6 +663,63 @@
   }
   var GEMS = '<span class="gem gem--tl"></span><span class="gem gem--tr"></span><span class="gem gem--bl"></span><span class="gem gem--br"></span>';
 
+  /* ---------------- owned skins (local collection) ---------------- */
+  function findShopItem(id) {
+    for (var i = 0; i < CONTENT.shop.length; i++) if (CONTENT.shop[i].id === id) return CONTENT.shop[i];
+    return null;
+  }
+  function loadOwned() {
+    try {
+      var raw = localStorage.getItem(OWNED_KEY);
+      var ids = raw ? JSON.parse(raw) : [];
+      return Array.isArray(ids) ? ids.filter(function (id) { return !!findShopItem(id); }) : [];
+    } catch (err) { return []; }
+  }
+  function storeOwned(ids) {
+    try { localStorage.setItem(OWNED_KEY, JSON.stringify(ids)); } catch (err) { /* private mode */ }
+  }
+  function isOwned(id) { return loadOwned().indexOf(id) !== -1; }
+  /* returns true when the item was added, false when removed */
+  function toggleOwned(id) {
+    var ids = loadOwned();
+    var at = ids.indexOf(id);
+    if (at === -1) ids.push(id); else ids.splice(at, 1);
+    storeOwned(ids);
+    return at === -1;
+  }
+
+  /* ---------------- avatar helpers ---------------- */
+  /* downscale any (square-cropped) photo to a256px JPEG data URL */
+  function processAvatarFile(file, cb) {
+    if (!file || !/^image\/(png|jpeg|webp)$/.test(file.type) || file.size > 5 * 1024 * 1024) { cb(null); return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        var S = 256;
+        var canvas = document.createElement("canvas");
+        canvas.width = S;
+        canvas.height = S;
+        var ctx = canvas.getContext("2d");
+        var side = Math.min(img.width, img.height);
+        ctx.drawImage(img, (img.width - side) / 2, (img.height - side) / 2, side, side, 0, 0, S, S);
+        try { cb(canvas.toDataURL("image/jpeg", 0.82)); } catch (err) { cb(null); }
+      };
+      img.onerror = function () { cb(null); };
+      img.src = reader.result;
+    };
+    reader.onerror = function () { cb(null); };
+    reader.readAsDataURL(file);
+  }
+  /* crest (fallback) + optional photo, inside .profile-avatar */
+  function avatarMarkup(avatar, classId) {
+    var item = findClass(classId);
+    var tone = item ? item.tone : "moon";
+    var sigil = (item && CLASS_SIGILS[item.sigil]) || CLASS_SIGILS.arcane;
+    return '<span class="profile-card__crest profile-card__crest--' + tone + '" aria-hidden="true">' + sigil + "</span>" +
+      (avatar ? '<img class="profile-avatar__img" src="' + avatar + '" alt="">' : "");
+  }
+
   function updateProfileFormState() {
     var submit = $("#profileSubmit");
     if (!submit) return;
@@ -659,10 +734,40 @@
     profileSlot.innerHTML =
       '<div class="profile-card profile-card--form frame reveal">' + GEMS +
       '<form class="profile-form" id="profileForm" novalidate>' +
+        '<div class="profile-form__avatar-row">' +
+          '<div class="profile-avatar profile-avatar--edit' + (profileDraft.avatar ? " profile-avatar--photo" : "") + '" id="profileAvatarPreview">' +
+            avatarMarkup(profileDraft.avatar, profileDraft.classId) +
+          "</div>" +
+          '<div class="profile-form__avatar-btns">' +
+            '<label class="btn btn--ghost btn--sm profile-form__avatar-label" for="profileAvatarInput">' + t("profile.avatarChoose") + "</label>" +
+            '<input type="file" id="profileAvatarInput" accept="image/png,image/jpeg,image/webp" hidden>' +
+            '<button class="profile-card__reset" type="button" data-avatar-remove' + (profileDraft.avatar ? "" : " hidden") + ">" + t("profile.avatarRemove") + "</button>" +
+            '<p class="profile-form__hint">' + t("profile.avatarHint") + "</p>" +
+            '<p class="profile-form__error" id="profileAvatarError" role="alert" hidden>' + t("profile.avatarError") + "</p>" +
+          "</div>" +
+        "</div>" +
         '<div class="profile-form__field">' +
           '<label class="profile-form__label" for="profileName">' + t("profile.nameLabel") + "</label>" +
           '<input class="profile-form__input" id="profileName" type="text" maxlength="18" autocomplete="off" placeholder="' + t("profile.namePlaceholder") + '" value="' + esc(profileDraft.name) + '">' +
           '<p class="profile-form__error" id="profileNameError" role="alert" hidden>' + t("profile.nameError") + "</p>" +
+        "</div>" +
+        '<div class="profile-form__grid">' +
+          '<div class="profile-form__field">' +
+            '<label class="profile-form__label" for="profileLevel">' + t("profile.levelLabel") + "</label>" +
+            '<input class="profile-form__input" id="profileLevel" type="number" min="1" max="999" inputmode="numeric" placeholder="1" value="' + esc(profileDraft.level) + '">' +
+          "</div>" +
+          '<div class="profile-form__field">' +
+            '<label class="profile-form__label" for="profileTitle">' + t("profile.titleLabel") + "</label>" +
+            '<input class="profile-form__input" id="profileTitle" type="text" maxlength="26" autocomplete="off" placeholder="' + t("profile.titlePlaceholder") + '" value="' + esc(profileDraft.title) + '">' +
+          "</div>" +
+          '<div class="profile-form__field">' +
+            '<label class="profile-form__label" for="profileGuild">' + t("profile.guildLabel") + "</label>" +
+            '<input class="profile-form__input" id="profileGuild" type="text" maxlength="24" autocomplete="off" value="' + esc(profileDraft.guild) + '">' +
+          "</div>" +
+          '<div class="profile-form__field">' +
+            '<label class="profile-form__label" for="profileServer">' + t("profile.serverLabel") + "</label>" +
+            '<input class="profile-form__input" id="profileServer" type="text" maxlength="24" autocomplete="off" value="' + esc(profileDraft.server) + '">' +
+          "</div>" +
         "</div>" +
         '<fieldset class="profile-form__fieldset">' +
           "<legend>" + t("profile.chooseClass") + "</legend>" +
@@ -697,6 +802,11 @@
           btn.classList.add("is-active");
           btn.setAttribute("aria-pressed", "true");
         }
+        var preview = $("#profileAvatarPreview");
+        if (preview) {
+          preview.innerHTML = avatarMarkup(profileDraft.avatar, profileDraft.classId);
+          preview.classList.toggle("profile-avatar--photo", !!profileDraft.avatar);
+        }
         updateProfileFormState();
       });
       picker.appendChild(btn);
@@ -706,14 +816,65 @@
       profileDraft.name = e.target.value;
       updateProfileFormState();
     });
+    [["#profileLevel", "level"], ["#profileTitle", "title"], ["#profileGuild", "guild"], ["#profileServer", "server"]]
+      .forEach(function (pair) {
+        var field = $(pair[0]);
+        if (field) field.addEventListener("input", function (e) { profileDraft[pair[1]] = e.target.value; });
+      });
+
+    /* avatar upload */
+    var avatarInput = $("#profileAvatarInput");
+    var avatarError = $("#profileAvatarError");
+    if (avatarInput) {
+      avatarInput.addEventListener("change", function (e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+        processAvatarFile(file, function (dataUrl) {
+          if (!dataUrl) {
+            avatarError.hidden = false;
+            avatarInput.value = "";
+            return;
+          }
+          avatarError.hidden = true;
+          profileDraft.avatar = dataUrl;
+          var preview = $("#profileAvatarPreview");
+          if (preview) {
+            preview.innerHTML = avatarMarkup(dataUrl, profileDraft.classId);
+            preview.classList.add("profile-avatar--photo");
+          }
+          var rm = $("[data-avatar-remove]", profileSlot);
+          if (rm) rm.hidden = false;
+          avatarInput.value = "";
+        });
+      });
+    }
+    var avatarRemoveBtn = $("[data-avatar-remove]", profileSlot);
+    if (avatarRemoveBtn) {
+      avatarRemoveBtn.addEventListener("click", function () {
+        profileDraft.avatar = null;
+        var preview = $("#profileAvatarPreview");
+        if (preview) {
+          preview.innerHTML = avatarMarkup(null, profileDraft.classId);
+          preview.classList.remove("profile-avatar--photo");
+        }
+        avatarRemoveBtn.hidden = true;
+      });
+    }
+
     $("#profileForm").addEventListener("submit", function (e) {
       e.preventDefault();
       var name = profileDraft.name.trim();
       if (name.length < 3 || !profileDraft.classId) return;
       var prev = loadProfile();
+      var lvl = parseInt(profileDraft.level, 10);
       storeProfile({
         name: name,
         classId: profileDraft.classId,
+        avatar: profileDraft.avatar || null,
+        level: lvl >= 1 && lvl <= 999 ? lvl : null,
+        title: (profileDraft.title || "").trim().slice(0, 26),
+        guild: (profileDraft.guild || "").trim().slice(0, 24),
+        server: (profileDraft.server || "").trim().slice(0, 24),
         since: profileEditing && prev && prev.since ? prev.since : new Date().toISOString()
       });
       profileEditing = false;
@@ -723,29 +884,74 @@
     if (cancelBtn) {
       cancelBtn.addEventListener("click", function () {
         profileEditing = false;
-        var p = loadProfile();
-        profileDraft = p ? { name: p.name, classId: p.classId } : { name: "", classId: null };
+        profileDraft = draftFrom(loadProfile());
         renderProfile();
       });
     }
     updateProfileFormState();
   }
 
+  /* profile -> form draft (null profile = empty draft) */
+  function draftFrom(p) {
+    return p
+      ? {
+          name: p.name,
+          classId: p.classId,
+          avatar: p.avatar || null,
+          level: p.level || "",
+          title: p.title || "",
+          guild: p.guild || "",
+          server: p.server || ""
+        }
+      : { name: "", classId: null, avatar: null, level: "", title: "", guild: "", server: "" };
+  }
+
+  function collectionMarkup() {
+    var items = loadOwned().map(findShopItem).filter(Boolean);
+    var list = items.length
+      ? '<ul class="profile-collection__list">' + items.map(function (item) {
+          var tier = item.tier || "collector";
+          return '<li class="owned-card owned-card--' + item.tone + (item.art ? " owned-card--cover" : "") + '"' +
+            (item.art ? ' style="background-image:url(' + item.art + ')"' : "") + ">" +
+            '<span class="owned-card__tier owned-card__tier--' + tier + '">' + t("shop.tier." + tier) + "</span>" +
+            '<span class="owned-card__name">' + esc(loc(item).name) + "</span>" +
+            '<button class="owned-card__remove" type="button" data-own-remove="' + item.id + '" aria-label="' + t("profile.removeItem") + '" title="' + t("profile.removeItem") + '"><span aria-hidden="true">×</span></button>' +
+            "</li>";
+        }).join("") + "</ul>"
+      : '<p class="profile-collection__empty">' + t("profile.collectionEmpty") + "</p>";
+    return '<div class="profile-collection frame reveal">' +
+      '<h4 class="profile-collection__title">' + t("profile.collection") +
+      ' <span class="profile-collection__count">' + items.length + "</span></h4>" +
+      list +
+      '<p class="profile-collection__note">' + t("profile.collectionNote") + "</p>" +
+      "</div>";
+  }
+
   function renderProfileCard(p) {
     var item = findClass(p.classId);
     var c = loc(item);
+    var stats = "";
+    function stat(label, value) {
+      if (!value) return "";
+      return '<div class="profile-stat"><dt>' + label + "</dt><dd>" + esc(value) + "</dd></div>";
+    }
+    stats += stat(t("profile.levelLabel"), p.level ? String(p.level) : "");
+    stats += stat(t("profile.titleLabel"), p.title || "");
+    stats += stat(t("profile.guildLabel"), p.guild || "");
+    stats += stat(t("profile.serverLabel"), p.server || "");
+    stats += '<div class="profile-stat"><dt>' + t("profile.since") + "</dt><dd>" + profileDate(p.since) + "</dd></div>";
     profileSlot.innerHTML =
       '<div class="profile-card profile-card--filled is-filled frame reveal">' + GEMS +
-      '<div class="profile-card__crest profile-card__crest--' + item.tone + '" aria-hidden="true">' +
-        (CLASS_SIGILS[item.sigil] || CLASS_SIGILS.arcane) +
+      '<div class="profile-avatar' + (p.avatar ? " profile-avatar--photo" : "") + '">' +
+        avatarMarkup(p.avatar, p.classId) +
       "</div>" +
       '<div class="profile-card__body">' +
         '<p class="profile-card__eyebrow">' + c.role + "</p>" +
         '<h3 class="profile-card__name">' + esc(p.name) + "</h3>" +
         '<div class="profile-card__meta">' +
           '<span class="profile-card__class">' + c.name + "</span>" +
-          '<span class="profile-card__since">' + t("profile.since") + " " + profileDate(p.since) + "</span>" +
         "</div>" +
+        '<dl class="profile-card__stats">' + stats + "</dl>" +
         '<p class="profile-card__note">' + t("profile.localNote") + "</p>" +
         '<div class="profile-card__actions">' +
           '<button class="btn btn--ghost btn--sm" type="button" data-profile-view>' + t("profile.viewClass") + "</button>" +
@@ -753,8 +959,16 @@
           '<button class="profile-card__reset" type="button" data-profile-reset>' + t("profile.reset") + "</button>" +
         "</div>" +
       "</div>" +
-      "</div>";
+      "</div>" +
+      collectionMarkup();
 
+    $all("[data-own-remove]", profileSlot).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        toggleOwned(btn.getAttribute("data-own-remove"));
+        renderProfile();
+        renderShop();
+      });
+    });
     $("[data-profile-view]", profileSlot).addEventListener("click", function () {
       for (var i = 0; i < CONTENT.classes.length; i++) {
         if (CONTENT.classes[i].id === p.classId) { activeClass = i; break; }
@@ -764,7 +978,7 @@
       if (section) section.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
     });
     $("[data-profile-edit]", profileSlot).addEventListener("click", function () {
-      profileDraft = { name: p.name, classId: p.classId };
+      profileDraft = draftFrom(p);
       profileEditing = true;
       renderProfile();
       var input = $("#profileName");
@@ -774,7 +988,7 @@
       if (!window.confirm(t("profile.reset") + "?")) return;
       try { localStorage.removeItem(PROFILE_KEY); } catch (err) { /* private mode */ }
       profileEditing = false;
-      profileDraft = { name: "", classId: null };
+      profileDraft = draftFrom(null);
       renderProfile();
     });
   }
@@ -903,10 +1117,21 @@
       '<div class="modal-prose"><p>' + c.text + "</p></div>" +
       '<div class="shop-buyrow">' +
         '<button class="btn btn--primary" type="button" data-shop-buy>' + shopPrice(item) + "</button>" +
-      "</div>"
+      "</div>" +
+      '<button class="btn btn--ghost shop-modal__collect' + (isOwned(item.id) ? " is-owned" : "") + '" type="button" data-shop-collect>' +
+        t(isOwned(item.id) ? "shop.removeFromCollection" : "shop.addToCollection") +
+      "</button>"
     );
     var buyBtn = $("[data-shop-buy]", modalBody);
     if (buyBtn) buyBtn.addEventListener("click", openShopPending);
+    var collectBtn = $("[data-shop-collect]", modalBody);
+    if (collectBtn) collectBtn.addEventListener("click", function () {
+      var added = toggleOwned(item.id);
+      collectBtn.textContent = t(added ? "shop.removeFromCollection" : "shop.addToCollection");
+      collectBtn.classList.toggle("is-owned", added);
+      renderShop();
+      renderProfile(); /* keep the collection panel in sync */
+    });
   }
 
   function buildShopCard(item) {
@@ -920,6 +1145,7 @@
     card.setAttribute("aria-label", c.name);
     card.innerHTML = GEMS +
       '<span class="shop-card__ring" aria-hidden="true"></span>' +
+      (isOwned(item.id) ? '<span class="shop-card__owned">✓ ' + t("shop.ownedChip") + "</span>" : "") +
       (item.art
         ? '<div class="shop-card__art shop-card__art--cover" aria-hidden="true">' + tierBadge + '<img class="shop-card__img" src="' + item.art + '" alt="" loading="lazy"></div>'
         : '<div class="shop-card__art" aria-hidden="true">' + tierBadge + '<span class="shop-card__sigil">' + shopSigil(item) + "</span></div>") +

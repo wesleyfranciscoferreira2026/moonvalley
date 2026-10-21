@@ -104,7 +104,8 @@ Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:
 - **`books`** — livros da lore (`tone`: cor da capa; `icon`: `star`/`beast`/`moon`/`flame`); capa desenhada em CSS + modal com o texto.
 - **`armory`** — arsenal (`kind`: `weapon`/`armor`/`item` com filtros; `rarity`: `common`/`rare`/`epic`/`legendary`; `icon` de sigilo; `stats` por item).
 - **`shop`** — loja de skins e itens agrupada por tier (`tier`: `collector`/`legendary`/`epic`/`elite`, com badge e título de grupo; a palavra "Legendary/Lendárias" brilha); `kind`: `skin`/`bundle`/`item`; `tone`; `sigil`; `art` opcional com a arte real da skin; `price` em Fragmentos de Lua, ou `price` + `currency: "BRL"` para preços em Reais, ex.: `249.9` → R$ 249,90 (o preço também aparece no botão de compra, no lugar de "Buy"). O botão Comprar abre um estado honesto de checkout pendente com link real do Discord.
-- **Perfil do jogador** — criado/gerenciado na seção #profile; fica no `localStorage` do navegador (`mv-profile`), sem servidor. Textos em `js/i18n.js` (`profile.*`).
+- **Perfil do jogador** — criado/gerenciado na seção #profile; fica no `localStorage` do navegador (`mv-profile`: nome, classe, avatar em data URL, nível, título, guilda, servidor, desde), sem servidor. Textos em `js/i18n.js` (`profile.*`).
+- **Coleção de skins** — itens "adicionados à coleção" na loja ficam no `localStorage` (`mv-owned-skins`, array de ids de `shop`), aparecem no card do perfil e no chip "Sua" nos cards da loja. Textos em `js/i18n.js` (`shop.addToCollection`, `shop.ownedChip`, `profile.collection*`).
 - **`features`** — sistemas de gameplay (`icon`: `sword`, `shield`, `compass`, `beast`, `star`, `banner`).
 - **`media`** — `kind`: `trailer`, `video` (abrem modal), `screenshot`, `art` (lightbox com navegação). `url` local (`.mp4`) abre com player nativo.
 - **`youtube`** — vídeos do canal; card vira link externo quando `url` tem o link do YouTube.

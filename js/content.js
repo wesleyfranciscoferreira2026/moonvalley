@@ -902,6 +902,42 @@ window.MV_CONTENT = {
       }
     },
     {
+      id: "skin-voidreign",
+      kind: "skin",
+      tier: "legendary",
+      tone: "arcane",
+      sigil: "blade",
+      art: "assets/shop/skin-voidreign.jpg",
+      price: 249.9,
+      currency: "BRL",
+      en: {
+        name: "Kaelith — Voidreign",
+        text: "Void-silk armor cut with crimson runestones. The storm behind her answers to the blade in her hand — and to nothing else."
+      },
+      pt: {
+        name: "Kaelith — Reinado do Vazio",
+        text: "Armadura de seda do vazio cortada por pedras rúnicas carmesim. A tempestade atrás dela responde à lâmina em sua mão — e a nada mais."
+      }
+    },
+    {
+      id: "skin-emberwing",
+      kind: "skin",
+      tier: "legendary",
+      tone: "gold",
+      sigil: "gun",
+      art: "assets/shop/skin-emberwing.jpg",
+      price: 249.9,
+      currency: "BRL",
+      en: {
+        name: "Theryon — Emberwing",
+        text: "Gilded scaleplate and wings of living flame. The arena itself lights his entrance — he has never needed an announcer."
+      },
+      pt: {
+        name: "Theryon — Asa Incandescente",
+        text: "Placas douradas de escamas e asas de chama viva. A própria arena ilumina sua entrada — ele nunca precisou de anunciante."
+      }
+    },
+    {
       id: "skin-moonprowler",
       kind: "skin",
       tier: "epic",
