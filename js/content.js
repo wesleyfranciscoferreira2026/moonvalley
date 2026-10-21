@@ -30,10 +30,10 @@ window.MV_CONFIG = {
        3. Project settings > Your apps > Web (</>) > copy the config
        4. Paste the values below and push — done. */
   firebase: {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    appId: ""
+    apiKey: "AIzaSyC-CnDKO703gpBK-_kfCAGiUVI-yPlVgSc",
+    authDomain: "moonvalleyonline-a0e5a.firebaseapp.com",
+    projectId: "moonvalleyonline-a0e5a",
+    appId: "1:927272271757:web:818658ea9d420d005847c4"
   },
   socials: [
     /* Add real profile URLs to enable the links. While url is null,

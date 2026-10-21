@@ -1739,7 +1739,8 @@
       "auth/invalid-credential": "auth.errWrongPass",
       "auth/wrong-password": "auth.errWrongPass",
       "auth/too-many-requests": "auth.errThrottle",
-      "auth/network-request-failed": "auth.errNetwork"
+      "auth/network-request-failed": "auth.errNetwork",
+      "auth/operation-not-allowed": "auth.errDisabled"
     };
     return t(map[code] || "auth.errGeneric");
   }
