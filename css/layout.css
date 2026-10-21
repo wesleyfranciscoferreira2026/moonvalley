@@ -1009,23 +1009,29 @@
 }
 .owned-card__tier {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 6px;
+  left: 6px;
   z-index: 1;
-  font-size: .54rem;
+  font-size: .46rem;
   font-weight: 700;
-  letter-spacing: .22em;
-  text-indent: .22em;
+  letter-spacing: .12em;
+  text-indent: .12em;
   text-transform: uppercase;
   color: var(--tier-c, #EFEDE4);
   background: #05121C;
   border: 1px solid var(--tier-c, rgba(216, 216, 207, .5));
-  padding: .35em .8em;
+  padding: .26em .58em;
 }
 .owned-card__tier--collector { --tier-c: #D8D8CF; }
 .owned-card__tier--epic { --tier-c: #B9A2F8; }
 .owned-card__tier--elite { --tier-c: #4FD6EC; }
-.owned-card__tier--legendary { --tier-c: #FFC46A; color: #FFE9BD; box-shadow: 0 0 12px rgba(255, 150, 60, .5); }
+.owned-card__tier--legendary {
+  --tier-c: #FFC46A;
+  background: #1B0F06;
+  color: #FFE9BD;
+  box-shadow: 0 0 10px rgba(255, 150, 60, .55), inset 0 0 6px rgba(245, 163, 74, .25);
+  animation: tier-word-glow 1.9s ease-in-out infinite;
+}
 .owned-card__remove {
   flex: 0 0 auto;
   width: 22px;
@@ -1812,6 +1818,7 @@
   .shop-card__ring,
   .shop-card__tier,
   .shop-card__tier::after,
+  .owned-card__tier,
   .shop-tier__label--legendary,
   .yt-card__play-ring { animation: none; }
   .shop-card__buy::after,
