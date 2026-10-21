@@ -883,6 +883,7 @@ window.MV_CONTENT = {
       kind: "skin",
       tone: "arcane",
       sigil: "arcane",
+      art: "assets/shop/skin-starborn.jpg",
       price: 1100,
       en: {
         name: "Nyfheris — Starborn",

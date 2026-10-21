@@ -876,7 +876,9 @@
   function openShopItem(item) {
     var c = loc(item);
     openModal(
-      '<div class="shop-modal__art shop-modal__art--' + item.tone + '" aria-hidden="true">' + shopSigil(item) + "</div>" +
+      (item.art
+        ? '<div class="shop-modal__art shop-modal__art--' + item.tone + ' shop-modal__art--cover"><img src="' + item.art + '" alt=""></div>'
+        : '<div class="shop-modal__art shop-modal__art--' + item.tone + '" aria-hidden="true">' + shopSigil(item) + "</div>") +
       '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + t("shop.kind." + item.kind) + "</span>" +
       '<h3 class="modal-title" id="modalTitle">' + c.name + "</h3>" +
       '<div class="modal-prose"><p>' + c.text + "</p></div>" +
@@ -901,7 +903,9 @@
       card.setAttribute("aria-label", c.name);
       card.innerHTML = GEMS +
         '<span class="shop-card__ring" aria-hidden="true"></span>' +
-        '<div class="shop-card__art" aria-hidden="true"><span class="shop-card__sigil">' + shopSigil(item) + "</span></div>" +
+        (item.art
+          ? '<div class="shop-card__art shop-card__art--cover" aria-hidden="true"><img class="shop-card__img" src="' + item.art + '" alt="" loading="lazy"></div>'
+          : '<div class="shop-card__art" aria-hidden="true"><span class="shop-card__sigil">' + shopSigil(item) + "</span></div>") +
         '<div class="shop-card__body">' +
           '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
           '<h3 class="shop-card__name">' + c.name + "</h3>" +
