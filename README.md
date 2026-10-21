@@ -94,6 +94,21 @@ window.MV_CONFIG = {
 - Ícones sociais disponíveis: `discord`, `whatsapp`, `x`, `youtube`, `instagram`, `reddit`.
   Para outro serviço, adicione o SVG em `MV_SOCIAL_ICONS`.
 
+## Login de verdade (Firebase — gratuito)
+
+O botão **Entrar / Criar Conta** no topo funciona em dois modos com a mesma interface (email + senha):
+
+- **Modo local (padrão)** — enquanto `MV_CONFIG.firebase` estiver vazio em `js/content.js`, as contas ficam só no navegador do visitante (hash SHA-256 no `localStorage`), com aviso honesto no modal.
+- **Modo nuvem (login real)** — para valer em qualquer aparelho, use o Firebase Authentication (Google, camada gratuita):
+
+  1. Acesse [console.firebase.google.com](https://console.firebase.google.com) e crie um projeto (não precisa de cartão).
+  2. No menu: **Build → Authentication → Get started → Email/Password → Enable**.
+  3. **Configurações do projeto → Seus apps → Web (`</>`)** — registre o app e copie a configuração.
+  4. Preencha em `js/content.js`, dentro de `MV_CONFIG.firebase`: `apiKey`, `authDomain`, `projectId`, `appId`.
+  5. Dê push — o login passa a ser real automaticamente (contas, senha e recuperação por email no servidor do Firebase). O modal muda o aviso para "Sua conta fica salva na nuvem".
+
+Enquanto o modo nuvem não estiver configurado, "Esqueci a senha" mostra um aviso honesto (recuperação por email só existe com Firebase).
+
 ## Como atualizar o conteúdo (RF-09)
 
 Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:

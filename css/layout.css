@@ -1741,6 +1741,20 @@
 .auth-form { display: grid; gap: .55rem; }
 .auth-form .profile-form__label { margin-top: .35rem; }
 .auth-submit { margin-top: .8rem; width: 100%; }
+.auth-forgot {
+  justify-self: start;
+  margin: -.1rem 0 .2rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: .74rem;
+  letter-spacing: .06em;
+  color: #9FE3F0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.auth-forgot:hover { color: var(--silver); }
 .auth-error { margin: .2rem 0 0; font-size: .8rem; letter-spacing: .04em; color: #E07856; }
 .auth-note { margin: 1.1rem 0 0; font-size: .72rem; line-height: 1.55; letter-spacing: .04em; color: var(--silver-dim); opacity: .8; }
 .toast {

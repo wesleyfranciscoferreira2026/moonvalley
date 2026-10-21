@@ -521,6 +521,11 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/content.js"></script>
+  <!-- Firebase compat SDK: real email/password login. Only used when
+       MV_CONFIG.firebase is filled in content.js — otherwise the site
+       keeps the honest local-account mode. -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -21,6 +21,20 @@ window.MV_CONFIG = {
   appStoreUrl: null,
   /* Real Google Play link of the game (same honest state). */
   playStoreUrl: null,
+  /* REAL cloud login (Firebase Authentication — free tier).
+     While these fields are empty, login/register works locally
+     in the browser (honest local mode). To enable the REAL login
+     (accounts valid on every device):
+       1. Create a free project at console.firebase.google.com
+       2. Build > Authentication > Get started > Email/Password > Enable
+       3. Project settings > Your apps > Web (</>) > copy the config
+       4. Paste the values below and push — done. */
+  firebase: {
+    apiKey: "",
+    authDomain: "",
+    projectId: "",
+    appId: ""
+  },
   socials: [
     /* Add real profile URLs to enable the links. While url is null,
        the button honestly shows a "coming soon" state. */

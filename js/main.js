@@ -1594,15 +1594,32 @@
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
-  /* ---------------- AUTH (local account — browser only) ----------------
-     Honest by design: no server exists for this site, so accounts are
-     stored in localStorage as SHA-256 hashes of "moonvalley:user:pass".
-     mv-users  = { username: { hash, since } }
-     mv-session = username string while "logged in" */
+  /* ---------------- AUTH (email + password) ----------------
+     Two modes sharing one UI:
+       - REAL login: Firebase Authentication (cloud, valid on every
+         device) — active when MV_CONFIG.firebase is filled in.
+       - Local fallback: accounts live in this browser only, stored
+         as SHA-256 hashes of "moonvalley:email:password" (the modal
+         honestly says so while cloud isn't configured).
+     Local shape: mv-users = { email: { username, hash, since } }
+                  mv-session = email while "logged in" */
   var AUTH_USERS = "mv-users";
   var AUTH_SESSION = "mv-session";
   var authNav = $("#authNav");
   var authMode = "login";
+  var authSeq = 0; /* stale-async guard: only the latest action may report */
+  var fbReady = false;
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  (function initFirebase() {
+    var cfg = CONFIG.firebase;
+    if (!cfg || !cfg.apiKey || !window.firebase) return;
+    try {
+      window.firebase.initializeApp(cfg);
+      fbReady = true;
+      window.firebase.auth().onAuthStateChanged(function () { renderAuthNav(); });
+    } catch (e) { fbReady = false; }
+  })();
 
   function loadUsers() {
     try { return JSON.parse(localStorage.getItem(AUTH_USERS) || "{}"); } catch (e) { return {}; }
@@ -1610,8 +1627,8 @@
   function getSession() {
     try { return localStorage.getItem(AUTH_SESSION) || ""; } catch (e) { return ""; }
   }
-  function hashPass(user, pass) {
-    var data = "moonvalley:" + user.toLowerCase() + ":" + pass;
+  function hashPass(email, pass) {
+    var data = "moonvalley:" + email.toLowerCase() + ":" + pass;
     if (window.crypto && crypto.subtle && crypto.subtle.digest) {
       return crypto.subtle.digest("SHA-256", new TextEncoder().encode(data)).then(function (buf) {
         return Array.prototype.map.call(new Uint8Array(buf), function (b) {
@@ -1636,17 +1653,36 @@
     }, 2800);
   }
 
+  function currentAccount() {
+    if (fbReady) {
+      var u = window.firebase.auth().currentUser;
+      if (!u) return null;
+      return { name: u.displayName || (u.email || "").split("@")[0], email: u.email || "" };
+    }
+    var email = getSession();
+    var rec = email && loadUsers()[email];
+    if (!rec) return null;
+    return { name: rec.username || email.split("@")[0], email: email };
+  }
+
   function renderAuthNav() {
     if (!authNav) return;
-    var user = getSession();
-    if (user && loadUsers()[user]) {
+    var acc = currentAccount();
+    if (acc) {
       authNav.innerHTML =
-        '<span class="auth-user"><i class="auth-user__dot" aria-hidden="true"></i>' + esc(user) + "</span>" +
+        '<span class="auth-user"><i class="auth-user__dot" aria-hidden="true"></i>' + esc(acc.name) + "</span>" +
         '<button class="btn btn--ghost btn--sm auth-btn" type="button" data-auth-logout>' + t("auth.logout") + "</button>";
       $("[data-auth-logout]", authNav).addEventListener("click", function () {
-        try { localStorage.removeItem(AUTH_SESSION); } catch (e) {}
-        renderAuthNav();
-        toast(t("auth.bye"));
+        if (fbReady) {
+          window.firebase.auth().signOut().then(function () {
+            renderAuthNav();
+            toast(t("auth.bye"));
+          });
+        } else {
+          try { localStorage.removeItem(AUTH_SESSION); } catch (e) {}
+          renderAuthNav();
+          toast(t("auth.bye"));
+        }
       });
     } else {
       authNav.innerHTML =
@@ -1665,17 +1701,21 @@
         '<button class="rank-tab' + (!isLogin ? " is-active" : "") + '" type="button" data-auth-tab="register" aria-pressed="' + !isLogin + '">' + t("auth.register") + "</button>" +
       "</div>" +
       '<form class="auth-form" novalidate>' +
-        '<label class="profile-form__label" for="authUser">' + t("auth.username") + "</label>" +
-        '<input class="profile-form__input" id="authUser" type="text" maxlength="20" autocomplete="username" placeholder="' + t("auth.usernamePlaceholder") + '">' +
+        (isLogin ? "" :
+          '<label class="profile-form__label" for="authUser">' + t("auth.username") + "</label>" +
+          '<input class="profile-form__input" id="authUser" type="text" maxlength="20" autocomplete="username" placeholder="' + t("auth.usernamePlaceholder") + '">') +
+        '<label class="profile-form__label" for="authEmail">' + t("auth.email") + "</label>" +
+        '<input class="profile-form__input" id="authEmail" type="email" maxlength="120" autocomplete="email" placeholder="' + t("auth.emailPlaceholder") + '">' +
         '<label class="profile-form__label" for="authPass">' + t("auth.password") + "</label>" +
         '<input class="profile-form__input" id="authPass" type="password" maxlength="64" autocomplete="' + (isLogin ? "current-password" : "new-password") + '" placeholder="' + t("auth.passwordPlaceholder") + '">' +
-        (isLogin ? "" :
-          '<label class="profile-form__label" for="authPass2">' + t("auth.password2") + "</label>" +
-          '<input class="profile-form__input" id="authPass2" type="password" maxlength="64" autocomplete="new-password" placeholder="' + t("auth.passwordPlaceholder") + '">') +
+        (isLogin
+          ? '<button class="auth-forgot" type="button" data-auth-forgot>' + t("auth.forgot") + "</button>"
+          : '<label class="profile-form__label" for="authPass2">' + t("auth.password2") + "</label>" +
+            '<input class="profile-form__input" id="authPass2" type="password" maxlength="64" autocomplete="new-password" placeholder="' + t("auth.passwordPlaceholder") + '">') +
         '<p class="auth-error" id="authError" role="alert" hidden></p>' +
         '<button class="btn btn--primary auth-submit" type="submit">' + t(isLogin ? "auth.login" : "auth.register") + "</button>" +
       "</form>" +
-      '<p class="auth-note">' + t("auth.localNote") + "</p>";
+      '<p class="auth-note">' + (fbReady ? t("auth.cloudNote") : t("auth.localNote")) + "</p>";
   }
 
   function openAuthModal(mode) {
@@ -1689,44 +1729,112 @@
     if (box) { box.textContent = msg; box.hidden = false; }
   }
 
+  function fbErr(err) {
+    var code = (err && err.code) || "";
+    var map = {
+      "auth/email-already-in-use": "auth.errTaken",
+      "auth/invalid-email": "auth.errEmail",
+      "auth/weak-password": "auth.errPass",
+      "auth/user-not-found": "auth.errNoEmail",
+      "auth/invalid-credential": "auth.errWrongPass",
+      "auth/wrong-password": "auth.errWrongPass",
+      "auth/too-many-requests": "auth.errThrottle",
+      "auth/network-request-failed": "auth.errNetwork"
+    };
+    return t(map[code] || "auth.errGeneric");
+  }
+
   function wireAuthForm() {
     $all("[data-auth-tab]", modalBody).forEach(function (btn) {
       btn.addEventListener("click", function () { openAuthModal(btn.getAttribute("data-auth-tab")); });
     });
+    var forgot = $("[data-auth-forgot]", modalBody);
+    if (forgot) {
+      forgot.addEventListener("click", function () {
+        var email = $("#authEmail") ? $("#authEmail").value.trim() : "";
+        if (!fbReady) return authFail(t("auth.forgotLocal"));
+        if (!EMAIL_RE.test(email)) return authFail(t("auth.errEmail"));
+        var seq = ++authSeq;
+        window.firebase.auth().sendPasswordResetEmail(email).then(function () {
+          if (seq !== authSeq) return;
+          closeModal();
+          toast(t("auth.resetSent"));
+        }).catch(function (err) {
+          if (seq !== authSeq) return;
+          authFail(fbErr(err));
+        });
+      });
+    }
     var form = $(".auth-form", modalBody);
     if (!form) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var user = $("#authUser").value.trim();
+      var seq = ++authSeq;
+      var email = $("#authEmail").value.trim();
       var pass = $("#authPass").value;
       var pass2El = $("#authPass2");
-      var users = loadUsers();
-      if (user.length < 3) return authFail(t("auth.errUser"));
+      var nameEl = $("#authUser");
+      if (!EMAIL_RE.test(email)) return authFail(t("auth.errEmail"));
       if (pass.length < 4) return authFail(t("auth.errPass"));
-      if (authMode === "login") {
-        if (!users[user]) return authFail(t("auth.errNoUser"));
-        hashPass(user, pass).then(function (hash) {
-          if (users[user].hash !== hash) return authFail(t("auth.errWrongPass"));
-          localStorage.setItem(AUTH_SESSION, user);
-          closeModal();
-          renderAuthNav();
-          toast(t("auth.welcome").replace("{name}", user));
-        });
+      if (authMode !== "login") {
+        if (!nameEl || nameEl.value.trim().length < 3) return authFail(t("auth.errUser"));
+        if (!pass2El || pass2El.value !== pass) return authFail(t("auth.errMatch"));
+      }
+      if (fbReady) {
+        if (authMode === "login") {
+          window.firebase.auth().signInWithEmailAndPassword(email, pass).then(function () {
+            if (seq !== authSeq) return;
+            closeModal();
+            renderAuthNav();
+            toast(t("auth.welcome").replace("{name}", currentAccount().name));
+          }).catch(function (err) {
+            if (seq !== authSeq) return;
+            authFail(fbErr(err));
+          });
+        } else {
+          var uname = nameEl.value.trim();
+          window.firebase.auth().createUserWithEmailAndPassword(email, pass).then(function (cred) {
+            return cred.user.updateProfile({ displayName: uname });
+          }).then(function () {
+            if (seq !== authSeq) return;
+            closeModal();
+            renderAuthNav();
+            toast(t("auth.created").replace("{name}", uname));
+          }).catch(function (err) {
+            if (seq !== authSeq) return;
+            authFail(fbErr(err));
+          });
+        }
       } else {
-        if (users[user]) return authFail(t("auth.errTaken"));
-        if (pass2El && pass2El.value !== pass) return authFail(t("auth.errMatch"));
-        hashPass(user, pass).then(function (hash) {
-          users[user] = { hash: hash, since: new Date().toISOString().slice(0, 10) };
-          localStorage.setItem(AUTH_USERS, JSON.stringify(users));
-          localStorage.setItem(AUTH_SESSION, user);
-          closeModal();
-          renderAuthNav();
-          toast(t("auth.created").replace("{name}", user));
-        });
+        var users = loadUsers();
+        if (authMode === "login") {
+          var rec = users[email];
+          if (!rec) return authFail(t("auth.errNoEmail"));
+          hashPass(email, pass).then(function (hash) {
+            if (seq !== authSeq) return;
+            if (rec.hash !== hash) return authFail(t("auth.errWrongPass"));
+            localStorage.setItem(AUTH_SESSION, email);
+            closeModal();
+            renderAuthNav();
+            toast(t("auth.welcome").replace("{name}", rec.username || email.split("@")[0]));
+          });
+        } else {
+          if (users[email]) return authFail(t("auth.errTaken"));
+          var unameL = nameEl.value.trim();
+          hashPass(email, pass).then(function (hash) {
+            if (seq !== authSeq) return;
+            users[email] = { username: unameL, hash: hash, since: new Date().toISOString().slice(0, 10) };
+            localStorage.setItem(AUTH_USERS, JSON.stringify(users));
+            localStorage.setItem(AUTH_SESSION, email);
+            closeModal();
+            renderAuthNav();
+            toast(t("auth.created").replace("{name}", unameL));
+          });
+        }
       }
     });
-    var userField = $("#authUser");
-    if (userField) userField.focus();
+    var firstField = $("#authUser") || $("#authEmail");
+    if (firstField) firstField.focus();
   }
 
   function embedUrl(raw) {
