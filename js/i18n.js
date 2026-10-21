@@ -107,6 +107,20 @@ window.MV_I18N = {
     "shop.pendingNote": "The store is a preview — purchases are not active yet. Join the official Discord to be notified when the Moon Merchant opens its doors.",
     "shop.joinDiscord": "Join Discord",
 
+    "nav.youtube": "YouTube",
+    "youtube.eyebrow": "From the Channel",
+    "youtube.title": "YouTube",
+    "youtube.lead": "Trailers, chronicles and dev diaries in motion — click a video to watch it on YouTube.",
+    "youtube.watch": "Watch on YouTube",
+    "youtube.soon": "Coming soon",
+
+    "cookies.title": "Cookies",
+    "cookies.text": "We use cookies (and local storage) only to remember your preferences, such as language and your local profile. No tracking, no ads.",
+    "cookies.accept": "Accept",
+    "cookies.essential": "Only essential",
+
+    "store.getApp": "Get the app",
+
     "features.eyebrow": "Shaping the Hero",
     "features.title": "Features",
     "features.lead": "The systems that give shape to your journey through the Vale.",
@@ -247,6 +261,20 @@ window.MV_I18N = {
     "shop.pendingTitle": "O checkout está sendo forjado",
     "shop.pendingNote": "A loja é uma prévia — as compras ainda não estão ativas. Entre no Discord oficial para ser avisado quando o Mercador da Lua abrir as portas.",
     "shop.joinDiscord": "Entrar no Discord",
+
+    "nav.youtube": "YouTube",
+    "youtube.eyebrow": "Do Canal",
+    "youtube.title": "YouTube",
+    "youtube.lead": "Trailers, crônicas e diários de desenvolvimento em movimento — clique em um vídeo para assisti-lo no YouTube.",
+    "youtube.watch": "Assistir no YouTube",
+    "youtube.soon": "Em breve",
+
+    "cookies.title": "Cookies",
+    "cookies.text": "Usamos cookies (e armazenamento local) apenas para lembrar suas preferências, como idioma e perfil local. Sem rastreamento, sem anúncios.",
+    "cookies.accept": "Aceitar",
+    "cookies.essential": "Somente essenciais",
+
+    "store.getApp": "Baixe o app",
 
     "features.eyebrow": "Forjando o Herói",
     "features.title": "Recursos",

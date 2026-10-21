@@ -76,9 +76,16 @@ window.MV_CONFIG = {
   whatsappUrl: "https://chat.whatsapp.com/...", // botão de WhatsApp
   trailerUrl: "assets/videos/kaelith-1.mp4", // trailer (arquivo local ou YouTube/Vimeo)
   heroImage: "assets/hero-valley.jpg",       // imagem de fundo do topo (null = cena SVG)
-  socials: []            // ex.: { key: "x", label: "X", url: "https://x.com/..." }
+  appStoreUrl: null,                          // link real da App Store (null = estado honesto)
+  socials: [                                  // Instagram/Facebook/YouTube/TikTok já listados
+    { key: "instagram", label: "Instagram", url: null }, // cole o URL real para ativar
+  ]
 };
 ```
+
+- `socials`: YouTube, Instagram, Facebook e TikTok já aparecem nos rodapés comunitários; enquanto `url: null`, o botão abre o aviso honesto de "em breve".
+- `appStoreUrl`: o badge da App Store fica no rodapé (`assets/store/app-store-badge.png`); com `url: null`, o clique abre o aviso de app em desenvolvimento.
+- `youtube` (em `MV_CONTENT`): vídeos do canal — ao definir `url` (link real do YouTube), o card vira link e redireciona para o vídeo; sem URL, mostra "Em breve" (a miniatura é derivada automaticamente do link quando definido).
 
 - `trailerUrl` aceita links do YouTube/Vimeo **ou** arquivos de vídeo locais (`.mp4`, `.webm`, `.ogg` — player nativo com `controls`).
   Sem URL, o modal exibe "O trailer está sendo forjado".
@@ -99,6 +106,8 @@ Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:
 - **Perfil do jogador** — criado/gerenciado na seção #profile; fica no `localStorage` do navegador (`mv-profile`), sem servidor. Textos em `js/i18n.js` (`profile.*`).
 - **`features`** — sistemas de gameplay (`icon`: `sword`, `shield`, `compass`, `beast`, `star`, `banner`).
 - **`media`** — `kind`: `trailer`, `video` (abrem modal), `screenshot`, `art` (lightbox com navegação). `url` local (`.mp4`) abre com player nativo.
+- **`youtube`** — vídeos do canal; card vira link externo quando `url` tem o link do YouTube.
+- **Cookies** — banner no rodapé da tela; escolha salva em `localStorage` (`mv-cookies`). Textos em `cookies.*` do `js/i18n.js`.
 - Textos da interface (títulos, botões, rodapé) ficam em `js/i18n.js`.
 
 ## Substituindo a arte

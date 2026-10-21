@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "features", "media", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "features", "media", "youtube", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -184,7 +184,7 @@
     banner: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M10 4h3v40h-3zM16 6h20l-4 6 4 6H16z"/><path fill="currentColor" d="m26 24 8 6-8 6v-4h-6v-4h6z" opacity=".55"/></svg>',
     moon: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M27 6a18 18 0 1 0 12 31A20.5 20.5 0 0 1 27 6z"/><path fill="currentColor" d="m38.5 5 1.7 4.3 4.3 1.7-4.3 1.7-1.7 4.3-1.7-4.3-4.3-1.7 4.3-1.7L38.5 5z"/></svg>',
     flame: '<svg viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" d="M24 4c6 8 14 13 14 24a14 14 0 1 1-28 0C10 17 18 12 24 4zm0 13.5A10.5 10.5 0 0 0 13.5 28 10.5 10.5 0 0 0 24 38.5 10.5 10.5 0 0 0 34.5 28 10.5 10.5 0 0 0 24 17.5z"/></svg>',
-    gun: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M21 4h6v6.7A15 15 0 0 1 37.3 17H44v6h-6.7A15 15 0 0 1 27 37.3V44h-6v-6.7A15 15 0 0 1 10.7 24H4v-6h6.7A15 15 0 0 1 21 10.7V4zm3 10a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><circle cx="24" cy="24" r="3.6" fill="currentColor"/></svg>',
+    gun: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M23 22.4h18v3.2H23zM13 18.6h10.6v10.2H13z"/><path fill="currentColor" d="M13.4 22.5 5 26v6.8l8.4-3.6z"/><path fill="currentColor" d="M15 12.9h9v2.8h-9zM17.6 15.7h1.9v3.2h-1.9zM21.5 15.7h1.9v3.2h-1.9z"/><path fill="currentColor" d="M25.2 28.8h2.6v5.4h-2.6z"/></svg>',
     bow: '<svg viewBox="0 0 48 48"><path fill="currentColor" d="M24 4C12 9 6 16.5 6 24s6 15 18 20v-6.8C14.5 33.7 11 29 11 24s3.5-9.7 13-7.2V4z"/><path fill="currentColor" d="M23.3 4h1.4v40h-1.4z"/><path fill="currentColor" d="M15 22.9h22v2.2H15z"/><path fill="currentColor" d="m37 19.5 7 4.5-7 4.5v-9z"/></svg>',
     staff: '<svg viewBox="0 0 48 48"><circle cx="37" cy="9" r="6" fill="currentColor"/><path fill="currentColor" d="M34.4 13.6 38.8 18 15 41.8l-4.4-4.4z"/><path fill="currentColor" d="m10.5 23 3.2 3.2-3.2 3.2-3.2-3.2z"/><path fill="currentColor" d="m22 33 2.6 2.6L22 38.2 19.4 35.6z"/></svg>',
     helm: '<svg viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" d="M24 4c9 0 15 5.4 15 14v10.5c0 8-5.6 13.6-15 15.5-9.4-1.9-15-7.5-15-15.5V18C9 9.4 15 4 24 4zm-8 16v4.5h16V20a8 8 0 0 0-16 0zm3 9h10v3.5H19z"/></svg>',
@@ -412,7 +412,7 @@
     shield: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 5 8 11v12c0 9.5 6.6 16.4 16 19 9.4-2.6 16-9.5 16-19V11L24 5z"/><path fill="currentColor" stroke="none" d="m24 15 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L24 15z"/></svg>',
     arcane: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="24" cy="24" r="13"/><path d="M24 8v8M24 32v8M8 24h8M32 24h8M13 13l5.5 5.5M29.5 29.5 35 35M35 13l-5.5 5.5M18.5 29.5 13 35"/><circle fill="currentColor" stroke="none" cx="24" cy="24" r="3.5"/></svg>',
     bow: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7c13 6.5 13 27.5 0 34"/><path d="M15 7v34"/><path d="M8 24h28"/><path d="m31 18 6 6-6 6"/></svg>',
-    gun: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17v-7h7M31 10h7v7M38 31v7h-7M17 38h-7v-7"/><path d="M24 13v22M13 24h22"/><circle fill="currentColor" stroke="none" cx="24" cy="24" r="3.5"/></svg>'
+    gun: '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 24h18"/><path d="M13 20h10v7H13z"/><path d="M13 23.5 5 27v5l8-3.5"/><path d="M15 15.5h9M18 15.5v4.5M22 15.5v4.5"/><path d="M26 27v4"/></svg>'
   };
 
   function classGallery(item, c) {
@@ -895,6 +895,7 @@
       card.setAttribute("role", "button");
       card.setAttribute("aria-label", c.name);
       card.innerHTML = GEMS +
+        '<span class="shop-card__ring" aria-hidden="true"></span>' +
         '<div class="shop-card__art" aria-hidden="true"><span class="shop-card__sigil">' + shopSigil(item) + "</span></div>" +
         '<div class="shop-card__body">' +
           '<span class="shop-card__kind">' + t("shop.kind." + item.kind) + "</span>" +
@@ -912,6 +913,92 @@
       shopGrid.appendChild(card);
     });
     registerReveals();
+  }
+
+  /* ---------------- YOUTUBE ---------------- */
+  var youtubeGrid = $("#youtubeGrid");
+
+  function ytVideoId(url) {
+    if (!url) return null;
+    var m = String(url).match(/(?:youtube\.com\/.*v=|youtu\.be\/|youtube\.com\/(?:embed|shorts)\/)([\w-]{6,})/);
+    return m ? m[1] : null;
+  }
+  function ytThumb(item) {
+    if (item.thumb) return item.thumb;
+    var id = ytVideoId(item.url);
+    return id ? "https://img.youtube.com/vi/" + id + "/hqdefault.jpg" : "";
+  }
+
+  function renderYoutube() {
+    if (!youtubeGrid) return;
+    youtubeGrid.innerHTML = "";
+    (CONTENT.youtube || []).forEach(function (item) {
+      var c = loc(item);
+      var ready = !!ytVideoId(item.url) || !!item.url;
+      var card = document.createElement(ready ? "a" : "article");
+      if (ready) {
+        card.href = item.url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+        card.setAttribute("aria-label", t("youtube.watch") + ": " + c.title);
+      } else {
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-disabled", "true");
+        card.setAttribute("aria-label", c.title + " — " + t("youtube.soon"));
+      }
+      card.className = "yt-card frame reveal" + (ready ? "" : " yt-card--pending");
+      card.innerHTML =
+        '<div class="yt-card__media">' +
+        '<img src="' + ytThumb(item) + '" alt="" loading="lazy">' +
+        '<span class="yt-card__play" aria-hidden="true"><span class="yt-card__play-ring">' + PLAY_ICON + "</span></span>" +
+        (ready ? "" : '<span class="yt-card__badge">' + t("youtube.soon") + "</span>") +
+        "</div>" +
+        '<div class="yt-card__body">' +
+        '<h3 class="yt-card__title">' + c.title + "</h3>" +
+        '<span class="yt-card__cta">' + (ready ? t("youtube.watch") + " →" : t("youtube.soon")) + "</span>" +
+        "</div>";
+      if (!ready) {
+        function open() { openPending(); }
+        card.addEventListener("click", open);
+        card.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
+        });
+      }
+      youtubeGrid.appendChild(card);
+    });
+    registerReveals();
+  }
+
+  /* ---------------- COOKIES ---------------- */
+  var cookieBanner = $("#cookieBanner");
+  if (cookieBanner) {
+    var cookieChoice = null;
+    try { cookieChoice = localStorage.getItem("mv-cookies"); } catch (err) { /* private mode: assume decided */ }
+    if (!cookieChoice) {
+      window.setTimeout(function () { cookieBanner.classList.add("is-shown"); }, 900);
+    }
+    $all("[data-cookie-choice]", cookieBanner).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        try { localStorage.setItem("mv-cookies", btn.dataset.cookieChoice); } catch (err) { /* private mode */ }
+        cookieBanner.classList.remove("is-shown");
+      });
+    });
+  }
+
+  /* ---------------- APP STORE ---------------- */
+  var appStoreBadge = $("#appStoreBadge");
+  if (appStoreBadge) {
+    if (CONFIG.appStoreUrl) {
+      appStoreBadge.href = CONFIG.appStoreUrl;
+      appStoreBadge.target = "_blank";
+      appStoreBadge.rel = "noopener noreferrer";
+    } else {
+      appStoreBadge.addEventListener("click", function (e) {
+        e.preventDefault();
+        openPending();
+      });
+    }
   }
 
   /* ---------------- SOCIAL / DISCORD ---------------- */
@@ -1192,6 +1279,7 @@
     renderFeatures();
     renderMediaFilters();
     renderMedia();
+    renderYoutube();
 
     /* refresh "view all" label state */
     var expanded = newsGrid.classList.contains("is-expanded");

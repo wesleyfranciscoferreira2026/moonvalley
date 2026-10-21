@@ -16,8 +16,16 @@ window.MV_CONFIG = {
   /* Hero backdrop shown at the very top of the site. Replace the
      file (keeping the name) or set to null to use the SVG scene. */
   heroImage: "assets/hero-valley.jpg",
+  /* Real App Store link of the game. While null, the badge shows
+     an honest "app in development" state. */
+  appStoreUrl: null,
   socials: [
-    /* { key: "x", label: "X", url: "https://x.com/yourprofile", icon: "..." }, */
+    /* Add real profile URLs to enable the links. While url is null,
+       the button honestly shows a "coming soon" state. */
+    { key: "instagram", label: "Instagram", url: null },
+    { key: "facebook", label: "Facebook", url: null },
+    { key: "youtube", label: "YouTube", url: null },
+    { key: "tiktok", label: "TikTok", url: null }
   ]
 };
 
@@ -28,7 +36,9 @@ window.MV_SOCIAL_ICONS = {
   x: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.2l-4.9-6.4L5.1 21H2l7.3-8.3L2.5 3h6.4l4.4 5.8L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg>',
   youtube: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26.3 26.3 0 0 0 2 12a26.3 26.3 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26.3 26.3 0 0 0 22 12a26.3 26.3 0 0 0-.4-4.8zM10 15.1V8.9l5.2 3.1-5.2 3.1z"/></svg>',
   instagram: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 4.3c2.5 0 2.8 0 3.8.1 2.6.1 3.8 1.4 3.9 3.9 0 1 .1 1.3.1 3.8s0 2.8-.1 3.8c-.1 2.5-1.3 3.8-3.9 3.9-1 0-1.3.1-3.8.1s-2.8 0-3.8-.1c-2.6-.1-3.8-1.4-3.9-3.9 0-1-.1-1.3-.1-3.8s0-2.8.1-3.8C4.4 5.8 5.6 4.5 8.2 4.4c1-.1 1.3-.1 3.8-.1zM12 2C9.4 2 9.1 2 8.1 2.1 4.6 2.2 2.2 4.6 2.1 8.1 2 9.1 2 9.4 2 12s0 2.9.1 3.9c.1 3.5 2.5 5.9 6 6 1 .1 1.3.1 3.9.1s2.9 0 3.9-.1c3.5-.1 5.9-2.5 6-6 .1-1 .1-1.3.1-3.9s0-2.9-.1-3.9c-.1-3.5-2.5-5.9-6-6C14.9 2 14.6 2 12 2zm0 4.9a5.1 5.1 0 1 0 0 10.2 5.1 5.1 0 0 0 0-10.2zm0 8.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6zm5.3-8.6a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z"/></svg>',
-  reddit: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 12.1a2.2 2.2 0 0 0-3.7-1.6 10.8 10.8 0 0 0-5.4-1.7l1-4.5 3.2.7a1.7 1.7 0 1 0 .2-1.2l-3.8-.8a.6.6 0 0 0-.7.5l-1.1 5.2a10.8 10.8 0 0 0-5.5 1.7A2.2 2.2 0 1 0 4.4 14a4.3 4.3 0 0 0 0 .6c0 3.1 3.6 5.6 8 5.6s8-2.5 8-5.6a4.3 4.3 0 0 0 0-.6A2.2 2.2 0 0 0 22 12.1zm-14.3 2a1.5 1.5 0 1 1 1.5 1.5 1.5 1.5 0 0 1-1.5-1.5zm8.5 3.7a5.7 5.7 0 0 1-4.2 1.3 5.7 5.7 0 0 1-4.2-1.3.5.5 0 0 1 .7-.7 4.8 4.8 0 0 0 3.5 1 4.8 4.8 0 0 0 3.5-1 .5.5 0 1 1 .7.7zm-.3-2.2a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1-1.5 1.5z"/></svg>'
+  reddit: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 12.1a2.2 2.2 0 0 0-3.7-1.6 10.8 10.8 0 0 0-5.4-1.7l1-4.5 3.2.7a1.7 1.7 0 1 0 .2-1.2l-3.8-.8a.6.6 0 0 0-.7.5l-1.1 5.2a10.8 10.8 0 0 0-5.5 1.7A2.2 2.2 0 1 0 4.4 14a4.3 4.3 0 0 0 0 .6c0 3.1 3.6 5.6 8 5.6s8-2.5 8-5.6a4.3 4.3 0 0 0 0-.6A2.2 2.2 0 0 0 22 12.1zm-14.3 2a1.5 1.5 0 1 1 1.5 1.5 1.5 1.5 0 0 1-1.5-1.5zm8.5 3.7a5.7 5.7 0 0 1-4.2 1.3 5.7 5.7 0 0 1-4.2-1.3.5.5 0 0 1 .7-.7 4.8 4.8 0 0 0 3.5 1 4.8 4.8 0 0 0 3.5-1 .5.5 0 1 1 .7.7zm-.3-2.2a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1-1.5 1.5z"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>',
+  tiktok: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 2h-3.1v13.6a2.6 2.6 0 1 1-2.2-2.6v-3.2a5.8 5.8 0 1 0 5.3 5.8V9.1a7 7 0 0 0 4 1.3V7.3a4 4 0 0 1-4-4V2z"/></svg>'
 };
 
 window.MV_CONTENT = {
@@ -906,6 +916,44 @@ window.MV_CONTENT = {
         name: "Corcel do Frostvale",
         text: "Um cavalo de guerra de crina glaciar criado sob a aurora. Não deixa pegadas na neve — os cavaleiros do Frostvale nunca explicaram por quê."
       }
+    }
+  ],
+
+  /* ==========================================================
+     YOUTUBE — videos of the official channel.
+     url: full YouTube link (watch, youtu.be or shorts).
+     When url is null the card shows an honest "coming soon"
+     state; thumbnails are local files or auto-derived from the
+     YouTube link once set.
+     ========================================================== */
+  youtube: [
+    {
+      id: "trailer",
+      url: null,
+      thumb: "assets/hero-valley.jpg",
+      en: { title: "Moon Valley — Official Trailer" },
+      pt: { title: "Moon Valley — Trailer Oficial" }
+    },
+    {
+      id: "kaelith-motion",
+      url: null,
+      thumb: "assets/classes/kaelith-1.jpg",
+      en: { title: "Kaelith — Blood-Gem Duelist in Motion" },
+      pt: { title: "Kaelith — A Duelista Rubra em Movimento" }
+    },
+    {
+      id: "frostvale-chronicle",
+      url: null,
+      thumb: "assets/regions/frostvale.jpg",
+      en: { title: "Frostvale — Chronicle of the Eternal Aurora" },
+      pt: { title: "Frostvale — Crônica da Aurora Eterna" }
+    },
+    {
+      id: "moongate-chronicle",
+      url: null,
+      thumb: "assets/regions/moongate.jpg",
+      en: { title: "The Moongate — Where the Stars Are Eaten" },
+      pt: { title: "O Moongate — Onde as Estrelas São Devoradas" }
     }
   ],
 
