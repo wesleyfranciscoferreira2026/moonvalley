@@ -634,7 +634,7 @@
   var profileSlot = $("#profileSlot");
   var PROFILE_KEY = "mv-profile";
   var OWNED_KEY = "mv-owned-skins";
-  var profileDraft = { name: "", classId: null, avatar: null, level: "", title: "", guild: "", server: "" };
+  var profileDraft = { name: "", classId: null, avatar: null, level: "", title: "", guild: "", server: "", bio: "", weapon: "", region: "", badges: [], accent: "solar" };
   var profileEditing = false;
 
   function esc(s) {
@@ -662,6 +662,28 @@
     } catch (err) { return iso || ""; }
   }
   var GEMS = '<span class="gem gem--tl"></span><span class="gem gem--tr"></span><span class="gem gem--bl"></span><span class="gem gem--br"></span>';
+
+  /* profile extras: aura colours, badges and regions */
+  var ACCENTS = { solar: "#F5A34A", aurora: "#11A9C4", blood: "#E9876F", arcane: "#B9A2F8", frost: "#8FD4EE", moon: "#D8D8CF" };
+  var ACCENT_ORDER = ["solar", "aurora", "blood", "arcane", "frost", "moon"];
+  var BADGE_ORDER = ["pvp", "explorer", "collector", "lorekeeper", "trader", "nightowl"];
+  var REGION_ORDER = ["americas", "europe", "asia", "oceania"];
+
+  /* rarity rank symbols — crown (legendary), star (epic), shield (elite), gem (collector) */
+  function tierIcon(tier) {
+    var paths = {
+      legendary: '<path d="M2 12.4 L3 4.6 L6.6 7.8 L8 3.4 L9.4 7.8 L13 4.6 L14 12.4 Z"/>',
+      epic: '<path d="M8 1.6 L9.7 6.3 L14.4 8 L9.7 9.7 L8 14.4 L6.3 9.7 L1.6 8 L6.3 6.3 Z"/>',
+      elite: '<path d="M8 1.8 L13.8 3.7 V8 C13.8 11.3 11.4 13.6 8 14.3 C4.6 13.6 2.2 11.3 2.2 8 V3.7 Z"/><path d="M5.6 7.9 L7.3 9.7 L10.5 6.4"/>',
+      collector: '<path d="M8 1.8 L14.2 8 L8 14.2 L1.8 8 Z"/><path d="M4.7 5.7 H11.3"/><path d="M4.7 5.7 L8 14.2 L11.3 5.7"/><path d="M8 1.8 L4.7 5.7 M8 1.8 L11.3 5.7"/>'
+    };
+    return '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (paths[tier] || paths.collector) + "</svg>";
+  }
+  function findArmoryItem(id) {
+    var list = CONTENT.armory || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
 
   /* ---------------- owned skins (local collection) ---------------- */
   function findShopItem(id) {
@@ -768,7 +790,38 @@
             '<label class="profile-form__label" for="profileServer">' + t("profile.serverLabel") + "</label>" +
             '<input class="profile-form__input" id="profileServer" type="text" maxlength="24" autocomplete="off" value="' + esc(profileDraft.server) + '">' +
           "</div>" +
+          '<div class="profile-form__field">' +
+            '<label class="profile-form__label" for="profileRegion">' + t("profile.regionLabel") + "</label>" +
+            '<select class="profile-form__select" id="profileRegion">' +
+              '<option value="">—</option>' +
+              REGION_ORDER.map(function (id) {
+                return '<option value="' + id + '"' + (profileDraft.region === id ? " selected" : "") + ">" + t("profile.region." + id) + "</option>";
+              }).join("") +
+            "</select>" +
+          "</div>" +
+          '<div class="profile-form__field">' +
+            '<label class="profile-form__label" for="profileWeapon">' + t("profile.weaponLabel") + "</label>" +
+            '<select class="profile-form__select" id="profileWeapon">' +
+              '<option value="">' + t("profile.weaponNone") + "</option>" +
+              (CONTENT.armory || []).map(function (it) {
+                return '<option value="' + esc(it.id) + '"' + (profileDraft.weapon === it.id ? " selected" : "") + ">" + esc(loc(it).name) + "</option>";
+              }).join("") +
+            "</select>" +
+          "</div>" +
         "</div>" +
+        '<div class="profile-form__field">' +
+          '<label class="profile-form__label" for="profileBio">' + t("profile.bioLabel") + "</label>" +
+          '<textarea class="profile-form__textarea" id="profileBio" maxlength="160" rows="3" placeholder="' + t("profile.bioPlaceholder") + '">' + esc(profileDraft.bio) + "</textarea>" +
+          '<span class="profile-form__counter" id="profileBioCount">' + String(profileDraft.bio).length + " / 160</span>" +
+        "</div>" +
+        '<fieldset class="profile-form__fieldset">' +
+          "<legend>" + t("profile.badgesLabel") + "</legend>" +
+          '<div class="profile-form__chips" id="profileBadges"></div>' +
+        "</fieldset>" +
+        '<fieldset class="profile-form__fieldset">' +
+          "<legend>" + t("profile.accentLabel") + "</legend>" +
+          '<div class="profile-form__swatches" id="profileAccents"></div>' +
+        "</fieldset>" +
         '<fieldset class="profile-form__fieldset">' +
           "<legend>" + t("profile.chooseClass") + "</legend>" +
           '<div class="profile-picker" id="profilePicker"></div>' +
@@ -821,6 +874,69 @@
         var field = $(pair[0]);
         if (field) field.addEventListener("input", function (e) { profileDraft[pair[1]] = e.target.value; });
       });
+
+    /* chronicle line (bio) + live counter */
+    var bioInput = $("#profileBio");
+    if (bioInput) {
+      bioInput.addEventListener("input", function (e) {
+        profileDraft.bio = e.target.value;
+        var counter = $("#profileBioCount");
+        if (counter) {
+          counter.textContent = profileDraft.bio.length + " / 160";
+          counter.classList.toggle("is-max", profileDraft.bio.length >= 160);
+        }
+      });
+    }
+    var regionSel = $("#profileRegion");
+    if (regionSel) regionSel.addEventListener("change", function (e) { profileDraft.region = e.target.value; });
+    var weaponSel = $("#profileWeapon");
+    if (weaponSel) weaponSel.addEventListener("change", function (e) { profileDraft.weapon = e.target.value; });
+
+    /* badge chips (multi-select) */
+    var badgesBox = $("#profileBadges");
+    if (badgesBox) {
+      BADGE_ORDER.forEach(function (id) {
+        var on = profileDraft.badges.indexOf(id) !== -1;
+        var chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "profile-chip" + (on ? " is-active" : "");
+        chip.setAttribute("aria-pressed", on ? "true" : "false");
+        chip.textContent = t("profile.badge." + id);
+        chip.addEventListener("click", function () {
+          var at = profileDraft.badges.indexOf(id);
+          if (at === -1) profileDraft.badges.push(id); else profileDraft.badges.splice(at, 1);
+          var nowOn = at === -1;
+          chip.classList.toggle("is-active", nowOn);
+          chip.setAttribute("aria-pressed", nowOn ? "true" : "false");
+        });
+        badgesBox.appendChild(chip);
+      });
+    }
+
+    /* aura swatches */
+    var accentsBox = $("#profileAccents");
+    if (accentsBox) {
+      ACCENT_ORDER.forEach(function (id) {
+        var on = (profileDraft.accent || "solar") === id;
+        var sw = document.createElement("button");
+        sw.type = "button";
+        sw.className = "profile-swatch" + (on ? " is-active" : "");
+        sw.style.setProperty("--sw", ACCENTS[id]);
+        sw.setAttribute("aria-pressed", on ? "true" : "false");
+        sw.setAttribute("aria-label", t("profile.accent." + id));
+        sw.title = t("profile.accent." + id);
+        sw.addEventListener("click", function () {
+          profileDraft.accent = id;
+          $all(".profile-swatch", accentsBox).forEach(function (el) {
+            el.classList.remove("is-active");
+            el.setAttribute("aria-pressed", "false");
+          });
+          sw.classList.add("is-active");
+          sw.setAttribute("aria-pressed", "true");
+        });
+        accentsBox.appendChild(sw);
+      });
+    }
 
     /* avatar upload */
     var avatarInput = $("#profileAvatarInput");
@@ -875,6 +991,11 @@
         title: (profileDraft.title || "").trim().slice(0, 26),
         guild: (profileDraft.guild || "").trim().slice(0, 24),
         server: (profileDraft.server || "").trim().slice(0, 24),
+        bio: (profileDraft.bio || "").trim().slice(0, 160),
+        weapon: findArmoryItem(profileDraft.weapon) ? profileDraft.weapon : "",
+        region: REGION_ORDER.indexOf(profileDraft.region) !== -1 ? profileDraft.region : "",
+        badges: (profileDraft.badges || []).filter(function (id) { return BADGE_ORDER.indexOf(id) !== -1; }).slice(0, 6),
+        accent: ACCENTS[profileDraft.accent] ? profileDraft.accent : "solar",
         since: profileEditing && prev && prev.since ? prev.since : new Date().toISOString()
       });
       profileEditing = false;
@@ -901,17 +1022,22 @@
           level: p.level || "",
           title: p.title || "",
           guild: p.guild || "",
-          server: p.server || ""
+          server: p.server || "",
+          bio: p.bio || "",
+          weapon: p.weapon || "",
+          region: p.region || "",
+          badges: Array.isArray(p.badges) ? p.badges.slice() : [],
+          accent: p.accent || "solar"
         }
-      : { name: "", classId: null, avatar: null, level: "", title: "", guild: "", server: "" };
+      : { name: "", classId: null, avatar: null, level: "", title: "", guild: "", server: "", bio: "", weapon: "", region: "", badges: [], accent: "solar" };
   }
 
-  function collectionMarkup() {
+  function collectionMarkup(accentHex) {
     var items = loadOwned().map(findShopItem).filter(Boolean);
     var list = items.length
       ? '<ul class="profile-collection__list">' + items.map(function (item) {
           var tier = item.tier || "collector";
-          var badge = '<span class="owned-card__tier owned-card__tier--' + tier + '">' + t("shop.tier." + tier) + "</span>";
+          var badge = '<span class="owned-card__tier owned-card__tier--' + tier + '">' + tierIcon(tier) + "<span>" + t("shop.tier." + tier) + "</span></span>";
           return '<li class="owned-card owned-card--' + item.tone + '">' +
             (item.art
               ? '<div class="owned-card__art owned-card__art--cover"><img src="' + item.art + '" alt="" loading="lazy">' + badge + "</div>"
@@ -923,7 +1049,7 @@
             "</li>";
         }).join("") + "</ul>"
       : '<p class="profile-collection__empty">' + t("profile.collectionEmpty") + "</p>";
-    return '<div class="profile-collection frame reveal">' +
+    return '<div class="profile-collection frame reveal" style="--p-accent:' + (accentHex || ACCENTS.solar) + '">' +
       '<h4 class="profile-collection__title">' + t("profile.collection") +
       ' <span class="profile-collection__count">' + items.length + "</span></h4>" +
       list +
@@ -934,6 +1060,7 @@
   function renderProfileCard(p) {
     var item = findClass(p.classId);
     var c = loc(item);
+    var accentHex = ACCENTS[p.accent] || ACCENTS.solar;
     var stats = "";
     function stat(label, value) {
       if (!value) return "";
@@ -943,9 +1070,19 @@
     stats += stat(t("profile.titleLabel"), p.title || "");
     stats += stat(t("profile.guildLabel"), p.guild || "");
     stats += stat(t("profile.serverLabel"), p.server || "");
+    stats += stat(t("profile.regionLabel"), p.region && REGION_ORDER.indexOf(p.region) !== -1 ? t("profile.region." + p.region) : "");
+    var wItem = findArmoryItem(p.weapon);
+    stats += stat(t("profile.weaponLabel"), wItem ? loc(wItem).name : "");
     stats += '<div class="profile-stat"><dt>' + t("profile.since") + "</dt><dd>" + profileDate(p.since) + "</dd></div>";
+    var badges = (Array.isArray(p.badges) ? p.badges : []).filter(function (id) { return BADGE_ORDER.indexOf(id) !== -1; });
+    var badgeRow = badges.length
+      ? '<div class="profile-card__badges">' + badges.map(function (id) {
+          return '<span class="profile-badge">' + t("profile.badge." + id) + "</span>";
+        }).join("") + "</div>"
+      : "";
+    var bio = p.bio ? '<blockquote class="profile-card__bio">' + esc(p.bio) + "</blockquote>" : "";
     profileSlot.innerHTML =
-      '<div class="profile-card profile-card--filled is-filled frame reveal">' + GEMS +
+      '<div class="profile-card profile-card--filled is-filled frame reveal" style="--p-accent:' + accentHex + '">' + GEMS +
       '<div class="profile-avatar' + (p.avatar ? " profile-avatar--photo" : "") + '">' +
         avatarMarkup(p.avatar, p.classId) +
       "</div>" +
@@ -955,6 +1092,8 @@
         '<div class="profile-card__meta">' +
           '<span class="profile-card__class">' + c.name + "</span>" +
         "</div>" +
+        badgeRow +
+        bio +
         '<dl class="profile-card__stats">' + stats + "</dl>" +
         '<p class="profile-card__note">' + t("profile.localNote") + "</p>" +
         '<div class="profile-card__actions">' +
@@ -964,7 +1103,7 @@
         "</div>" +
       "</div>" +
       "</div>" +
-      collectionMarkup();
+      collectionMarkup(accentHex);
 
     $all("[data-own-remove]", profileSlot).forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -1115,7 +1254,7 @@
       (item.art
         ? '<div class="shop-modal__art shop-modal__art--' + item.tone + ' shop-modal__art--cover"><img src="' + item.art + '" alt=""></div>'
         : '<div class="shop-modal__art shop-modal__art--' + item.tone + '" aria-hidden="true">' + shopSigil(item) + "</div>") +
-      '<span class="shop-card__tier shop-card__tier--' + tier + '" style="position:static;display:inline-block;margin:0 .6rem .7rem 0">' + t("shop.tier." + tier) + "</span>" +
+      '<span class="shop-card__tier shop-card__tier--' + tier + '" style="position:static;display:inline-flex;margin:0 .6rem .7rem 0">' + tierIcon(tier) + "<span>" + t("shop.tier." + tier) + "</span></span>" +
       '<span class="book-card__kind" style="position:static;display:inline-block;margin-bottom:.7rem">' + t("shop.kind." + item.kind) + "</span>" +
       '<h3 class="modal-title" id="modalTitle">' + c.name + "</h3>" +
       '<div class="modal-prose"><p>' + c.text + "</p></div>" +
@@ -1141,9 +1280,9 @@
   function buildShopCard(item) {
     var c = loc(item);
     var tier = item.tier || "collector";
-    var tierBadge = '<span class="shop-card__tier shop-card__tier--' + tier + '">' + t("shop.tier." + tier) + "</span>";
+    var tierBadge = '<span class="shop-card__tier shop-card__tier--' + tier + '">' + tierIcon(tier) + "<span>" + t("shop.tier." + tier) + "</span></span>";
     var card = document.createElement("article");
-    card.className = "frame shop-card shop-card--" + item.tone + " reveal";
+    card.className = "frame shop-card shop-card--" + item.tone + " shop-card--tier-" + tier + " reveal";
     card.setAttribute("tabindex", "0");
     card.setAttribute("role", "button");
     card.setAttribute("aria-label", c.name);
@@ -1184,7 +1323,7 @@
       sec.className = "shop-tier";
       var head = document.createElement("h3");
       head.className = "shop-tier__label shop-tier__label--" + group.tier;
-      head.textContent = group.label;
+      head.innerHTML = '<span class="shop-tier__icon" aria-hidden="true">' + tierIcon(group.tier) + "</span><span>" + esc(group.label) + "</span>";
       var grid = document.createElement("div");
       grid.className = "shop-grid";
       sec.appendChild(head);

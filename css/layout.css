@@ -858,7 +858,7 @@
 .profile-pick__role { font-size: .72rem; letter-spacing: .05em; color: var(--silver-dim); text-align: center; }
 .profile-form__actions { display: flex; gap: .9rem; flex-wrap: wrap; }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
-.btn:disabled:hover { transform: none; box-shadow: none; }
+.btn:disabled:hover { transform: none; filter: drop-shadow(0 3px 7px rgba(0, 0, 0, .45)); }
 
 .profile-card__note {
   margin-top: 1.5rem;
@@ -915,11 +915,83 @@
 .profile-form__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; }
 .profile-form__grid .profile-form__field { margin: 0; }
 
+/* --- extended form: selects, chronicle line, badges, aura --- */
+.profile-form__select,
+.profile-form__textarea {
+  padding: .85em 1.15em;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  color: var(--silver);
+  background: rgba(4, 16, 26, .72);
+  border: 1px solid rgba(216, 216, 207, .25);
+  outline: none;
+  transition: border-color .3s, box-shadow .3s;
+}
+.profile-form__select:focus,
+.profile-form__textarea:focus {
+  border-color: rgba(17, 169, 196, .75);
+  box-shadow: 0 0 0 3px rgba(17, 169, 196, .18);
+}
+.profile-form__select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.6em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%239AA6AB' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.1em center;
+  cursor: pointer;
+}
+.profile-form__select option { background: #071A24; color: var(--silver); }
+.profile-form__textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
+.profile-form__counter { align-self: flex-end; font-size: .7rem; letter-spacing: .1em; color: var(--silver-dim); }
+.profile-form__counter.is-max { color: #E9876F; }
+
+.profile-form__chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+.profile-chip {
+  font-family: var(--font-title);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  background: rgba(7, 26, 36, .55);
+  border: 1px solid rgba(216, 216, 207, .2);
+  padding: .6em 1.15em;
+  cursor: pointer;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+  transition: color .3s, border-color .3s, background .3s, transform .3s var(--ease-out), filter .3s;
+}
+.profile-chip::before { content: "◆"; font-size: .62em; margin-right: .7em; opacity: .55; }
+.profile-chip:hover { color: #fff; border-color: rgba(17, 169, 196, .6); transform: translateY(-2px); }
+.profile-chip.is-active {
+  color: #FFE9BD;
+  border-color: var(--solar);
+  background: rgba(245, 163, 74, .14);
+  filter: drop-shadow(0 0 10px rgba(245, 163, 74, .4));
+}
+.profile-chip.is-active::before { opacity: 1; color: var(--solar); }
+
+.profile-form__swatches { display: flex; flex-wrap: wrap; gap: .8rem; }
+.profile-swatch {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(216, 216, 207, .3);
+  background: radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--sw, #F5A34A) 55%, #fff), var(--sw, #F5A34A) 72%);
+  clip-path: polygon(9px 0, calc(100% - 9px) 0, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0 calc(100% - 9px), 0 9px);
+  cursor: pointer;
+  transition: transform .3s var(--ease-out), filter .3s;
+}
+.profile-swatch:hover { transform: translateY(-3px); filter: brightness(1.12); }
+.profile-swatch.is-active {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 5px var(--sw, #F5A34A)) drop-shadow(0 0 11px var(--sw, #F5A34A)) brightness(1.1);
+}
+
 /* filled card: all game data as stat rows */
 .profile-card__stats {
   margin: 1.15rem 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: .7rem 1.4rem;
 }
 .profile-stat { border-top: 1px solid rgba(245, 163, 74, .2); padding-top: .5rem; }
@@ -933,6 +1005,60 @@
   opacity: .9;
 }
 .profile-stat dd { margin: .2rem 0 0; font-size: .92rem; font-weight: 700; color: var(--silver); letter-spacing: .04em; }
+
+/* --- filled card extras: chronicle line, badges, aura theming --- */
+.profile-card.is-filled,
+.profile-collection { --p-accent: var(--solar); }
+.profile-card.is-filled .profile-avatar {
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--p-accent) 50%, transparent));
+  transition: filter .4s;
+}
+.profile-card.is-filled .profile-avatar__img {
+  border-color: color-mix(in srgb, var(--p-accent) 82%, #fff 12%);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--p-accent) 45%, transparent), inset 0 0 12px rgba(0, 0, 0, .4);
+}
+.profile-card.is-filled .profile-card__name {
+  text-shadow: 0 0 20px color-mix(in srgb, var(--p-accent) 55%, transparent);
+}
+.profile-card.is-filled .profile-stat { border-top-color: color-mix(in srgb, var(--p-accent) 45%, transparent); }
+.profile-card.is-filled .profile-stat dt { color: color-mix(in srgb, var(--p-accent) 82%, #fff 18%); }
+.profile-card.is-filled .gem,
+.profile-collection .gem {
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--p-accent) 55%, #fff), var(--p-accent));
+  box-shadow: 0 0 9px color-mix(in srgb, var(--p-accent) 88%, transparent);
+}
+.profile-collection .profile-collection__count {
+  border-color: color-mix(in srgb, var(--p-accent) 60%, transparent);
+  color: color-mix(in srgb, var(--p-accent) 85%, #fff 15%);
+}
+.profile-card__bio {
+  margin: 1rem 0 0;
+  padding: .8rem 1.1rem;
+  border-left: 2px solid color-mix(in srgb, var(--p-accent) 65%, transparent);
+  background: rgba(4, 16, 26, .55);
+  font-size: .95rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--silver-dim);
+  white-space: pre-line;
+}
+.profile-card__badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .95rem; }
+.profile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  font-family: var(--font-title);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--p-accent) 75%, #fff 30%);
+  background: color-mix(in srgb, var(--p-accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--p-accent) 55%, transparent);
+  padding: .4em 1em;
+  clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+}
+.profile-badge::before { content: "◆"; font-size: .7em; color: var(--p-accent); }
 
 /* local collection of owned skins/items */
 .profile-collection { margin-top: 1.6rem; padding: clamp(1.2rem, 3vw, 1.8rem); }
@@ -1012,16 +1138,20 @@
   top: 6px;
   left: 6px;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
   font-size: .46rem;
   font-weight: 700;
   letter-spacing: .12em;
   text-indent: .12em;
   text-transform: uppercase;
   color: var(--tier-c, #EFEDE4);
-  background: #05121C;
+  background: color-mix(in srgb, var(--tier-c, #D8D8CF) 16%, #05121C);
   border: 1px solid var(--tier-c, rgba(216, 216, 207, .5));
   padding: .26em .58em;
 }
+.owned-card__tier svg { width: 8px; height: 8px; flex: none; display: block; }
 .owned-card__tier--collector { --tier-c: #D8D8CF; }
 .owned-card__tier--epic { --tier-c: #B9A2F8; }
 .owned-card__tier--elite { --tier-c: #4FD6EC; }
@@ -1212,11 +1342,19 @@
 .shop-tier__label::after {
   background: linear-gradient(90deg, rgba(245, 163, 74, .5), transparent);
 }
+.shop-tier__icon { display: inline-flex; flex: none; color: inherit; }
+.shop-tier__icon svg {
+  width: clamp(20px, 2.4vw, 26px);
+  height: clamp(20px, 2.4vw, 26px);
+  display: block;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, currentColor 65%, transparent));
+}
 .shop-tier__label--collector { color: #D8D8CF; }
 .shop-tier__label--epic { color: #B9A2F8; }
 .shop-tier__label--elite { color: #4FD6EC; }
 /* the word "Legendary / Lendárias" shimmers laterally */
 .shop-tier__label--legendary { color: #FFC46A; filter: drop-shadow(0 0 10px rgba(245, 163, 74, .8)); }
+.shop-tier__label--legendary .shop-tier__icon { color: #FFC46A; }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .shop-tier__label--legendary {
     background-image: linear-gradient(100deg, #FFA64D 28%, #FFF0CE 46%, #FFFFFF 52%, #FFF0CE 58%, #FF8C42 76%);
@@ -1343,6 +1481,9 @@
   left: 12px;
   z-index: 3;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
   font-family: var(--font-title);
   font-size: .6rem;
   font-weight: 700;
@@ -1350,11 +1491,20 @@
   text-indent: .24em;
   text-transform: uppercase;
   padding: .5em 1.05em;
-  background: #05121C;
+  background: color-mix(in srgb, var(--tier-c, #D8D8CF) 14%, #05121C);
   border: 1px solid var(--tier-c, rgba(216, 216, 207, .55));
   color: var(--tier-c, #EFEDE4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
   pointer-events: none;
+}
+.shop-card__tier svg {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  display: block;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--tier-c, #D8D8CF) 70%, transparent));
 }
 .shop-card__tier--collector { --tier-c: #D8D8CF; }
 .shop-card__tier--epic { --tier-c: #B9A2F8; }
@@ -1367,6 +1517,7 @@
   box-shadow: 0 0 20px rgba(255, 150, 60, .65), inset 0 0 10px rgba(245, 163, 74, .3);
   animation: tier-word-glow 1.9s ease-in-out infinite;
 }
+.shop-card__tier--legendary svg { filter: drop-shadow(0 0 7px rgba(255, 196, 106, .95)); }
 @keyframes tier-word-glow {
   0%, 100% { text-shadow: 0 0 6px rgba(255, 196, 106, .85); }
   50% { text-shadow: 0 0 14px rgba(255, 224, 160, 1), 0 0 32px rgba(255, 130, 50, .9), 0 0 50px rgba(245, 163, 74, .6); }
@@ -1386,7 +1537,23 @@
   0% { background-position: 150% 0; }
   55%, 100% { background-position: -150% 0; }
 }
-.shop-card__body { display: flex; flex-direction: column; gap: .4rem; padding: 1.15rem 1.25rem 1.3rem; flex: 1; }
+.shop-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  padding: 1.15rem 1.25rem 1.3rem;
+  flex: 1;
+  border-top: 1px solid rgba(255, 150, 60, .28);
+  background: linear-gradient(180deg, rgba(255, 150, 60, .05), transparent 45%);
+}
+/* the card's inner line takes the tier's colour */
+.shop-card--tier-collector .shop-card__body { border-top-color: rgba(216, 216, 207, .38); background: linear-gradient(180deg, rgba(216, 216, 207, .05), transparent 45%); }
+.shop-card--tier-epic .shop-card__body { border-top-color: rgba(185, 162, 248, .45); background: linear-gradient(180deg, rgba(185, 162, 248, .06), transparent 45%); }
+.shop-card--tier-elite .shop-card__body { border-top-color: rgba(79, 214, 236, .45); background: linear-gradient(180deg, rgba(79, 214, 236, .06), transparent 45%); }
+.shop-card--tier-legendary .shop-card__body {
+  border-top-color: rgba(255, 196, 106, .65);
+  background: linear-gradient(180deg, rgba(255, 150, 60, .1), transparent 50%);
+}
 .shop-card__kind {
   font-family: var(--font-title);
   font-size: .58rem;
@@ -1403,7 +1570,9 @@
   letter-spacing: .07em;
   color: var(--silver);
   text-wrap: balance;
+  transition: color .3s, text-shadow .3s;
 }
+.shop-card:hover .shop-card__name { color: #fff; text-shadow: 0 0 14px rgba(255, 196, 106, .45); }
 /* "yours" chip on owned shop cards */
 .shop-card__owned {
   position: absolute;

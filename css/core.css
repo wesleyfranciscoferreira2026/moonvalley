@@ -247,8 +247,18 @@ body::before {
   border: 1px solid rgba(216, 216, 207, .35);
   background: linear-gradient(180deg, rgba(10, 36, 49, .85), rgba(4, 16, 26, .92));
   clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
-  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out), color .3s, border-color .3s, background .3s;
+  transition: transform var(--dur) var(--ease-out), filter var(--dur) var(--ease-out), color .3s, border-color .3s, background .3s;
   will-change: transform;
+  filter: drop-shadow(0 3px 7px rgba(0, 0, 0, .45));
+}
+/* shine sweep that travels across the button on hover/focus */
+.btn::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 32%, rgba(255, 255, 255, .26) 47%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .26) 53%, transparent 68%);
+  transform: translateX(-135%);
+  transition: transform .6s var(--ease-out);
+  pointer-events: none;
 }
 .btn::after {
   content: "";
@@ -261,23 +271,26 @@ body::before {
 .btn:hover, .btn:focus-visible {
   color: #fff;
   border-color: rgba(245, 163, 74, .8);
-  box-shadow: var(--gold-glow), inset 0 0 24px rgba(245, 163, 74, .12);
+  background: linear-gradient(180deg, rgba(14, 46, 61, .9), rgba(6, 20, 31, .95));
   transform: translateY(-2px);
+  filter: drop-shadow(0 0 14px rgba(245, 163, 74, .5)) drop-shadow(0 8px 16px rgba(0, 0, 0, .5));
 }
+.btn:hover::before, .btn:focus-visible::before { transform: translateX(135%); }
 .btn:hover::after { border-color: rgba(245, 163, 74, .4); }
 .btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: 2px solid rgba(245, 163, 74, .9); outline-offset: 3px; }
 
 .btn--primary {
   color: #1d0e06;
   border-color: rgba(245, 163, 74, .9);
   background: linear-gradient(180deg, var(--solar-soft), var(--solar) 45%, var(--copper-2));
   text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
-  box-shadow: 0 6px 22px rgba(184, 92, 67, .4), inset 0 1px 0 rgba(255, 255, 255, .45);
+  filter: drop-shadow(0 6px 14px rgba(184, 92, 67, .45));
 }
 .btn--primary:hover, .btn--primary:focus-visible {
   color: #120802;
-  filter: brightness(1.08);
-  box-shadow: 0 8px 30px rgba(245, 163, 74, .55), inset 0 1px 0 rgba(255, 255, 255, .5);
+  background: linear-gradient(180deg, #FFC98A, #F9AE5B 45%, var(--copper-2));
+  filter: drop-shadow(0 0 18px rgba(245, 163, 74, .75)) drop-shadow(0 8px 18px rgba(0, 0, 0, .5));
 }
 
 .btn--ghost { background: linear-gradient(180deg, rgba(7, 26, 36, .75), rgba(4, 16, 26, .88)); }
@@ -292,7 +305,7 @@ body::before {
 }
 .btn[aria-disabled="true"]:hover {
   transform: none;
-  box-shadow: none;
+  filter: drop-shadow(0 3px 7px rgba(0, 0, 0, .45));
   border-color: rgba(216, 216, 207, .35);
   color: var(--silver);
 }
@@ -504,11 +517,13 @@ body::before {
     linear-gradient(45deg, transparent calc(50% - .55px), rgba(245, 163, 74, .5) calc(50% - .55px), rgba(245, 163, 74, .5) calc(50% + .55px), transparent calc(50% + .55px)) no-repeat right 0 / 18px 18px,
     linear-gradient(45deg, transparent calc(50% - .55px), rgba(245, 163, 74, .5) calc(50% - .55px), rgba(245, 163, 74, .5) calc(50% + .55px), transparent calc(50% + .55px)) no-repeat 0 bottom / 18px 18px,
     linear-gradient(135deg, transparent calc(50% - .55px), rgba(245, 163, 74, .5) calc(50% - .55px), rgba(245, 163, 74, .5) calc(50% + .55px), transparent calc(50% + .55px)) no-repeat right bottom / 18px 18px,
+    /* cool top sheen for depth */
+    radial-gradient(130% 55% at 50% 0%, rgba(17, 169, 196, .07), transparent 62%),
     linear-gradient(165deg, rgba(10, 36, 49, .92), rgba(4, 16, 26, .96));
-  border: 1px solid rgba(245, 163, 74, .32);
+  border: 1px solid rgba(245, 163, 74, .38);
   clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
   box-shadow: inset 0 0 32px rgba(0, 0, 0, .35);
-  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out), border-color .4s;
+  transition: transform var(--dur) var(--ease-out), filter var(--dur) var(--ease-out), border-color .4s;
 }
 .frame::before {
   content: "";
@@ -529,7 +544,7 @@ body::before {
 .frame:hover, .frame:focus-within {
   transform: translateY(-6px);
   border-color: rgba(245, 163, 74, .6);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, .55), 0 0 30px rgba(245, 163, 74, .16), inset 0 0 32px rgba(0, 0, 0, .35);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .55)) drop-shadow(0 0 16px rgba(245, 163, 74, .22));
 }
 .frame:hover::after { opacity: 1; }
 .frame:hover::before { border-color: rgba(245, 163, 74, .45); }
