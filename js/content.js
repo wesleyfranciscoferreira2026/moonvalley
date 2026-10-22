@@ -952,6 +952,24 @@ window.MV_CONTENT = {
       }
     },
     {
+      id: "skin-solstice",
+      kind: "skin",
+      tier: "legendary",
+      tone: "gold",
+      sigil: "bow",
+      art: "assets/shop/skin-solstice.jpg",
+      price: 249.9,
+      currency: "BRL",
+      en: {
+        name: "Vaelthor — Solstice Hunter",
+        text: "Solar plate welded over moonlit leather — gold that remembers the first dawn. The circle beneath his feet burns the old runes into the stone; his arrows carry the sunrise."
+      },
+      pt: {
+        name: "Vaelthor — Caçador do Solstício",
+        text: "Placas solares soldadas sobre o couro luaqueado — ouro que lembra a primeira aurora. O círculo sob seus pés queima as runas antigas na pedra; suas flechas carregam o nascer do sol."
+      }
+    },
+    {
       id: "skin-moonprowler",
       kind: "skin",
       tier: "epic",
