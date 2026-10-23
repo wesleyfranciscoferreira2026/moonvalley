@@ -35,6 +35,15 @@ window.MV_CONFIG = {
     projectId: "moonvalleyonline-a0e5a",
     appId: "1:927272271757:web:818658ea9d420d005847c4"
   },
+  /* Sign-up verification code sent by email (emailjs.com — free plan,
+     200 emails/month, no credit card). While these values are empty,
+     the code field stays hidden and signup works without it.
+     Setup guide: README section "Email verification code". */
+  emailjs: {
+    publicKey: "",
+    serviceId: "",
+    templateId: ""
+  },
   socials: [
     /* Add real profile URLs to enable the links. While url is null,
        the button honestly shows a "coming soon" state. */

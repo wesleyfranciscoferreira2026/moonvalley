@@ -109,6 +109,31 @@ O botão **Entrar / Criar Conta** no topo funciona em dois modos com a mesma int
 
 Enquanto o modo nuvem não estiver configurado, "Esqueci a senha" mostra um aviso honesto (recuperação por email só existe com Firebase).
 
+## Código de verificação por email no cadastro (EmailJS — gratuito)
+
+No cadastro, o visitante digita o email → clica **Enviar código** → recebe um código de 6 dígitos → digita o código → a conta só é criada depois (igual Roblox). Usa o [EmailJS](https://www.emailjs.com/) no plano gratuito: **200 emails/mês, sem cartão de crédito**.
+
+Enquanto `MV_CONFIG.emailjs` estiver vazio em `js/content.js`, o campo do código fica escondido e o cadastro funciona como antes.
+
+Para ativar:
+
+1. Crie uma conta grátis em [emailjs.com/sign-up](https://dashboard.emailjs.com/sign-up) e **confirme o email** clicando no link que eles enviam.
+2. **Email Services → Add New Service** — conecte seu email (Gmail/Outlook/etc.) e copie o **Service ID**.
+3. **Email Templates → Create New Template** — cole este conteúdo e salve:
+   - Subject: `Moon Valley — seu código: {{code}}`
+   - To Email: `{{to_email}}`
+   - Content (HTML):
+     ```html
+     <p>Olá! Seu código de verificação do Moon Valley é:</p>
+     <h2 style="letter-spacing:.3em">{{code}}</h2>
+     <p>Ele expira em 10 minutos. Se você não pediu esse código, ignore este email.</p>
+     ```
+   - Copie o **Template ID**.
+4. **Account → API Keys** — copie a **Public Key**.
+5. Preencha os três valores em `js/content.js`, dentro de `MV_CONFIG.emailjs`: `publicKey`, `serviceId`, `templateId`. Dê push — o campo do código aparece no cadastro.
+
+Detalhes: o código vale 10 minutos, o botão de reenvio tem espera de 45 segundos, e os emails podem cair na caixa de spam (vale avisar os visitantes).
+
 ## Como atualizar o conteúdo (RF-09)
 
 Todo o conteúdo dinâmico vive em `js/content.js`, com campos `en` e `pt`:

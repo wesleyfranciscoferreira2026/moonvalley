@@ -1749,6 +1749,14 @@
   var authSeq = 0; /* stale-async guard: only the latest action may report */
   var fbReady = false;
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  /* signup verification code (EmailJS) — hidden while CONFIG.emailjs is empty */
+  var otp = { code: "", email: "", expires: 0, cooldown: 0, sending: false, timer: 0 };
+  var OTP_TTL_MS = 10 * 60 * 1000;    /* a code lives 10 minutes */
+  var OTP_COOLDOWN_MS = 45000;        /* resend cooldown, also respects EmailJS's 1 req/sec */
+  function otpOn() {
+    var e = CONFIG.emailjs || {};
+    return !!(e.publicKey && e.serviceId && e.templateId);
+  }
 
   (function initFirebase() {
     var cfg = CONFIG.firebase;
@@ -1845,6 +1853,15 @@
           '<input class="profile-form__input" id="authUser" type="text" maxlength="20" autocomplete="username" placeholder="' + t("auth.usernamePlaceholder") + '">') +
         '<label class="profile-form__label" for="authEmail">' + t("auth.email") + "</label>" +
         '<input class="profile-form__input" id="authEmail" type="email" maxlength="120" autocomplete="email" placeholder="' + t("auth.emailPlaceholder") + '">' +
+        (isLogin || !otpOn() ? "" :
+          '<div class="auth-otp">' +
+            '<label class="profile-form__label" for="otpCode">' + t("auth.otpCode") + "</label>" +
+            '<div class="auth-otp__row">' +
+              '<button class="btn btn--ghost btn--sm auth-otp__send" type="button" data-otp-send>' + t("auth.otpSend") + "</button>" +
+              '<input class="profile-form__input auth-otp__input" id="otpCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="' + t("auth.otpPlaceholder") + '">' +
+            "</div>" +
+            '<p class="auth-otp__status" id="otpStatus" role="status" aria-live="polite" hidden></p>' +
+          "</div>") +
         '<label class="profile-form__label" for="authPass">' + t("auth.password") + "</label>" +
         '<input class="profile-form__input" id="authPass" type="password" maxlength="64" autocomplete="' + (isLogin ? "current-password" : "new-password") + '" placeholder="' + t("auth.passwordPlaceholder") + '">' +
         (isLogin
@@ -1884,6 +1901,39 @@
     return t(map[code] || "auth.errGeneric");
   }
 
+  /* ---- email verification code (EmailJS) helpers ---- */
+  function otpStatus(msg, kind) {
+    var el = $("#otpStatus");
+    if (!el) return;
+    el.textContent = msg || "";
+    el.className = "auth-otp__status" + (kind ? " is-" + kind : "");
+    el.hidden = !msg;
+  }
+
+  function otpStartCooldown(btn) {
+    clearInterval(otp.timer);
+    otp.timer = setInterval(function () {
+      var left = otp.cooldown - Date.now();
+      if (left <= 0) {
+        clearInterval(otp.timer);
+        otp.timer = 0;
+        btn.disabled = false;
+        btn.textContent = t("auth.otpSend");
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = Math.ceil(left / 1000) + "s";
+    }, 250);
+  }
+
+  function otpCheck(email, typed) {
+    if (!otp.code) return "Missing";
+    if (email.toLowerCase() !== otp.email.toLowerCase()) return "Changed";
+    if (Date.now() > otp.expires) return "Expired";
+    if (!typed || typed !== otp.code) return "Wrong";
+    return "Ok";
+  }
+
   function wireAuthForm() {
     $all("[data-auth-tab]", modalBody).forEach(function (btn) {
       btn.addEventListener("click", function () { openAuthModal(btn.getAttribute("data-auth-tab")); });
@@ -1905,6 +1955,61 @@
         });
       });
     }
+    var otpSend = $("[data-otp-send]", modalBody);
+    if (otpSend) {
+      if (otp.code && otp.email) otpStatus(t("auth.otpSent").replace("{email}", otp.email), "ok");
+      if (otp.cooldown > Date.now()) otpStartCooldown(otpSend);
+      otpSend.addEventListener("click", function () {
+        var email = $("#authEmail") ? $("#authEmail").value.trim() : "";
+        if (!EMAIL_RE.test(email)) return authFail(t("auth.errEmail"));
+        if (otp.sending || Date.now() < otp.cooldown) return;
+        if (!window.emailjs) return otpStatus(t("auth.otpUnavailable"), "err");
+        var cfg = CONFIG.emailjs || {};
+        var code = String(Math.floor(100000 + Math.random() * 900000));
+        otp.sending = true;
+        otpSend.disabled = true;
+        otpSend.textContent = t("auth.otpSending");
+        otpStatus("", "");
+        window.emailjs.send(cfg.serviceId, cfg.templateId, {
+          to_email: email,
+          code: code,
+          site: "Moon Valley",
+          lang: lang === "pt" ? "pt-BR" : "en"
+        }, { publicKey: cfg.publicKey }).then(function () {
+          otp.sending = false;
+          otp.code = code;
+          otp.email = email;
+          otp.expires = Date.now() + OTP_TTL_MS;
+          otp.cooldown = Date.now() + OTP_COOLDOWN_MS;
+          otpStatus(t("auth.otpSent").replace("{email}", email), "ok");
+          var codeInput = $("#otpCode");
+          if (codeInput) { codeInput.value = ""; codeInput.focus(); }
+          otpStartCooldown(otpSend);
+        }).catch(function () {
+          otp.sending = false;
+          otpSend.disabled = false;
+          otpSend.textContent = t("auth.otpSend");
+          otpStatus(t("auth.otpFail"), "err");
+        });
+      });
+      var emailField = $("#authEmail", modalBody);
+      if (emailField) {
+        emailField.addEventListener("input", function () {
+          if (otp.code && emailField.value.trim().toLowerCase() !== otp.email.toLowerCase()) {
+            otpStatus(t("auth.otpChangedInfo"), "warn");
+          }
+        });
+      }
+      var codeField = $("#otpCode", modalBody);
+      if (codeField) {
+        codeField.addEventListener("input", function () {
+          codeField.value = codeField.value.replace(/\D/g, "").slice(0, 6);
+        });
+      }
+    } else {
+      clearInterval(otp.timer);
+      otp.timer = 0;
+    }
     var form = $(".auth-form", modalBody);
     if (!form) return;
     form.addEventListener("submit", function (e) {
@@ -1919,6 +2024,11 @@
       if (authMode !== "login") {
         if (!nameEl || nameEl.value.trim().length < 3) return authFail(t("auth.errUser"));
         if (!pass2El || pass2El.value !== pass) return authFail(t("auth.errMatch"));
+        if (otpOn()) {
+          var codeEl = $("#otpCode");
+          var otpRes = otpCheck(email, codeEl ? codeEl.value.replace(/\D/g, "") : "");
+          if (otpRes !== "Ok") return authFail(t("auth.otpErr" + otpRes));
+        }
       }
       if (fbReady) {
         if (authMode === "login") {
@@ -1937,6 +2047,7 @@
             return cred.user.updateProfile({ displayName: uname });
           }).then(function () {
             if (seq !== authSeq) return;
+            otp.code = ""; otp.email = ""; otp.expires = 0;
             closeModal();
             renderAuthNav();
             toast(t("auth.created").replace("{name}", uname));
@@ -1965,6 +2076,7 @@
             if (seq !== authSeq) return;
             users[email] = { username: unameL, hash: hash, since: new Date().toISOString().slice(0, 10) };
             localStorage.setItem(AUTH_USERS, JSON.stringify(users));
+            otp.code = ""; otp.email = ""; otp.expires = 0;
             localStorage.setItem(AUTH_SESSION, email);
             closeModal();
             renderAuthNav();

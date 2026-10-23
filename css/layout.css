@@ -1925,6 +1925,25 @@
 }
 .auth-forgot:hover { color: var(--silver); }
 .auth-error { margin: .2rem 0 0; font-size: .8rem; letter-spacing: .04em; color: #E07856; }
+
+/* signup verification code (EmailJS) */
+.auth-otp { display: flex; flex-direction: column; gap: .55rem; margin: .3rem 0 .4rem; }
+.auth-otp__row { display: flex; gap: .6rem; align-items: stretch; flex-wrap: wrap; }
+.auth-otp__send { flex: 0 0 auto; align-self: center; white-space: nowrap; }
+.auth-otp__input {
+  flex: 1 1 130px;
+  min-width: 0;
+  text-align: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: .42em;
+  text-indent: .42em;
+}
+.auth-otp__status { margin: 0; min-height: 1.1em; font-size: .78rem; line-height: 1.45; letter-spacing: .03em; color: var(--silver-dim); }
+.auth-otp__status.is-ok { color: #79D6A0; }
+.auth-otp__status.is-err { color: #E9876F; }
+.auth-otp__status.is-warn { color: #F5A34A; }
 .auth-note { margin: 1.1rem 0 0; font-size: .72rem; line-height: 1.55; letter-spacing: .04em; color: var(--silver-dim); opacity: .8; }
 .toast {
   position: fixed;
