@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 48" fill="none">
   <defs>
     <linearGradient id="orn-line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#D8D8CF" stop-opacity="0"/>
-      <stop offset=".45" stop-color="#D8D8CF" stop-opacity=".85"/>
-      <stop offset="1" stop-color="#D8D8CF" stop-opacity=".9"/>
+      <stop offset="0" stop-color="#F2F4F8" stop-opacity="0"/>
+      <stop offset=".45" stop-color="#F2F4F8" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#F2F4F8" stop-opacity=".9"/>
     </linearGradient>
     <linearGradient id="orn-gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFD9A3"/>
+      <stop offset="0" stop-color="#E7C78E"/>
       <stop offset="1" stop-color="#B85C43"/>
     </linearGradient>
     <linearGradient id="orn-silver" x1="0" y1="0" x2="0" y2="1">
@@ -24,7 +24,7 @@
   <path d="M520 29.5H350" stroke="url(#orn-line)" stroke-width=".5" opacity=".5"/>
 
   <!-- left filigree (mirrored on the right) -->
-  <g id="orn-half" stroke="#D8D8CF" stroke-width="1.1" opacity=".9">
+  <g id="orn-half" stroke="#F2F4F8" stroke-width="1.1" opacity=".9">
     <path d="M226 24C244 24 252 12 268 12"/>
     <path d="M226 24C244 24 252 36 268 36"/>
     <path d="M268 12C280 12 284 18 292 20"/>

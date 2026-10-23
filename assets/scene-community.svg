@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
   <defs>
     <linearGradient id="cm-sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#04101A"/>
+      <stop offset="0" stop-color="#070D16"/>
       <stop offset=".6" stop-color="#0A3145"/>
       <stop offset="1" stop-color="#12586E"/>
     </linearGradient>
     <radialGradient id="cm-fire" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="#FFE9A8" stop-opacity=".95"/>
-      <stop offset=".4" stop-color="#F5A34A" stop-opacity=".55"/>
-      <stop offset="1" stop-color="#F5A34A" stop-opacity="0"/>
+      <stop offset=".4" stop-color="#C99B55" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#C99B55" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="cm-moon" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="#EAF6F8" stop-opacity=".6"/>
@@ -50,7 +50,7 @@
     <g fill="#020A12">
       <path d="M770 782 830 782 810 764 790 764Z"/>
     </g>
-    <path d="M800 700C816 722 824 742 818 760 812 776 788 776 782 760 776 742 784 722 800 700Z" fill="#F5A34A"/>
+    <path d="M800 700C816 722 824 742 818 760 812 776 788 776 782 760 776 742 784 722 800 700Z" fill="#C99B55"/>
     <path d="M800 716C809 730 813 744 809 755 805 765 795 765 791 755 787 744 791 730 800 716Z" fill="#FFE9A8"/>
 
     <!-- figure 1: seated with a staff, left of the fire -->
@@ -80,7 +80,7 @@
     </g>
 
     <!-- warm rim light from the fire -->
-    <g stroke="#F5A34A" stroke-width="2" opacity=".8" fill="none" stroke-linecap="round">
+    <g stroke="#C99B55" stroke-width="2" opacity=".8" fill="none" stroke-linecap="round">
       <path d="M700 690C708 706 714 726 716 748"/>
       <path d="M946 674C938 692 934 716 936 740"/>
       <path d="M900 662C894 676 892 692 894 708"/>

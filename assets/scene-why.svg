@@ -15,14 +15,14 @@
       <stop offset="1" stop-color="#164B60"/>
     </linearGradient>
     <linearGradient id="wy-aurora" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7FD6E6" stop-opacity="0"/>
-      <stop offset=".5" stop-color="#7FD6E6" stop-opacity=".5"/>
+      <stop offset="0" stop-color="#C6D6E8" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#C6D6E8" stop-opacity=".5"/>
       <stop offset="1" stop-color="#B49BE8" stop-opacity="0"/>
     </linearGradient>
     <radialGradient id="wy-orb" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="#EAFBFF"/>
-      <stop offset=".4" stop-color="#7FD6E6" stop-opacity=".8"/>
-      <stop offset="1" stop-color="#7FD6E6" stop-opacity="0"/>
+      <stop offset=".4" stop-color="#C6D6E8" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#C6D6E8" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="wy-moon" cx="50%" cy="50%" r="50%">
       <stop offset="0" stop-color="#F2FAFB" stop-opacity=".9"/>
@@ -64,7 +64,7 @@
 
   <!-- frozen ground with reflections -->
   <path d="M0 900V812C220 788 420 812 640 796 880 778 1100 810 1340 794 1460 786 1540 796 1600 788V900Z" fill="#0A2C3C"/>
-  <g stroke="#7FD6E6" stroke-width="1.4" opacity=".35">
+  <g stroke="#C6D6E8" stroke-width="1.4" opacity=".35">
     <path d="M120 856h280"/><path d="M520 878h240"/><path d="M900 850h300"/><path d="M1240 880h260"/>
   </g>
 
@@ -84,9 +84,9 @@
       <path d="M170 66C182 84 182 104 174 120" stroke="#F5C489" stroke-width="2.4" opacity=".8"/>
       <path d="M166 312C186 348 196 396 190 444" stroke="#F5C489" stroke-width="2.4" opacity=".7"/>
       <path d="M122 164C128 216 142 268 166 312" stroke="#F5C489" stroke-width="1.6" opacity=".45"/>
-      <path d="M76 126C68 96 80 66 104 52" stroke="#7FD6E6" stroke-width="2" opacity=".75"/>
-      <path d="M110 110C132 104 156 108 174 120" stroke="#7FD6E6" stroke-width="1.6" opacity=".6"/>
-      <path d="M120 258C118 320 122 384 138 440" stroke="#7FD6E6" stroke-width="1.4" opacity=".35"/>
+      <path d="M76 126C68 96 80 66 104 52" stroke="#C6D6E8" stroke-width="2" opacity=".75"/>
+      <path d="M110 110C132 104 156 108 174 120" stroke="#C6D6E8" stroke-width="1.6" opacity=".6"/>
+      <path d="M120 258C118 320 122 384 138 440" stroke="#C6D6E8" stroke-width="1.4" opacity=".35"/>
     </g>
   </g>
 

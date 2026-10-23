@@ -2,18 +2,18 @@
   <defs>
     <linearGradient id="mv-silver" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset=".55" stop-color="#D8D8CF"/>
+      <stop offset=".55" stop-color="#F2F4F8"/>
       <stop offset="1" stop-color="#8E9AA0"/>
     </linearGradient>
     <linearGradient id="mv-gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFD9A3"/>
-      <stop offset=".55" stop-color="#F5A34A"/>
+      <stop offset="0" stop-color="#E7C78E"/>
+      <stop offset=".55" stop-color="#C99B55"/>
       <stop offset="1" stop-color="#B85C43"/>
     </linearGradient>
     <radialGradient id="mv-glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#11A9C4" stop-opacity=".5"/>
-      <stop offset=".7" stop-color="#11A9C4" stop-opacity=".12"/>
-      <stop offset="1" stop-color="#11A9C4" stop-opacity="0"/>
+      <stop offset="0" stop-color="#C6D6E8" stop-opacity=".5"/>
+      <stop offset=".7" stop-color="#C6D6E8" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#C6D6E8" stop-opacity="0"/>
     </radialGradient>
     <mask id="mv-crescent">
       <circle cx="60" cy="60" r="42" fill="#fff"/>
@@ -39,10 +39,10 @@
   <!-- scene inside the disc: valley + castle -->
   <g clip-path="url(#mv-disc)">
     <!-- stars -->
-    <circle cx="76" cy="27" r="1.1" fill="#F5A34A"/>
-    <circle cx="87" cy="37" r=".8" fill="#D8D8CF"/>
-    <circle cx="68" cy="17" r=".7" fill="#D8D8CF" opacity=".8"/>
-    <circle cx="93" cy="24" r=".6" fill="#D8D8CF" opacity=".6"/>
+    <circle cx="76" cy="27" r="1.1" fill="#C99B55"/>
+    <circle cx="87" cy="37" r=".8" fill="#F2F4F8"/>
+    <circle cx="68" cy="17" r=".7" fill="#F2F4F8" opacity=".8"/>
+    <circle cx="93" cy="24" r=".6" fill="#F2F4F8" opacity=".6"/>
     <!-- valley floor -->
     <rect x="0" y="90" width="120" height="40" fill="#05141E"/>
     <!-- mountains -->
@@ -58,7 +58,7 @@
       <rect x="50" y="53.2" width="17" height="3.2"/>
     </g>
     <!-- windows -->
-    <g fill="#F5A34A">
+    <g fill="#C99B55">
       <rect x="56.6" y="46.4" width="1.2" height="1.9" rx=".4"/>
       <rect x="59.4" y="46.4" width="1.2" height="1.9" rx=".4"/>
       <rect x="48.2" y="52.4" width="1" height="1.6" rx=".3"/>

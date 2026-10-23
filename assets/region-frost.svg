@@ -11,7 +11,7 @@
       <stop offset="1" stop-color="#2A6E84"/>
     </linearGradient>
     <linearGradient id="fr-aurora" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7FD6E6" stop-opacity="0"/>
+      <stop offset="0" stop-color="#C6D6E8" stop-opacity="0"/>
       <stop offset=".5" stop-color="#8FE4C9" stop-opacity=".55"/>
       <stop offset="1" stop-color="#B49BE8" stop-opacity="0"/>
     </linearGradient>

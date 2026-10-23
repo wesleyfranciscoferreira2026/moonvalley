@@ -46,7 +46,7 @@
   <path d="M-20 900 60 810 200 880 340 800 470 890 620 810 780 900 940 820 1100 900 1260 830 1420 900 1620 840V940H-20Z" fill="url(#mt-near)"/>
 
   <!-- warm rim light on right slopes -->
-  <g stroke="#F5A34A" stroke-width="2" opacity=".35" fill="none">
+  <g stroke="#C99B55" stroke-width="2" opacity=".35" fill="none">
     <path d="M1030 452 1000 490"/>
     <path d="M1260 492 1230 530"/>
     <path d="M1460 632 1432 668"/>

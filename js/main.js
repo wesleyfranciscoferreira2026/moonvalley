@@ -664,7 +664,7 @@
   var GEMS = '<span class="gem gem--tl"></span><span class="gem gem--tr"></span><span class="gem gem--bl"></span><span class="gem gem--br"></span>';
 
   /* profile extras: aura colours, badges and regions */
-  var ACCENTS = { solar: "#F5A34A", aurora: "#11A9C4", blood: "#E9876F", arcane: "#B9A2F8", frost: "#8FD4EE", moon: "#D8D8CF" };
+  var ACCENTS = { solar: "#E7C78E", aurora: "#A6B9CC", blood: "#E9876F", arcane: "#B9A2F8", frost: "#8FD4EE", moon: "#F2F4F8" };
   var ACCENT_ORDER = ["solar", "aurora", "blood", "arcane", "frost", "moon"];
   var BADGE_ORDER = ["pvp", "explorer", "collector", "lorekeeper", "trader", "nightowl"];
   var REGION_ORDER = ["americas", "europe", "asia", "oceania"];
