@@ -24,7 +24,7 @@ O repositório já inclui o workflow `.github/workflows/deploy-pages.yml`, que p
 2. No GitHub, abra o repositório → **Settings** → **Pages**.
 3. Em **Source**, escolha **GitHub Actions** e salve.
 4. Pronto: o site fica online em
-   `https://wesleyfranciscoferreira2026.github.io/moonvalley/`
+   `https://wesleyfranciscoferreira2026.github.io/moonvalleyonline/`
    (o deploy roda sozinho a cada push; acompanhe em **Actions**).
 
 ### Opção B — Netlify Drop (mais rápido, sem git)
