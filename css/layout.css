@@ -1695,6 +1695,51 @@
 .rar-chip--rare { --rar-c: #8FB8DE; }
 .rar-chip--common { --rar-c: #9AA5AA; }
 
+/* ---------------- equipment droplist (210 weapons) ---------------- */
+.drop-equip__note { margin: 0 0 1.4rem; font-size: .86rem; line-height: 1.6; letter-spacing: .03em; color: var(--silver-dim); max-width: 62ch; }
+.weapon-legends { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; margin-bottom: 1.9rem; }
+.weapon-legend { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.weapon-legend__art { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-bottom: 1px solid rgba(216, 216, 207, .14); }
+.weapon-legend__art--ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.4rem;
+  color: rgba(245, 163, 74, .55);
+  background: radial-gradient(120% 100% at 50% 0%, rgba(17, 169, 196, .16), rgba(7, 26, 36, .92));
+}
+.weapon-legend__body { padding: 1rem 1.1rem 1.2rem; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
+.weapon-legend__tier { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--solar); }
+.weapon-legend__name { margin: 0; font-size: 1.25rem; letter-spacing: .09em; color: #FFFFFF; }
+.weapon-legend__flavor { margin: 0; font-size: .82rem; line-height: 1.55; color: var(--silver-dim); flex: 1; }
+.weapon-legend__meta { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin-top: .55rem; }
+.weapon-legend__cat { font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: #11A9C4; }
+.equip-controls { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; justify-content: space-between; margin-bottom: .9rem; }
+.equip-search { max-width: 260px; margin: 0; }
+.equip-tabs { margin: 0; justify-content: flex-end; }
+.eq-chip__kanji { color: rgba(17, 169, 196, .85); margin-left: .15rem; }
+.equip-count { margin: 0 0 .7rem; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--silver-dim); }
+.equip-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: .55rem; }
+.weapon-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .6rem .75rem;
+  border: 1px solid rgba(216, 216, 207, .14);
+  background: rgba(7, 26, 36, .55);
+}
+.weapon-chip__name { font-family: var(--font-title); font-weight: 700; font-size: .82rem; letter-spacing: .07em; color: #EDF3F4; }
+.weapon-chip__cat { font-size: .8rem; color: rgba(17, 169, 196, .7); }
+.weapon-chip[hidden] { display: none; }
+.weapon-chip--supreme { border-color: rgba(245, 163, 74, .6); box-shadow: inset 0 0 14px rgba(245, 163, 74, .14); }
+.weapon-chip--supreme .weapon-chip__name { color: #FFD9A0; }
+@media (max-width: 640px) {
+  .equip-search { max-width: none; width: 100%; }
+  .equip-tabs { justify-content: flex-start; }
+  .equip-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
 /* ---------------- ranking (hall of the vale) ---------------- */
 .rank-tabs {
   display: flex;

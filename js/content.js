@@ -1206,6 +1206,65 @@ window.MV_CONTENT = {
     }
   ],
 
+  /* ---------- EQUIPMENT DROP LIST ----------
+     210 exclusive weapon names (Japanese only — lore names, no translation).
+     supreme: the 7 featured weapons with art + flavor; chance <= 0.1%. */
+  equipment: {
+    categories: [
+      {
+        key: "katana", kanji: "刀", en: "Katanas", pt: "Katanas",
+        names: ["KUROTSUME", "AKATSURYU", "YAMIKAZE", "TSUKIKIBA", "RAIKOKU", "SHIROKAGE", "ONITEN", "KAGEGIRI", "GESSEN", "KURONAMI", "HOSHIKIRI", "RYUGEKI", "MUGENKIBA", "AKUMAKIRI", "RAISHINKEN", "YORUTSUKI", "KOKUENRYU", "TENSHIKAGE", "SHURAIBA", "ZANKOKU", "RYUMEIGETSU", "KURONOTSURUGI", "ENGETSUKI", "KAMIKIBA", "MUGENKIRI", "RAITENRYU", "YAMITSURUGI", "SHINRAKAGE", "OUKARYU", "TENKURONAGI"]
+      },
+      {
+        key: "sword", kanji: "剣", en: "Swords", pt: "Espadas",
+        names: ["KENKIBA", "HOMURAGIRI", "RAIKOKUTEN", "SHINKENRA", "GURENRYU", "KAGEHOMURA", "TENRAIKEN", "ONIMON", "KOKURYUGEN", "HAKURYUKEN", "ENMAKIBA", "SORAKIRI", "JIGOKUREN", "KAMINARIHA", "KURAGETSU", "SEIRYUKEN", "RYUMEIKEN", "SHURAOTSU", "TENMUSOU", "GOKURYUKEN", "KISHINKIBA", "AKURYUGA", "HOSHITEN", "KUROHOMURA", "SENGEKIRIN", "RAIMEIKOKU", "AMENOKIBA", "MUKUROKEN", "SHINENRYU", "KAMIYORIKEN"]
+      },
+      {
+        key: "shield", kanji: "盾", en: "Shields", pt: "Escudos",
+        names: ["KUROGANE", "ONIMAMORI", "TENGOKUHA", "RAIKABE", "KAGEGAKI", "SHIROGANE", "RYUTATE", "KAMINOKABE", "YAMIMAMORI", "TSUKITATE", "KOKURYUTATE", "TENKOMORI", "ONIKABE", "RAISHIELD", "KURONOKI", "HOSHITATE", "SHINKABE", "AKAMAMORI", "MUGENTATE", "SEITENKABE", "RYUGOKU", "KAMIKAGAMI", "YORUTATE", "TENRYUGUARD", "GOKUHEKI", "KUROSHINKAI", "AMATSUTATE", "SHURAHEKI", "BANSEIKABE", "FUTENNOOKI"]
+      },
+      {
+        key: "hammer", kanji: "大槌", en: "Hammers", pt: "Martelos",
+        names: ["KUROTSUCHI", "ONIKAZAN", "RAISHOGUN", "GOKUHA", "TENGENZAN", "KAMITSUCHI", "RYUGORAI", "AKUMATSUI", "KOKUHEKI", "HOMURATSUI", "JIGOKUZAN", "TENKAIHA", "RAIMEITSUI", "ONIKOKU", "GURENTSUCHI", "RYUSEKAI", "SHINRAKU", "KURONOTSUI", "HAKAIKOKU", "KISHINZAN", "GOKUTENRA", "TENMAKOKU", "RYUJISHIN", "BAKURETSU", "MUGENDAI", "KAMINARIJIN", "SHURAHAKAI", "AMENOKAMUI", "DAITENGOKU", "KONSHINHAKAI"]
+      },
+      {
+        key: "axe", kanji: "斧", en: "Axes", pt: "Machados",
+        names: ["KUROONO", "ONIKIBA", "RAISEN", "YAMITSUME", "RYUKOKU", "AKATSUKIBA", "KAGEONO", "HOMURAKIBA", "TENMAONO", "KOKURYUHA", "JIGOKUKIBA", "RAIONI", "SHURAONO", "KURONAGI", "GURENTSUME", "RYUKAMEN", "KAMITSUME", "YORUONO", "HAKURYUKIBA", "MUGENONO", "ONIKAMUI", "RAIGOKU", "TENKIBAHA", "KOKUENONO", "SHINRAKIBA", "AMATSUONO", "KISHINRAI", "HAKAIKIBA", "GOKURYUONO", "BANSEIKOKU"]
+      },
+      {
+        key: "dagger", kanji: "短刀", en: "Daggers", pt: "Adagas",
+        names: ["KUROTSUKI", "ONIKIRIHA", "YAMIKIBA", "RAISHIME", "KAGEKIBA", "AKUMATSUME", "TSUKIKIRI", "SHINOBIKAGE", "KOKUROHA", "YORUTSUME", "ONIMUSUME", "KURONOKIBA", "RAIKASUMI", "MUGENKAGE", "SHURATSUME", "HOSHIKIBA", "JIGOKUGIRI", "AKAKAGE", "KAMINOKIRI", "KUROHOTARU", "MURASAKIKIBA", "RYUKAGE", "ENMAKIRI", "SHINKUROTSUME", "TENSHIKIRI", "KOKUENKIBA", "YAMIMUSHA", "ONIKASUMI", "MUGENSHIN", "KURONAGARE"]
+      },
+      {
+        key: "kunai", kanji: "苦無", en: "Kunais", pt: "Kunais",
+        names: ["KUROHARI", "ONITOBI", "RAISENKO", "YAMIHARI", "KAZEKIBA", "TSUKITOBI", "KAGEBARI", "RYUTSUBA", "KOKUENBI", "SHINOBIKIBA", "AKATSUKIHARI", "ONIKASAI", "RAIGENKO", "YORUTOBI", "KURONAMIHA", "HOSHIBARI", "KAMIKAZARI", "MUGENHARI", "SHURAKIBA", "TENKASEN", "KOKURYUTOBI", "JIGOKUHARI", "KAGEHOTARU", "RAIMEIKIBA", "AMENOHARI", "ONIMIKAZE", "SHINKAGEBI", "KURONOTSUBASA", "MUGENRAI", "YOMIKURAI"]
+      }
+    ],
+    supreme: [
+      { name: "TENKURONAGI", cat: "katana", art: "", chance: "0.1%",
+        en: { title: "Legendary Katana", text: "A blade that seems to absorb the sound around it." },
+        pt: { title: "Katana Lendária", text: "Uma lâmina que parece absorver o som ao redor." } },
+      { name: "KAMIYORIKEN", cat: "sword", art: "assets/droplist/weapon-kamiyoriken.jpg", chance: "0.05%",
+        en: { title: "Supreme Sword", text: "A relic forged to challenge divine entities." },
+        pt: { title: "Espada Suprema", text: "Uma relíquia criada para desafiar entidades divinas." } },
+      { name: "FUTENNOOKI", cat: "shield", art: "assets/droplist/weapon-futenooki.jpg", chance: "0.1%",
+        en: { title: "Legendary Shield", text: "An ancient defense able to withstand devastating attacks." },
+        pt: { title: "Escudo Lendário", text: "Uma defesa ancestral capaz de resistir a ataques devastadores." } },
+      { name: "KONSHINHAKAI", cat: "hammer", art: "assets/droplist/weapon-konshinhakai.jpg", chance: "0.05%",
+        en: { title: "Supreme Hammer", text: "A hammer whose force threatens both flesh and spirit." },
+        pt: { title: "Martelo Supremo", text: "Um martelo cuja força ameaça tanto a carne quanto o espírito." } },
+      { name: "BANSEIKOKU", cat: "axe", art: "assets/droplist/weapon-banseikoku.jpg", chance: "0.1%",
+        en: { title: "Legendary Axe", text: "A weapon tied to the fall of entire civilizations." },
+        pt: { title: "Machado Lendário", text: "Uma arma associada à queda de civilizações inteiras." } },
+      { name: "KURONAGARE", cat: "dagger", art: "assets/droplist/weapon-kuronagare.jpg", chance: "0.1%",
+        en: { title: "Legendary Dagger", text: "A silent weapon that leaves a trail of shadows." },
+        pt: { title: "Adaga Lendária", text: "Uma arma silenciosa que deixa um rastro de sombras." } },
+      { name: "YOMIKURAI", cat: "kunai", art: "assets/droplist/weapon-yomikurai.jpg", chance: "0.05%",
+        en: { title: "Supreme Kunai", text: "A legendary projectile linked to the depths of the world." },
+        pt: { title: "Kunai Suprema", text: "Um projétil lendário ligado às profundezas do mundo." } }
+    ]
+  },
+
   /* ---------- ROADMAP (dev plans, preview) ----------
      Statuses: idea | planned | development | launch
      Categories: gameplay | world | classes | systems | community */

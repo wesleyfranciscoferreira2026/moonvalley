@@ -1379,12 +1379,100 @@
     dropGrid.appendChild(board);
   }
 
+  /* equipment droplist: 210 weapon names + 7 supreme featured (art + flavor) */
+  function renderDropEquipment() {
+    var eq = CONTENT.equipment || { categories: [], supreme: [] };
+    var catOf = {};
+    (eq.categories || []).forEach(function (c) { catOf[c.key] = c; });
+    var supremeMap = {};
+    (eq.supreme || []).forEach(function (s) { supremeMap[s.name] = s; });
+
+    var legends = (eq.supreme || []).map(function (s) {
+      var c = loc(s);
+      var cat = catOf[s.cat];
+      var art = s.art
+        ? '<img class="weapon-legend__art" src="' + s.art + '" alt="' + esc(s.name) + '" loading="lazy">'
+        : '<div class="weapon-legend__art weapon-legend__art--ph" aria-hidden="true">' + (cat ? cat.kanji : "刀") + "</div>";
+      return '<article class="frame weapon-legend reveal">' +
+        art +
+        '<div class="weapon-legend__body">' +
+          '<span class="weapon-legend__tier">' + esc(c.title) + "</span>" +
+          '<h3 class="weapon-legend__name">' + esc(s.name) + "</h3>" +
+          '<p class="weapon-legend__flavor">' + esc(c.text) + "</p>" +
+          '<div class="weapon-legend__meta">' +
+            '<span class="weapon-legend__cat">' + (cat ? esc(loc(cat)) + " " + cat.kanji : "") + "</span>" +
+            '<span class="rar-chip rar-chip--legendary">' + dropChanceText(s.chance) + "</span>" +
+          "</div>" +
+        "</div>" +
+      "</article>";
+    }).join("");
+
+    var chips = ['<button class="rank-tab is-active" type="button" data-eq-cat="all" aria-pressed="true">' + t("drop.equipAll") + "</button>"];
+    (eq.categories || []).forEach(function (c) {
+      chips.push('<button class="rank-tab" type="button" data-eq-cat="' + c.key + '" aria-pressed="false">' + esc(loc(c)) +
+        ' <span class="eq-chip__kanji">' + c.kanji + "</span></button>");
+    });
+    var cells = [];
+    (eq.categories || []).forEach(function (c) {
+      c.names.forEach(function (name) {
+        cells.push('<li class="weapon-chip' + (supremeMap[name] ? " weapon-chip--supreme" : "") +
+          '" data-eq-item data-cat="' + c.key + '" data-name="' + name + '">' +
+          '<span class="weapon-chip__name">' + esc(name) + "</span>" +
+          '<span class="weapon-chip__cat">' + c.kanji + "</span>" +
+          "</li>");
+      });
+    });
+
+    var board = document.createElement("article");
+    board.className = "frame drop-card drop-equip";
+    board.innerHTML = GEMS +
+      '<p class="drop-card__region">' + t("drop.equipTitle") + "</p>" +
+      '<p class="drop-equip__note">' + t("drop.equipNote") + "</p>" +
+      '<div class="weapon-legends">' + legends + "</div>" +
+      '<div class="equip-controls">' +
+        '<input class="profile-form__input equip-search" id="equipSearch" type="search" maxlength="30" placeholder="' + t("drop.equipSearch") + '" aria-label="' + t("drop.equipSearch") + '">' +
+        '<div class="rank-tabs equip-tabs" role="tablist">' + chips.join("") + "</div>" +
+      "</div>" +
+      '<p class="equip-count" id="equipCount">' + t("drop.equipCount").replace("{n}", String(cells.length)) + "</p>" +
+      '<ul class="equip-grid">' + cells.join("") + "</ul>";
+    dropGrid.appendChild(board);
+
+    var activeCat = "all", query = "";
+    var countEl = $("#equipCount", board);
+    function applyFilter() {
+      var shown = 0;
+      $all("[data-eq-item]", board).forEach(function (li) {
+        var okCat = activeCat === "all" || li.getAttribute("data-cat") === activeCat;
+        var okQ = !query || li.getAttribute("data-name").indexOf(query) > -1;
+        li.hidden = !(okCat && okQ);
+        if (okCat && okQ) shown++;
+      });
+      if (countEl) countEl.textContent = t("drop.equipCount").replace("{n}", String(shown));
+    }
+    $all("[data-eq-cat]", board).forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        activeCat = btn.getAttribute("data-eq-cat");
+        $all("[data-eq-cat]", board).forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        applyFilter();
+      });
+    });
+    var search = $("#equipSearch", board);
+    if (search) search.addEventListener("input", function () {
+      query = search.value.trim().toUpperCase();
+      applyFilter();
+    });
+  }
+
   function renderDroplist() {
     if (!dropGrid) return;
     var dropTabs = $("#dropTabs");
     if (dropTabs) {
       dropTabs.innerHTML = "";
-      [["guardians", "droplist.tab.guardians"], ["items", "droplist.tab.items"]].forEach(function (pair) {
+      [["guardians", "droplist.tab.guardians"], ["items", "droplist.tab.items"], ["equipment", "droplist.tab.equipment"]].forEach(function (pair) {
         var btn = document.createElement("button");
         btn.type = "button";
         btn.className = "rank-tab" + (dropView === pair[0] ? " is-active" : "");
@@ -1400,6 +1488,11 @@
     dropGrid.innerHTML = "";
     if (dropView === "items") {
       renderDropItems();
+      registerReveals();
+      return;
+    }
+    if (dropView === "equipment") {
+      renderDropEquipment();
       registerReveals();
       return;
     }
