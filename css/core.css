@@ -258,15 +258,7 @@ body::before {
   will-change: transform;
   filter: drop-shadow(0 3px 7px rgba(0, 0, 0, .45));
 }
-/* shine sweep that travels across the button on hover/focus */
-.btn::before {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(105deg, transparent 32%, rgba(255, 255, 255, .26) 47%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .26) 53%, transparent 68%);
-  transform: translateX(-135%);
-  transition: transform .6s var(--ease-out);
-  pointer-events: none;
-}
+/* shine removed — flat premium look (PMD) */
 .btn::after {
   content: "";
   position: absolute; inset: 3px;
@@ -282,7 +274,6 @@ body::before {
   transform: translateY(-2px);
   filter: drop-shadow(0 0 12px rgba(201, 155, 85, .3)) drop-shadow(0 8px 16px rgba(0, 0, 0, .5));
 }
-.btn:hover::before, .btn:focus-visible::before { transform: translateX(135%); }
 .btn:hover::after { border-color: rgba(201, 155, 85, .35); }
 .btn:active { transform: translateY(0); }
 .btn:focus-visible { outline: 2px solid rgba(201, 155, 85, .9); outline-offset: 3px; }
