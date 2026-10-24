@@ -1561,6 +1561,62 @@
   border-top-color: rgba(255, 196, 106, .65);
   background: linear-gradient(180deg, rgba(231, 199, 142, .1), transparent 50%);
 }
+/* legendary skins wear the gilded frame; the artwork keeps its 424 / 588
+   proportion, with the content inset to the frame's opening */
+.shop-card--tier-legendary {
+  aspect-ratio: 424 / 588;
+  padding: 14.62% 10.61% 11.08% 10.14%;
+  border-color: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  background:
+    url("../assets/frames/legendary.png?v=2") center / 100% 100% no-repeat,
+    linear-gradient(165deg, rgba(18, 49, 61, .96), rgba(7, 13, 22, .98));
+  box-shadow: 0 14px 32px rgba(4, 8, 16, .45);
+  animation: none;
+}
+.shop-card--tier-legendary:hover,
+.shop-card--tier-legendary:focus-within {
+  border-color: transparent;
+  filter: drop-shadow(0 16px 30px rgba(4, 8, 16, .55)) drop-shadow(0 0 16px rgba(231, 199, 142, .22));
+}
+.shop-card--tier-legendary::before,
+.shop-card--tier-legendary::after { content: none; }
+.shop-card--tier-legendary .gem,
+.shop-card--tier-legendary .shop-card__ring { display: none; }
+.shop-card--tier-legendary .shop-card__art {
+  flex: 1 1 auto;
+  min-height: 0;
+  aspect-ratio: auto;
+  border-bottom: 0;
+}
+/* the whole skin artwork stays visible inside the frame opening */
+.shop-card--tier-legendary .shop-card__img {
+  object-fit: contain;
+}
+.shop-card--tier-legendary:hover .shop-card__img { transform: none; }
+.shop-card--tier-legendary .shop-card__body {
+  flex: 0 0 auto;
+  gap: .2rem;
+  padding: .55rem .5rem .6rem;
+}
+.shop-card--tier-legendary .shop-card__kind { font-size: .5rem; }
+.shop-card--tier-legendary .shop-card__name { font-size: .85rem; line-height: 1.14; }
+.shop-card--tier-legendary .shop-card__foot { padding-top: .4rem; }
+.shop-card--tier-legendary .shop-card__buy {
+  font-size: .7rem;
+  letter-spacing: .16em;
+  text-indent: .16em;
+  padding: .9em 1.8em;
+}
+.shop-card--tier-legendary .shop-card__tier {
+  top: calc(10.54% + 8px);
+  left: calc(10.14% + 8px);
+}
+.shop-card--tier-legendary .shop-card__owned {
+  top: calc(10.54% + 8px);
+  right: calc(10.61% + 8px);
+}
 .shop-card__kind {
   font-family: var(--font-title);
   font-size: .58rem;
