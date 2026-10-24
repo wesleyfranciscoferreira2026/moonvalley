@@ -67,7 +67,7 @@
 
   /* active section highlighting */
   var navLinks = $all(".site-nav__link");
-  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "ranking", "roadmap", "features", "media", "youtube", "community"]
+  var sections = ["home", "news", "why", "world", "classes", "profile", "books", "armory", "shop", "droplist", "ranking", "ranked", "roadmap", "features", "media", "youtube", "community"]
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
   if ("IntersectionObserver" in window) {
@@ -1522,6 +1522,7 @@
   /* ---------------- RANKING ---------------- */
   var rankTabs = $("#rankTabs");
   var rankBoard = $("#rankBoard");
+  var rankedBoard = $("#rankedBoard");
   var rankBoardKey = "kills";
 
   function rankNum(n) {
@@ -1539,49 +1540,52 @@
     return rankNum(tier.min) + " – " + rankNum(tier.max);
   }
 
-  function renderRankedBoard() {
+  function renderRanked() {
+    if (!rankedBoard) return;
     var data = CONTENT.ranking && CONTENT.ranking.ranked;
-    if (!data) return "";
+    if (!data) {
+      rankedBoard.innerHTML = "";
+      return;
+    }
     var season = loc(data.season);
 
     var tiers = data.tiers.map(function (tier) {
-      var division = tier.divisions === 1 ? t("ranking.ranked.division") : t("ranking.ranked.divisions");
+      var division = tier.divisions === 1 ? t("ranked.division") : t("ranked.divisions");
       return '<article class="ranked-tier ranked-tier--' + tier.key + '">' +
         '<span class="ranked-tier__emblem">' + RANK_TIER_SIGIL + "</span>" +
         '<div class="ranked-tier__body">' +
-          '<h3 class="ranked-tier__name">' + t("ranking.tier." + tier.key) + "</h3>" +
-          '<p class="ranked-tier__range">' + rankTierRange(tier) + ' <em>' + t("ranking.ranked.mmr") + "</em></p>" +
+          '<h3 class="ranked-tier__name">' + t("ranked.tier." + tier.key) + "</h3>" +
+          '<p class="ranked-tier__range">' + rankTierRange(tier) + ' <em>' + t("ranked.mmr") + "</em></p>" +
           '<p class="ranked-tier__divisions">' + tier.divisions + " " + division + "</p>" +
-          '<p class="ranked-tier__reward"><span>' + t("ranking.ranked.reward") + "</span>" + esc(loc(tier).reward) + "</p>" +
+          '<p class="ranked-tier__reward"><span>' + t("ranked.reward") + "</span>" + esc(loc(tier).reward) + "</p>" +
         "</div>" +
       "</article>";
     }).join("");
 
     var p = loadProfile();
     var you = p
-      ? '<p class="ranked__you"><span>' + t("ranking.ranked.placement") + ":</span> <strong>" + esc(p.name) + "</strong> — " +
-        t("ranking.ranked.unranked") + ". " + t("ranking.ranked.placementNote") + "</p>"
+      ? '<p class="ranked__you"><span>' + t("ranked.placement") + ":</span> <strong>" + esc(p.name) + "</strong> — " +
+        t("ranked.unranked") + ". " + t("ranked.placementNote") + "</p>"
       : '<p class="ranked__you">' + t("ranking.createProfileHint") + "</p>";
 
-    return '<div class="ranked">' +
+    rankedBoard.innerHTML = '<div class="ranked">' +
       '<div class="ranked__season">' +
         "<div>" +
-          '<p class="ranked__season-eyebrow">' + t("ranking.ranked.season") + "</p>" +
+          '<p class="ranked__season-eyebrow">' + t("ranked.season") + "</p>" +
           '<h3 class="ranked__season-name">' + esc(season.name) + "</h3>" +
           '<p class="ranked__season-window">' + esc(season.window) + "</p>" +
         "</div>" +
-        '<span class="ranked__season-badge">' + t("ranking.ranked.preSeason") + "</span>" +
+        '<span class="ranked__season-badge">' + t("ranked.preSeason") + "</span>" +
       "</div>" +
-      '<h3 class="ranked__title">' + t("ranking.ranked.tiers") + "</h3>" +
+      '<h3 class="ranked__title">' + t("ranked.tiers") + "</h3>" +
       '<div class="ranked__grid">' + tiers + "</div>" +
       you +
-      '<p class="rank-board__hint">' + t("ranking.ranked.note") + "</p>" +
     "</div>";
   }
 
   function renderRanking() {
     if (!rankTabs || !rankBoard) return;
-    var keys = ["kills", "mobs", "arena", "ranked"];
+    var keys = ["kills", "mobs", "arena"];
     rankTabs.innerHTML = "";
     keys.forEach(function (key) {
       var btn = document.createElement("button");
@@ -1595,11 +1599,6 @@
       });
       rankTabs.appendChild(btn);
     });
-
-    if (rankBoardKey === "ranked") {
-      rankBoard.innerHTML = renderRankedBoard();
-      return;
-    }
 
     var rows = (CONTENT.ranking && CONTENT.ranking[rankBoardKey]) || [];
     var isArena = rankBoardKey === "arena";
@@ -2408,6 +2407,7 @@
     renderShop();
     renderDroplist();
     renderRanking();
+    renderRanked();
     renderRoadmap();
     renderAuthNav();
     if (!modalRoot.hidden && $(".auth-form", modalBody)) openAuthModal(authMode);
