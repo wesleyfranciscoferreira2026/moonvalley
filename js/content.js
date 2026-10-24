@@ -1505,7 +1505,7 @@ window.MV_CONTENT = {
           pt: { reward: "Estandarte de Invicto e um fragmento de skin exclusivo." }
         },
         {
-          key: "onipotente", rank: 6, min: 500, max: null,
+          key: "onipotente", rank: 6, min: 500, max: null, art: "assets/ranks/onipotente.png",
           en: { reward: "Omnipotent banner and a title carved in the Moongate." },
           pt: { reward: "Estandarte de Onipotente e um título gravado no Moongate." }
         }

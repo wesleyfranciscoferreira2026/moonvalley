@@ -1550,8 +1550,11 @@
     var season = loc(data.season);
 
     var tiers = data.tiers.map(function (tier) {
-      return '<article class="ranked-tier ranked-tier--' + tier.key + '">' +
-        '<span class="ranked-tier__emblem">' + RANK_TIER_SIGIL + "</span>" +
+      var crest = tier.art
+        ? '<img class="ranked-tier__art" src="' + esc(tier.art) + '" alt="" loading="lazy" decoding="async">'
+        : '<span class="ranked-tier__emblem">' + RANK_TIER_SIGIL + "</span>";
+      return '<article class="ranked-tier ranked-tier--' + tier.key + (tier.art ? " ranked-tier--art" : "") + '">' +
+        crest +
         '<div class="ranked-tier__body">' +
           '<h3 class="ranked-tier__name">' + t("ranked.tier." + tier.key) + "</h3>" +
           '<p class="ranked-tier__range">' + rankTierRange(tier) + ' <em>' + t("ranked.mmr") + "</em></p>" +

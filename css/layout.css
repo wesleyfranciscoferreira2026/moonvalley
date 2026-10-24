@@ -2023,6 +2023,22 @@
   --tier: #E7C78E;
   box-shadow: inset 0 0 24px rgba(231, 199, 142, .14);
 }
+.ranked-tier--art {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(120px, 170px) 1fr;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.25rem;
+}
+.ranked-tier__art {
+  width: 100%;
+  max-width: 170px;
+  height: auto;
+  justify-self: center;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 18px rgba(231, 199, 142, .22));
+}
 .ranked__you {
   margin: 0;
   padding: .85rem 1rem;
@@ -2046,6 +2062,7 @@
 @media (max-width: 560px) {
   .ranked__season { padding: 1rem; }
   .ranked__grid { grid-template-columns: 1fr; }
+  .ranked-tier--art { grid-template-columns: 1fr; }
 }
 
 /* ---------------- roadmap (dev plans) ---------------- */
