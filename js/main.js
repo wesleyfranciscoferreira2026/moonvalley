@@ -1550,13 +1550,12 @@
     var season = loc(data.season);
 
     var tiers = data.tiers.map(function (tier) {
-      var division = tier.divisions === 1 ? t("ranked.division") : t("ranked.divisions");
       return '<article class="ranked-tier ranked-tier--' + tier.key + '">' +
         '<span class="ranked-tier__emblem">' + RANK_TIER_SIGIL + "</span>" +
         '<div class="ranked-tier__body">' +
           '<h3 class="ranked-tier__name">' + t("ranked.tier." + tier.key) + "</h3>" +
           '<p class="ranked-tier__range">' + rankTierRange(tier) + ' <em>' + t("ranked.mmr") + "</em></p>" +
-          '<p class="ranked-tier__divisions">' + tier.divisions + " " + division + "</p>" +
+          '<p class="ranked-tier__rank">' + t("ranked.rank") + " " + tier.rank + "</p>" +
           '<p class="ranked-tier__reward"><span>' + t("ranked.reward") + "</span>" + esc(loc(tier).reward) + "</p>" +
         "</div>" +
       "</article>";

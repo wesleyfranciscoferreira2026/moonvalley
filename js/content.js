@@ -1469,49 +1469,45 @@ window.MV_CONTENT = {
       { name: "Eclipsia", classId: "nyfheris", value: 1933, wins: 70, losses: 66 }
     ],
     /* Ranked ladder (pre-season preview): tiers ordered from the
-       lowest to the highest. `min`/`max` are MMR thresholds, `max: null`
-       means the tier is open-ended. Rewards are localized. */
+       lowest to the highest. `rank` is the displayed rank number,
+       `min`/`max` are moon (luas) thresholds, `max: null` means the
+       tier is open-ended. Rewards are localized. */
     ranked: {
       season: {
-        en: { name: "Season I — The Silver Ladder", window: "1 Nov 2026 — 1 Feb 2027" },
-        pt: { name: "Temporada I — A Escada de Prata", window: "1 nov 2026 — 1 fev 2027" }
+        en: { name: "Season I — The Moon Ladder", window: "1 Nov 2026 — 1 Feb 2027" },
+        pt: { name: "Temporada I — A Escada das Luas", window: "1 nov 2026 — 1 fev 2027" }
       },
       placementMatches: 5,
       tiers: [
         {
-          key: "bronze", min: 0, max: 1199, divisions: 3,
-          en: { reward: "Bronze banner, 400 Moon Shards and the recruit's sigil." },
-          pt: { reward: "Estandarte Bronze, 400 Fragmentos de Lua e o sigilo do recruta." }
+          key: "proscrito", rank: 1, min: 0, max: 100,
+          en: { reward: "Outlaw banner and the exile's sigil." },
+          pt: { reward: "Estandarte de Proscrito e o sigilo do exilado." }
         },
         {
-          key: "silver", min: 1200, max: 1499, divisions: 3,
-          en: { reward: "Silver banner, 700 Moon Shards and a profile frame." },
-          pt: { reward: "Estandarte Prata, 700 Fragmentos de Lua e uma moldura de perfil." }
+          key: "ascendente", rank: 2, min: 100, max: 200,
+          en: { reward: "Ascendant banner and a profile frame." },
+          pt: { reward: "Estandarte de Ascendente e uma moldura de perfil." }
         },
         {
-          key: "gold", min: 1500, max: 1799, divisions: 3,
-          en: { reward: "Golden banner, 1,000 Moon Shards and an arena emote." },
-          pt: { reward: "Estandarte Dourado, 1.000 Fragmentos de Lua e um gesto de arena." }
+          key: "conquistador", rank: 3, min: 200, max: 300,
+          en: { reward: "Conqueror banner and an arena emote." },
+          pt: { reward: "Estandarte de Conquistador e um gesto de arena." }
         },
         {
-          key: "platinum", min: 1800, max: 2049, divisions: 3,
-          en: { reward: "Platinum banner, 1,400 Moon Shards and a weapon glow." },
-          pt: { reward: "Estandarte Platina, 1.400 Fragmentos de Lua e um brilho de arma." }
+          key: "soberano", rank: 4, min: 300, max: 400,
+          en: { reward: "Sovereign banner and a weapon glow." },
+          pt: { reward: "Estandarte de Soberano e um brilho de arma." }
         },
         {
-          key: "diamond", min: 2050, max: 2299, divisions: 3,
-          en: { reward: "Diamond banner, 1,800 Moon Shards and an exclusive skin shard." },
-          pt: { reward: "Estandarte Diamante, 1.800 Fragmentos de Lua e um fragmento de skin exclusivo." }
+          key: "invicto", rank: 5, min: 400, max: 500,
+          en: { reward: "Undefeated banner and an exclusive skin shard." },
+          pt: { reward: "Estandarte de Invicto e um fragmento de skin exclusivo." }
         },
         {
-          key: "master", min: 2300, max: 2499, divisions: 1,
-          en: { reward: "Master banner, 2,500 Moon Shards and the Master's cloak." },
-          pt: { reward: "Estandarte Mestre, 2.500 Fragmentos de Lua e o manto do Mestre." }
-        },
-        {
-          key: "legend", min: 2500, max: null, divisions: 1,
-          en: { reward: "Legend banner, 4,000 Moon Shards and a title carved in the Moongate." },
-          pt: { reward: "Estandarte Lenda, 4.000 Fragmentos de Lua e um título gravado no Moongate." }
+          key: "onipotente", rank: 6, min: 500, max: null,
+          en: { reward: "Omnipotent banner and a title carved in the Moongate." },
+          pt: { reward: "Estandarte de Onipotente e um título gravado no Moongate." }
         }
       ]
     }
